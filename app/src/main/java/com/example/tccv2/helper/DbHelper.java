@@ -13,7 +13,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Realiza a manipulação das tabelas no banco de dados
     //Responsável por fazer as operações de acesso do banco
 
-    public static final int DATABASE_VERSION = 6;
+    public static final int DATABASE_VERSION = 8;
     public static final String DATABASE_NOME = "BdCEC";
 
     public DbHelper(Context context) {
@@ -109,6 +109,41 @@ public class DbHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY (" + Contract.PCir.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
+    private static final String CREATE_CALCULOINICIAL = " create table "
+            + Contract.CalculoInicial.TABELA + "("
+            + Contract.CalculoInicial._ID + " integer primary key autoincrement,"
+            + Contract.CalculoInicial.COLUNA_USUARIO + " INTEGER, "
+            +Contract.CalculoInicial.COLUNA_PESO + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_ESTATURA + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_HB + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PAO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_SAO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PVO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_SVO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PAM + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PVC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PCP + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_FC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_AREASUPC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_32 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_33 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_34 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_35 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_36 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_CAO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_CVO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_REO2 + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_DC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_IC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_VS + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_IRVS + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_IRVP + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_OBS + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_HORAVALOR + " TEXT, "
+            + " FOREIGN KEY (" + Contract.CalculoInicial.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "))";
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -118,6 +153,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_EXAMESADICIONAIS);
         sqLiteDatabase.execSQL(CREATE_PCIR);
         sqLiteDatabase.execSQL(CREATE_PCEC);
+        sqLiteDatabase.execSQL(CREATE_CALCULOINICIAL);
 
     }
 
@@ -129,6 +165,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCir.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCec.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
     }
 
     // Métodos CRUD para usuários
@@ -300,7 +337,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos CRUD para PCec
 
-    // Adicionar Parametros da Cirurgia
+    // Adicionar Parametros da Cec
     public long adicionarParametrosCec(int userId, String piaCec, String pvcCec, String tempCec, String diureseCec,
                                        String fcCec, String horaInicioCec) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -316,6 +353,67 @@ public class DbHelper extends SQLiteOpenHelper {
         long idPCec = sqLiteDatabase.insert(Contract.PCec.TABELA, null, values);
         return idPCec;
     }
+
+    // Métodos CRUD para CalculoInicial
+
+    // Adicionar Valores para o cálculo
+
+    public long adicionarValores (int userId, String peso, String estatura, String hb, String pao2, String sao2,
+                                  String pvo2, String svo2, String pam, String pvc, String pcp, String fc,
+                                  String areaSupC, String vo2_32, String vo2_33, String vo2_34, String vo2_35,
+                                  String vo2_36, String vo2_escolhido, String cao2, String cvo2, String reo2,
+                                  String dc, String ic, String vs, String irvs, String irvp, String obs, String horaValor ){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Contract.CalculoInicial.COLUNA_USUARIO, userId);
+        values.put(Contract.CalculoInicial.COLUNA_PESO, peso);
+        values.put(Contract.CalculoInicial.COLUNA_ESTATURA, estatura);
+        values.put(Contract.CalculoInicial.COLUNA_HB, hb);
+        values.put(Contract.CalculoInicial.COLUNA_PAO2, pao2);
+        values.put(Contract.CalculoInicial.COLUNA_SAO2, sao2);
+        values.put(Contract.CalculoInicial.COLUNA_PVO2, pvo2);
+        values.put(Contract.CalculoInicial.COLUNA_SVO2, svo2);
+        values.put(Contract.CalculoInicial.COLUNA_PAM, pam);
+        values.put(Contract.CalculoInicial.COLUNA_PVC, pvc);
+        values.put(Contract.CalculoInicial.COLUNA_PCP, pcp);
+        values.put(Contract.CalculoInicial.COLUNA_FC, fc);
+        values.put(Contract.CalculoInicial.COLUNA_AREASUPC, areaSupC);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_32, vo2_32);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_33, vo2_33);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_34, vo2_34);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_35, vo2_35);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_36, vo2_36);
+        values.put(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO, vo2_escolhido);
+        values.put(Contract.CalculoInicial.COLUNA_CAO2, cao2);
+        values.put(Contract.CalculoInicial.COLUNA_CVO2, cvo2);
+        values.put(Contract.CalculoInicial.COLUNA_REO2, reo2);
+        values.put(Contract.CalculoInicial.COLUNA_DC, dc);
+        values.put(Contract.CalculoInicial.COLUNA_IC, ic);
+        values.put(Contract.CalculoInicial.COLUNA_VS, vs);
+        values.put(Contract.CalculoInicial.COLUNA_IRVS, irvs);
+        values.put(Contract.CalculoInicial.COLUNA_IRVP, irvp);
+        values.put(Contract.CalculoInicial.COLUNA_OBS, obs);
+        values.put(Contract.CalculoInicial.COLUNA_HORAVALOR, horaValor);
+
+        long idCalculoInicial = sqLiteDatabase.insert(Contract.CalculoInicial.TABELA, null, values);
+        return idCalculoInicial;
+    }
+
+    // Métodos CRUD para ExamesRep
+
+    // Adicionar Exames_Rep
+
+    // Métodos CRUD para Calculo_Rep
+
+    // Adicionar para Calculo_Rep
+
+    // Métodos CRUD para Procedimento
+
+    // Adicionar Procedimento
+
+    // Métodos CRUD para Registros
+
+    // Adicionar Registros
 
 
 }

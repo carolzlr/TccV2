@@ -97,4 +97,43 @@ public class Contract {
         public static final String FK_USUARIO = " FOREIGN KEY (" + COLUNA_USUARIO + " ) REFERENCES "
                 + Usuario.TABELA + " ( " + Usuario._ID + " ) ";
     }
+
+    public static class CalculoInicial implements BaseColumns{
+        public static final String TABELA = "calculoInicial";
+        public static final String COLUNA_ID = "idCalculos";
+        public static final String COLUNA_USUARIO = "usuario";
+        public static final String COLUNA_PESO = "peso";
+        public static final String COLUNA_ESTATURA = "estatura";
+        public static final String COLUNA_HB = "hb";
+        public static final String COLUNA_PAO2 = "pao2";
+        public static final String COLUNA_SAO2 = "sao2";
+        public static final String COLUNA_PVO2 = "pvo2";
+        public static final String COLUNA_SVO2 = "svo2";
+        public static final String COLUNA_PAM = "pam";
+        public static final String COLUNA_PVC = "pvc";
+        public static final String COLUNA_PAPM = "papm";
+        public static final String COLUNA_PCP = "pcp";
+        public static final String COLUNA_FC = "fc";
+        public static final String COLUNA_AREASUPC = "areaSupc";
+        public static final String COLUNA_VO2_36 = "vo2_36";
+        public static final String COLUNA_VO2_35 = "vo2_35";
+        public static final String COLUNA_VO2_34 = "vo2_34";
+        public static final String COLUNA_VO2_33 = "vo2_33";
+        public static final String COLUNA_VO2_32 = "vo2_32";
+        public static final String COLUNA_VO2_ESCOLHIDO = "vo2_escolhido";
+        public static final String COLUNA_CAO2 = "cao2";
+        public static final String COLUNA_CVO2 = "cvo2";
+        public static final String COLUNA_REO2 = "reo2";
+        public static final String COLUNA_DC = "dc";
+        public static final String COLUNA_IC = "ic";
+        public static final String COLUNA_VS = "vs";
+        public static final String COLUNA_IRVS = "irvs";
+        public static final String COLUNA_IRVP = "irvp";
+        public static final String COLUNA_OBS = "obs";
+        public static final String COLUNA_HORAVALOR = "horaValor";
+
+        public static final String FK_USUARIO =
+                "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
+                        + Usuario.TABELA + "(" + Usuario._ID + ")";
+    }
 }
