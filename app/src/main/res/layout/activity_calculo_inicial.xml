@@ -47,18 +47,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/bt_novo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp"
-            android:src="@drawable/ic_salvar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/bt_voltar" />
-
         <TextView
             android:id="@+id/Calcular"
             android:layout_width="wrap_content"
@@ -98,7 +86,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/peso"
+                        android:id="@+id/ed_peso"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -115,7 +103,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/estatura"
+                        android:id="@+id/ed_estatura"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -132,7 +120,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/hb"
+                        android:id="@+id/ed_hb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -149,7 +137,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/pao2"
+                        android:id="@+id/ed_pao2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -166,7 +154,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/sao2"
+                        android:id="@+id/ed_sao2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -183,7 +171,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/pvo2"
+                        android:id="@+id/ed_pvo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -200,7 +188,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/svo2"
+                        android:id="@+id/ed_svo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -217,7 +205,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/pam"
+                        android:id="@+id/ed_pam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -234,7 +222,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/pvc"
+                        android:id="@+id/ed_pvc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -251,7 +239,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/papm"
+                        android:id="@+id/ed_papm"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -268,7 +256,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/pcp"
+                        android:id="@+id/ed_pcp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -285,7 +273,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/fc"
+                        android:id="@+id/ed_fc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -302,7 +290,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/areaSupC"
+                        android:id="@+id/ed_areaSupC"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -318,7 +306,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vo2_36"
+                        android:id="@+id/ed_vo2_36"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -334,7 +322,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vo2_35"
+                        android:id="@+id/ed_vo2_35"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -350,7 +338,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vo2_34"
+                        android:id="@+id/ed_vo2_34"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -366,7 +354,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vo2_33"
+                        android:id="@+id/ed_vo2_33"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -382,7 +370,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vo2_32"
+                        android:id="@+id/ed_vo2_32"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -398,7 +386,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/cao2"
+                        android:id="@+id/ed_cao2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -414,7 +402,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/cvo2"
+                        android:id="@+id/ed_cvo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -430,7 +418,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/reo2"
+                        android:id="@+id/ed_reo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -446,7 +434,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/vo2_escolhido"
+                        android:id="@+id/ed_vo2_escolhido"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:inputType="number"
@@ -464,7 +452,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/dc"
+                        android:id="@+id/ed_dc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -480,7 +468,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/ic"
+                        android:id="@+id/ed_ic"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -496,7 +484,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/vs"
+                        android:id="@+id/ed_vs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -512,7 +500,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/irvs"
+                        android:id="@+id/ed_irvs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -528,7 +516,7 @@
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/irvp"
+                        android:id="@+id/ed_irvp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -544,7 +532,7 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/obs"
+                        android:id="@+id/ed_obs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -561,13 +549,20 @@
                         android:padding="8dp" />
 
                     <EditText
-                        android:id="@+id/dataHora"
+                        android:id="@+id/ed_horaValor"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:inputType="time"
                         android:padding="8dp" />
                 </TableRow>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_add"
+                    style="@style/Button"
+                    android:text="@string/SalvarContinuar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edit_senha" />
 
 
             </TableLayout>

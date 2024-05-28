@@ -7,11 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tccv2.helper.DbHelper;
 
@@ -82,9 +78,9 @@ public class Cad_Equipe extends AppCompatActivity {
                     perfusionista, instrumentador, anestesista, circulante, hospital);
             if (idEquipe != -1) {
                 Intent intent = new Intent(Cad_Equipe.this, Cad_Paciente.class);
-                startActivity(intent);
                 intent.putExtra("USER_ID", userId);
                 intent.putExtra("EQUIPE _ID", idEquipe);
+                startActivity(intent);
                 finish();
                 Toast.makeText(this, "Equipe adicionada com sucesso!", Toast.LENGTH_SHORT).show();
             } else {

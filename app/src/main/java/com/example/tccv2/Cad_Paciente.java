@@ -10,11 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tccv2.helper.DbHelper;
 
@@ -55,6 +51,12 @@ public class Cad_Paciente extends AppCompatActivity {
 
         // Recuperar o idUser
         userId = getIntent().getIntExtra("USER_ID", -1);
+        // Verifique se o userId é válido
+        if (userId == -1) {
+            Toast.makeText(this, "ID de usuário não foi passado corretamente.", Toast.LENGTH_SHORT).show();
+            finish(); // Encerra a atividade se o ID do usuário não for passado corretamente
+            return;
+        }
 
         // Recuperar o idEquipe
         idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);

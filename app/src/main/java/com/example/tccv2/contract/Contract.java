@@ -78,7 +78,7 @@ public class Contract {
         public static final String COLUNA_PVCCIR = "pvcCir";
         public static final String COLUNA_TEMPCIR = "tempCir";
         public static final String COLUNA_DIURESECIR = "diureseCir";
-        public static final String COLUNA_FCCIR = "tempCir";
+        public static final String COLUNA_FCCIR = "fcCir";
 
         public static final String FK_USUARIO = " FOREIGN KEY (" + COLUNA_USUARIO + " ) REFERENCES "
                 + Usuario.TABELA + " ( " + Usuario._ID + " ) ";
@@ -91,7 +91,7 @@ public class Contract {
         public static final String COLUNA_PVCCEC = "pvcCec";
         public static final String COLUNA_TEMPCEC = "tempCec";
         public static final String COLUNA_DIURESECEC = "diureseCec";
-        public static final String COLUNA_FCCEC = "tempCec";
+        public static final String COLUNA_FCCEC = "fcCec";
         public static final String COLUNA_HORAINICIOCEC = "horaInicioCec";
 
         public static final String FK_USUARIO = " FOREIGN KEY (" + COLUNA_USUARIO + " ) REFERENCES "
@@ -131,6 +131,60 @@ public class Contract {
         public static final String COLUNA_IRVP = "irvp";
         public static final String COLUNA_OBS = "obs";
         public static final String COLUNA_HORAVALOR = "horaValor";
+
+        public static final String FK_USUARIO =
+                "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
+                        + Usuario.TABELA + "(" + Usuario._ID + ")";
+    }
+
+    public static class ExamesRep implements BaseColumns {
+        public static final String TABELA = "examesRep";
+        public static final String COLUNA_USUARIO = "usuario";
+        public static final String COLUNA_PHR_REP = "phRep";
+        public static final String COLUNA_PCO2_REP = "pco2Rep";
+        public static final String COLUNA_PO2_REP = "po2Rep";
+        public static final String COLUNA_SVO2_REP = "svo2Rep";
+        public static final String COLUNA_HCO3_REP = "hco3Rep";
+        public static final String COLUNA_BEECF_REP = "beecfRep";
+        public static final String COLUNA_K_REP = "kRep";
+        public static final String COLUNA_NA_REP= "naRep";
+        public static final String COLUNA_CA_REP = "caRep";
+        public static final String COLUNA_CL_REP = "clRep";
+        public static final String COLUNA_GLIC_REP = "glicRep";
+        public static final String COLUNA_LACT_REP = "lactRep";
+        public static final String COLUNA_HB_REP = "hbRep";
+        public static final String COLUNA_HTC_REP = "htcRep";
+        public static final String COLUNA_PLAQ_REP = "plaqRep";
+        public static final String COLUNA_TCA_REP = "tcaRep";
+        public static final String COLUNA_HORA_REP = "horaRep";
+        public static final String FK_USUARIO = " FOREIGN KEY (" + COLUNA_USUARIO + " ) REFERENCES "
+                + Usuario.TABELA + " ( " + Usuario._ID + " ) ";
+    }
+
+    public static class Calculo_Rep implements BaseColumns{
+        public static final String TABELA = "calculoRep";
+        public static final String COLUNA_ID = "idCalculosRep";
+        public static final String COLUNA_USUARIO = "usuario";
+        public static final String COLUNA_REP_HB = "Rep_hb";
+        public static final String COLUNA_REP_PAO2 = "Rep_pao2";
+        public static final String COLUNA_REP_SAO2 = "Rep_sao2";
+        public static final String COLUNA_REP_PVO2 = "Rep_pvo2";
+        public static final String COLUNA_REP_SVO2 = "Rep_svo2";
+        public static final String COLUNA_REP_PAM = "Rep_pam";
+        public static final String COLUNA_REP_PVC = "Rep_pvc";
+        public static final String COLUNA_REP_PAPM = "Rep_papm";
+        public static final String COLUNA_REP_PCP = "Rep_pcp";
+        public static final String COLUNA_REP_FC = "Rep_fc";
+        public static final String COLUNA_REP_CAO2 = "Rep_cao2";
+        public static final String COLUNA_REP_CVO2 = "Rep_cvo2";
+        public static final String COLUNA_REP_REO2 = "Rep_reo2";
+        public static final String COLUNA_REP_DC = "Rep_dc";
+        public static final String COLUNA_REP_IC = "Rep_ic";
+        public static final String COLUNA_REP_VS = "Rep_vs";
+        public static final String COLUNA_REP_IRVS = "Rep_irvs";
+        public static final String COLUNA_REP_IRVP = "Rep_irvp";
+        public static final String COLUNA_REP_OBS = "Rep_obs";
+        public static final String COLUNA_REP_HORAVALOR = "Rep_horaValor";
 
         public static final String FK_USUARIO =
                 "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "

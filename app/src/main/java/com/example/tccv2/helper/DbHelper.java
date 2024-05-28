@@ -13,8 +13,8 @@ public class DbHelper extends SQLiteOpenHelper {
     //Realiza a manipulação das tabelas no banco de dados
     //Responsável por fazer as operações de acesso do banco
 
-    public static final int DATABASE_VERSION = 8;
-    public static final String DATABASE_NOME = "BdCEC";
+    public static final int DATABASE_VERSION = 5;
+    public static final String DATABASE_NOME = "BDCEC";
 
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
@@ -122,6 +122,7 @@ public class DbHelper extends SQLiteOpenHelper {
             +Contract.CalculoInicial.COLUNA_SVO2 + " TEXT, "
             +Contract.CalculoInicial.COLUNA_PAM + " TEXT, "
             +Contract.CalculoInicial.COLUNA_PVC + " TEXT, "
+            +Contract.CalculoInicial.COLUNA_PAPM + " TEXT, "
             +Contract.CalculoInicial.COLUNA_PCP + " TEXT, "
             +Contract.CalculoInicial.COLUNA_FC + " TEXT, "
             +Contract.CalculoInicial.COLUNA_AREASUPC + " TEXT, "
@@ -141,9 +142,59 @@ public class DbHelper extends SQLiteOpenHelper {
             +Contract.CalculoInicial.COLUNA_IRVP + " TEXT, "
             +Contract.CalculoInicial.COLUNA_OBS + " TEXT, "
             +Contract.CalculoInicial.COLUNA_HORAVALOR + " TEXT, "
-            + " FOREIGN KEY (" + Contract.CalculoInicial.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + " FOREIGN KEY (" + Contract. Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
+    private static final String CREATE_EXAMESREP = " create table "
+            + Contract.ExamesRep.TABELA + "("
+            + Contract.ExamesRep._ID + " integer primary key autoincrement,"
+            + Contract.ExamesRep.COLUNA_USUARIO + " INTEGER, "
+            +Contract.ExamesRep.COLUNA_PHR_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_PCO2_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_PO2_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_SVO2_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_HCO3_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_BEECF_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_K_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_NA_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_CA_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_CL_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_GLIC_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_LACT_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_HB_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_HTC_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_PLAQ_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_TCA_REP + " TEXT, "
+            +Contract.ExamesRep.COLUNA_HORA_REP + " TEXT, "
+            + " FOREIGN KEY (" + Contract.ExamesRep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "))";
+
+    private static final String CREATE_CALCULO_REP = " create table "
+            + Contract.Calculo_Rep.TABELA + "("
+            + Contract.Calculo_Rep._ID + " integer primary key autoincrement,"
+            + Contract.Calculo_Rep.COLUNA_USUARIO + " INTEGER, "
+            +Contract.Calculo_Rep.COLUNA_REP_HB + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_PAO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_SAO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_PVO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_SVO2 + " TEXT, "
+            +Contract. Calculo_Rep.COLUNA_REP_PAM + " TEXT, "
+            +Contract. Calculo_Rep.COLUNA_REP_PVC + " TEXT, "
+            +Contract. Calculo_Rep.COLUNA_REP_PAPM + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_PCP + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_FC + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_CAO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_CVO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_REO2 + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_DC + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_IC + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_VS + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_IRVS + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_IRVP + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_OBS + " TEXT, "
+            +Contract.Calculo_Rep.COLUNA_REP_HORAVALOR + " TEXT, "
+            + " FOREIGN KEY (" + Contract.Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "))";
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -154,6 +205,8 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_PCIR);
         sqLiteDatabase.execSQL(CREATE_PCEC);
         sqLiteDatabase.execSQL(CREATE_CALCULOINICIAL);
+        sqLiteDatabase.execSQL(CREATE_EXAMESREP);
+        sqLiteDatabase.execSQL(CREATE_CALCULO_REP);
 
     }
 
@@ -166,6 +219,9 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCir.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCec.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.CalculoInicial.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Calculo_Rep.TABELA);
     }
 
     // Métodos CRUD para usuários
@@ -248,7 +304,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Adicionar Usuário
     public long adicionarEquipe (int userId, String cirurgiao, String auxiliar1, String auxiliar2, String perfusionista,
-                                    String instrumentador, String anestesista, String circulante, String hospital){
+                                 String instrumentador, String anestesista, String circulante, String hospital){
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.Equipe.COLUNA_USUARIO, userId);
@@ -357,9 +413,8 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para CalculoInicial
 
     // Adicionar Valores para o cálculo
-
     public long adicionarValores (int userId, String peso, String estatura, String hb, String pao2, String sao2,
-                                  String pvo2, String svo2, String pam, String pvc, String pcp, String fc,
+                                  String pvo2, String svo2, String pam, String pvc, String papm, String pcp, String fc,
                                   String areaSupC, String vo2_32, String vo2_33, String vo2_34, String vo2_35,
                                   String vo2_36, String vo2_escolhido, String cao2, String cvo2, String reo2,
                                   String dc, String ic, String vs, String irvs, String irvp, String obs, String horaValor ){
@@ -375,6 +430,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(Contract.CalculoInicial.COLUNA_SVO2, svo2);
         values.put(Contract.CalculoInicial.COLUNA_PAM, pam);
         values.put(Contract.CalculoInicial.COLUNA_PVC, pvc);
+        values.put(Contract.CalculoInicial.COLUNA_PAPM, papm);
         values.put(Contract.CalculoInicial.COLUNA_PCP, pcp);
         values.put(Contract.CalculoInicial.COLUNA_FC, fc);
         values.put(Contract.CalculoInicial.COLUNA_AREASUPC, areaSupC);
@@ -399,13 +455,99 @@ public class DbHelper extends SQLiteOpenHelper {
         return idCalculoInicial;
     }
 
+    // Recuperar do BD vo2Escolhido
+    public double recuperarVo2Escolhido (long idCalculoInicial) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(" SELECT vo2_escolhido FROM CalculoInicial " +
+                "WHERE idCalculoInicial = ? ", new String[]{String.valueOf(idCalculoInicial)});
+        if (cursor != null && cursor.moveToFirst()){
+            double vo2Escolhido = cursor.getDouble(0);
+            cursor.close();
+            return vo2Escolhido;
+        }
+        return  0.0;
+    }
+    // Recuperar do BD vo2Escolhido
+    public double recuperarASC (long idCalculoInicial) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery(" SELECT areaSupC FROM CalculoInicial " +
+                "WHERE idCalculoInicial = ? ", new String[]{String.valueOf(idCalculoInicial)});
+        if (cursor != null && cursor.moveToFirst()){
+            double areaSupC = cursor.getDouble(0);
+            cursor.close();
+            return areaSupC;
+        }
+        return  0.0;
+    }
+
     // Métodos CRUD para ExamesRep
 
     // Adicionar Exames_Rep
+    public long adicionarExamesRep(int userId, String phRep, String pco2Rep, String po2Rep, String svo2Rep,
+                                   String hco3Rep, String beecfRep, String kRep, String naRep, String caRep,
+                                   String clRep, String glicRep, String lactRep, String hbRep, String htcRep,
+                                   String plaqRep, String tcaRep, String horaRep) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Contract.ExamesRep.COLUNA_USUARIO, userId);
+        values.put(Contract.ExamesRep.COLUNA_PHR_REP, phRep);
+        values.put(Contract.ExamesRep.COLUNA_PCO2_REP, pco2Rep);
+        values.put(Contract.ExamesRep.COLUNA_PO2_REP, po2Rep);
+        values.put(Contract.ExamesRep.COLUNA_SVO2_REP, svo2Rep);
+        values.put(Contract.ExamesRep.COLUNA_HCO3_REP, hco3Rep);
+        values.put(Contract.ExamesRep.COLUNA_BEECF_REP, beecfRep);
+        values.put(Contract.ExamesRep.COLUNA_K_REP, kRep);
+        values.put(Contract.ExamesRep.COLUNA_NA_REP, naRep);
+        values.put(Contract.ExamesRep.COLUNA_CA_REP, caRep);
+        values.put(Contract.ExamesRep.COLUNA_CL_REP, clRep);
+        values.put(Contract.ExamesRep.COLUNA_GLIC_REP, glicRep);
+        values.put(Contract.ExamesRep.COLUNA_LACT_REP, lactRep);
+        values.put(Contract.ExamesRep.COLUNA_HB_REP, hbRep);
+        values.put(Contract.ExamesRep.COLUNA_HTC_REP, htcRep);
+        values.put(Contract.ExamesRep.COLUNA_PLAQ_REP, plaqRep);
+        values.put(Contract.ExamesRep.COLUNA_TCA_REP, tcaRep);
+        values.put(Contract.ExamesRep.COLUNA_HORA_REP, horaRep);
+
+        long idExamesRep = sqLiteDatabase.insert(Contract.ExamesRep.TABELA, null, values);
+        return idExamesRep;
+    }
 
     // Métodos CRUD para Calculo_Rep
 
     // Adicionar para Calculo_Rep
+    public long adicionarValoresRep (int userId, String Rep_hb, String Rep_pao2, String Rep_sao2, String Rep_pvo2,
+                                     String Rep_svo2, String Rep_pam, String Rep_pvc, String Rep_papm,
+                                     String Rep_pcp, String Rep_fc, String Rep_cao2, String Rep_cvo2,
+                                     String Rep_reo2, String Rep_dc, String Rep_ic, String Rep_vs,
+                                     String Rep_irvs, String Rep_irvp, String Rep_obs, String Rep_horaValor ){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(Contract.Calculo_Rep.COLUNA_USUARIO, userId);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_HB, Rep_hb);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PAO2, Rep_pao2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_SAO2, Rep_sao2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PVO2, Rep_pvo2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_SVO2, Rep_svo2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PAM, Rep_pam);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PVC, Rep_pvc);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PAPM, Rep_papm);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_PCP, Rep_pcp);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_FC, Rep_fc);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_CAO2, Rep_cao2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_CVO2, Rep_cvo2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_REO2, Rep_reo2);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_DC, Rep_dc);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_IC, Rep_ic);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_VS, Rep_vs);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_IRVS, Rep_irvs);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_IRVP, Rep_irvp);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_OBS, Rep_obs);
+        values.put(Contract.Calculo_Rep.COLUNA_REP_HORAVALOR, Rep_horaValor);
+
+        long idCalculo_Rep = sqLiteDatabase.insert(Contract.CalculoInicial.TABELA, null, values);
+        return idCalculo_Rep;
+    }
+
 
     // Métodos CRUD para Procedimento
 
