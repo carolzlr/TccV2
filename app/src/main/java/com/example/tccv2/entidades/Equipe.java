@@ -41,6 +41,17 @@ public class Equipe {
         this.hospital = hospital;
     }
 
+    public Equipe(int usuario, String cirurgiao, String auxiliar1, String perfusionista, String hospital) {
+        this.usuario = usuario;
+        this.cirurgiao = cirurgiao;
+        this.auxiliar1 = auxiliar1;
+        this.perfusionista = perfusionista;
+        this.hospital = hospital;
+    }
+
+    public Equipe() {
+    }
+
     public int getIdEquipe() {
         return idEquipe;
     }

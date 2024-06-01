@@ -4,17 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tccv2.helper.DbHelper;
 
@@ -53,10 +51,13 @@ public class Calculo_Rep extends AppCompatActivity {
     private long idEquipe;
     private long idPaciente;
     private long idExamesAdicionais;
+    private long idPCir;
+    private long idPCec;
     private long idCalculoInicial;
-    private long idExames_Rep;
-    private double superficieCorporal;
+    private long idExamesRep;
+    private double areaSupC;
     private double vo2Escolhido;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +81,15 @@ public class Calculo_Rep extends AppCompatActivity {
 
         // Recuperar vo2_escolhido e ASC
         recuperardoBD();
+
+        // Botão Repetir
+        bt_rep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+        //Botão Finalizar
 
     }
 
@@ -124,12 +134,6 @@ public class Calculo_Rep extends AppCompatActivity {
         papm_rep.addTextChangedListener(initialWatcher);
         pcp_rep.addTextChangedListener(initialWatcher);
         fc_rep.addTextChangedListener(new FCTextWatcher()); // Específico para fc_rep
-
-    }
-
-    private void recuperardoBD() {
-        vo2Escolhido = dbHelper.recuperarVo2Escolhido(idCalculoInicial);
-        superficieCorporal = dbHelper.recuperarASC(idCalculoInicial);
     }
 
     private void recuperarExtras(){
@@ -145,11 +149,34 @@ public class Calculo_Rep extends AppCompatActivity {
         // Recuperar idExamesAdicionais
         idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
 
+        // Recuperar idPCir
+        idPCir = getIntent().getLongExtra("PCIR_ID", -1);
+
+        //Recuperar idPCec
+        idPCec = getIntent().getLongExtra("PCEC_ID", -1);
+
         // Recuperar idExamesAdicionais
         idCalculoInicial = getIntent().getLongExtra("CALCULOINICIAL_ID", -1);
 
-        // Recuperar idExames_Rep
-        idExames_Rep = getIntent().getLongExtra("EXAMESREP_ID", -1);
+        // Recuperar idExamesRep
+        idExamesRep = getIntent().getLongExtra("EXAMESREP_ID", -1);
+
+        Log.d("CalculoRep", "userId: " + userId);
+        Log.d("CalculoRep", "EQUIPE_ID: " + idEquipe);
+        Log.d("CalculoRep", "PACIENTE_ID: " + idPaciente);
+        Log.d("CalculoRep", "EXAMESADICIONAIS_ID: " + idExamesAdicionais);
+        Log.d("CalculoRep", "PCIR_ID: " + idPCir);
+        Log.d("CalculoRep", "PCEC_ID: " + idPCec);
+        Log.d("CalculoRep", "CALCULOINICIAL_ID: " + idCalculoInicial);
+        Log.d("CalculoRep", "EXAMESREP_ID:" + idExamesRep);
+    }
+
+    private void recuperardoBD() {
+        vo2Escolhido = dbHelper.recuperarVo2Escolhido(idCalculoInicial);
+        areaSupC = dbHelper.recuperarASC(idCalculoInicial);
+
+        Log.d("Calculo_Rep", "vo2Escolhido: " + vo2Escolhido);
+        Log.d("Calculo_Rep", "areaSupC: " + areaSupC);
     }
 
     private class InitialTextWatcher implements TextWatcher {
@@ -178,6 +205,38 @@ public class Calculo_Rep extends AppCompatActivity {
         }
     }
 
+    private double calcularCAO2 (double hb, double sao2, double pao2){
+        return ((1.34 * hb *sao2)/100) + (pao2 * 0.003);
+    }
+
+    private double calcularCVO2 (double hb, double svo2, double pvo2){
+        return ((1.34 * hb *svo2)/100) + (pvo2 * 0.003);
+    }
+
+    private double calcularREO2 (double cao2, double cvo2){
+        return (cao2-cvo2) / cao2;
+    }
+
+    private double calcularDC (double vo2Escolhido, double cao2, double cvo2){
+        return (vo2Escolhido / 10) / (cao2 - cvo2);
+    }
+
+    private double calcularIC (double dc, double areaSupC) {
+        return dc / areaSupC;
+    }
+
+    private double calcularVS (double dc, double fc) {
+        return (dc * 1000) / fc;
+    }
+
+    private  double calcularIRVS (double pam, double pvc, double ic){
+        return ((pam - pvc)*80) / ic;
+    }
+
+    private double  calcularIRVP (double papm, double pcp, double ic){
+        return ((papm - pcp)*80) / ic;
+    }
+
     private void calcularValoresRep() {
         // Obtenha os valores como strings
         String hbStr = hb_rep.getText().toString();
@@ -204,6 +263,11 @@ public class Calculo_Rep extends AppCompatActivity {
             double cvo2Value = calcularCVO2(hbDouble, svo2Double, pvo2Double);
             double reo2Value = calcularREO2(cao2Value, cvo2Value);
 
+            // Adicione logs para verificar os valores calculados
+            Log.d("Calculo_Rep", "cao2Value: " + cao2Value);
+            Log.d("Calculo_Rep", "cvo2Value: " + cvo2Value);
+            Log.d("Calculo_Rep", "reo2Value: " + reo2Value);
+
             // Atualizar TextViews
             cao2_rep.setText(String.format(locale, "%.2f", cao2Value));
             cvo2_rep.setText(String.format(locale, "%.2f", cvo2Value));
@@ -218,7 +282,6 @@ public class Calculo_Rep extends AppCompatActivity {
         // Obtenha os valores necessários
         String cao2Str = cao2_rep.getText().toString();
         String cvo2Str = cvo2_rep.getText().toString();
-        String vo2_escolhidoStr = vo2_escolhido_rep.getText().toString();
         String pamStr = pam_rep.getText().toString();
         String pvcStr = pvc_rep.getText().toString();
         String papmStr = papm_rep.getText().toString();
@@ -228,9 +291,8 @@ public class Calculo_Rep extends AppCompatActivity {
 
 
         // Verifique se todos os campos necessários estão preenchidos antes de calcular
-        if (cao2Str.isEmpty() || cvo2Str.isEmpty() || vo2_escolhidoStr.isEmpty()
-                || pamStr.isEmpty() || pvcStr.isEmpty() || papmStr.isEmpty()
-                || pcpStr.isEmpty() || fcStr.isEmpty() ) {
+        if (cao2Str.isEmpty() || cvo2Str.isEmpty() ||pamStr.isEmpty() || pvcStr.isEmpty()
+                || papmStr.isEmpty() || pcpStr.isEmpty() || fcStr.isEmpty() ) {
             return;
         }
 
@@ -238,7 +300,6 @@ public class Calculo_Rep extends AppCompatActivity {
             // Converta os valores para double
             double cao2Double = parseDouble(cao2Str);
             double cvo2Double = parseDouble(cvo2Str);
-            double vo2EscolhidoDouble = Double.parseDouble(vo2_escolhidoStr);
             double pamDouble = Double.parseDouble(pamStr);
             double pvcDouble = Double.parseDouble(pvcStr);
             double papmDouble = Double.parseDouble(papmStr);
@@ -246,11 +307,25 @@ public class Calculo_Rep extends AppCompatActivity {
             double fcDouble = Double.parseDouble(fcStr);
 
             // Calcular valores finais
-            double dcValue = calcularDC(vo2EscolhidoDouble, cao2Double, cvo2Double);
-            double icValue = calcularIC(dcValue, superficieCorporal );
+            double dcValue = calcularDC(vo2Escolhido, cao2Double, cvo2Double);
+            double icValue = calcularIC(dcValue, areaSupC );
             double vsValue = calcularVS(dcValue, fcDouble);
             double irvsValue = calcularIRVS(pamDouble, pvcDouble, icValue);
             double irvpValue = calcularIRVP(papmDouble, pcpDouble, icValue);
+
+            // Adicione logs para verificar os valores calculados
+            Log.d("Calculo_Rep", "dcValue: " + dcValue);
+            Log.d("Calculo_Rep", "icValue: " + icValue);
+            Log.d("Calculo_Rep", "vsValue: " + vsValue);
+            Log.d("Calculo_Rep", "irvsValue: " + irvsValue);
+            Log.d("Calculo_Rep", "irvpValue: " + irvpValue);
+
+            // Atualizar TextViews
+            dc_rep.setText(String.format(locale, "%.2f", dcValue));
+            ic_rep.setText(String.format(locale, "%.2f", icValue));
+            vs_rep.setText(String.format(locale, "%.1f", vsValue));
+            irvs_rep.setText(String.format(locale, "%.1f", irvsValue));
+            irvp_rep.setText(String.format(locale, "%.1f", irvpValue));
 
             // Atualizar TextViews
             dc_rep.setText(String.format(locale, "%.2f", dcValue));
@@ -304,7 +379,11 @@ public class Calculo_Rep extends AppCompatActivity {
                 intent.putExtra("EQUIPE_ID", idEquipe);
                 intent.putExtra("PACIENTE_ID", idPaciente);
                 intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                intent.putExtra("PCIR_ID", idPCir);
+                intent.putExtra("PCEC_ID", idPCec);
                 intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
+                intent.putExtra("EXAMESREP_ID", idExamesRep);
+                intent.putExtra("CALCULOREP_ID", idCalculoRep);
                 startActivity(intent);
                 finish();
                 Toast.makeText(this, "Exames adicionados com sucesso!", Toast.LENGTH_SHORT).show();
@@ -314,37 +393,5 @@ public class Calculo_Rep extends AppCompatActivity {
         } else {
             Toast.makeText(this, "ID de usuário inválido.", Toast.LENGTH_SHORT).show();
         }
-    }
-
-    private double calcularCAO2 (double hb, double sao2, double pao2){
-        return ((1.34 * hb *sao2)/100) + (pao2 * 0.003);
-    }
-
-    private double calcularCVO2 (double hb, double svo2, double pvo2){
-        return ((1.34 * hb *svo2)/100) + (pvo2 * 0.003);
-    }
-
-    private double calcularREO2 (double cao2, double cvo2){
-        return (cao2-cvo2) / cao2;
-    }
-
-    private double calcularDC (double vo2_escolhido, double cao2, double cvo2){
-        return (vo2_escolhido / 10) / (cao2 - cvo2);
-    }
-
-    private double calcularIC (double dc, double superficie) {
-        return dc / superficie;
-    }
-
-    private double calcularVS (double dc, double fc) {
-        return (dc * 1000) / fc;
-    }
-
-    private  double calcularIRVS (double pam, double pvc, double ic){
-        return ((pam - pvc)*80) / ic;
-    }
-
-    private double  calcularIRVP (double papm, double pcp, double ic){
-        return ((papm - pcp)*80) / ic;
     }
 }

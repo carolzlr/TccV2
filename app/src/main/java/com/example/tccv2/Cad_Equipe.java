@@ -2,6 +2,7 @@ package com.example.tccv2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ public class Cad_Equipe extends AppCompatActivity {
 
         // Recuperar o idUser
         userId = getIntent().getIntExtra("USER_ID", -1);
+        Log.d("Cad_Equipe", "userId: " + userId);
 
         // Configurando o OnClickListener para o botão de salvar
         bt_salvar_e.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +81,7 @@ public class Cad_Equipe extends AppCompatActivity {
             if (idEquipe != -1) {
                 Intent intent = new Intent(Cad_Equipe.this, Cad_Paciente.class);
                 intent.putExtra("USER_ID", userId);
-                intent.putExtra("EQUIPE _ID", idEquipe);
+                intent.putExtra("EQUIPE_ID", idEquipe);
                 startActivity(intent);
                 finish();
                 Toast.makeText(this, "Equipe adicionada com sucesso!", Toast.LENGTH_SHORT).show();

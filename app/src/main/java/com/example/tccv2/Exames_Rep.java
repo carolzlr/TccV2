@@ -46,8 +46,8 @@ public class Exames_Rep extends AppCompatActivity {
     private long idPaciente;
     private long idExamesAdicionais;
     private long idCalculoInicial ;
-    private double superficieCorporal;
-    private double vo2Escolhido;
+    private long idPCir;
+    private long idPCec;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +62,11 @@ public class Exames_Rep extends AppCompatActivity {
 
         // Inicialize a variável Locale com a localidade padrão do celualr
         locale = new Locale("pt", "BR");
+        
+        // Recuperar Ids
+        recuperarId();
 
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
-
-        // Recuperar o idEquipe
-        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
-
-        // Recuperar idPaciente
-        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
-
-        // Recuperar idExamesAdicionais
-        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
-
-        // Recuperar idExamesAdicionais
-        idCalculoInicial = getIntent().getLongExtra("CALCULOINICIAL_ID", -1);
-
-        // Recuperar vo2_escolhido
-        vo2Escolhido = getIntent().getDoubleExtra("VO2_ESCOLHIDO", vo2Escolhido);
-
-        // Recuperar areaSupC
-        superficieCorporal = getIntent().getDoubleExtra("SUPERFICIE_CORPORAL", superficieCorporal);
+        
         bt_salvar_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,6 +96,41 @@ public class Exames_Rep extends AppCompatActivity {
         rep_hora = findViewById(R.id.rep_hora);
         bt_voltar_rep = findViewById(R.id.bt_voltar_rep);
     }
+    
+    private void recuperarId(){
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
+        // Recuperar o idEquipe
+        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+
+        // Recuperar idPaciente
+        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
+
+        // Recuperar idExamesAdicionais
+        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
+        
+        // Recuperar idPCir
+        idPCir = getIntent().getLongExtra("PCIR_ID", -1);
+        
+        //Recuperar idPCec
+        idPCec = getIntent().getLongExtra("PCEC_ID", -1);
+
+        // Recuperar idExamesAdicionais
+        idCalculoInicial = getIntent().getLongExtra("CALCULOINICIAL_ID", -1);
+
+        Log.d("ExamesRep", "userId: " + userId);
+        Log.d("ExamesRep", "EQUIPE_ID: " + idEquipe);
+        Log.d("ExamesRep", "PACIENTE_ID: " + idPaciente);
+        Log.d("ExamesRep", "EXAMESADICIONAIS_ID: " + idExamesAdicionais);
+        Log.d("ExamesRep", "PCIR_ID: " + idPCir);
+        Log.d("ExamesRep", "PCEC_ID: " + idPCec);
+        Log.d("ExamesRep", "CALCULOINICIAL_ID: " + idCalculoInicial);
+    }
+
+
+    
+
 
     private String formatarValor(String valor) {
         try {
@@ -167,13 +186,16 @@ public class Exames_Rep extends AppCompatActivity {
             long idExamesRep = dbHelper.adicionarExamesRep(userId, ph_rep, pco2_rep, po2_rep, svo2_rep, hco3_rep,
                     beecf_rep, k_rep, na_rep, ca_rep, cl_rep, glic_rep, lact_rep, hb_rep, htc_rep, plaq_rep,
                     tca_rep, hora_rep );
-            if (idExamesAdicionais != -1) {
-                Intent intent = new Intent(Exames_Rep.this, P_Cir.class);
+            if (idExamesRep != -1) {
+                Intent intent = new Intent(Exames_Rep.this, Calculo_Rep.class);
                 // Passar ids para a próxima atividade
                 intent.putExtra("USER_ID", userId);
                 intent.putExtra("EQUIPE_ID", idEquipe);
                 intent.putExtra("PACIENTE_ID", idPaciente);
                 intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                intent.putExtra("PCIR_ID", idPCir);
+                intent.putExtra("PCEC_ID", idPCec);
+                intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
                 intent.putExtra("EXAMESREP_ID", idExamesRep);
                 startActivity(intent);
                 finish();

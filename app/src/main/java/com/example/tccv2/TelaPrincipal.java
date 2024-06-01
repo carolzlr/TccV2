@@ -59,8 +59,7 @@ public class TelaPrincipal extends AppCompatActivity {
 
         // Recuperar o idUser
         userId = getIntent().getIntExtra("USER_ID", -1);
-        Log.d("Cad_Paciente", "USER_ID recuperado: " + userId);
-        // Adicione um log para verificar o valor do userId
+
 
         bt_sair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +83,7 @@ public class TelaPrincipal extends AppCompatActivity {
         bt_pesquisar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Pesquisar.class);
+                Intent intent = new Intent(TelaPrincipal.this, Calculo_Rep.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -126,7 +125,7 @@ public class TelaPrincipal extends AppCompatActivity {
         bt_relatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Relatorio.class);
+                Intent intent = new Intent(TelaPrincipal.this, Calculo_Rep.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -147,6 +146,16 @@ public class TelaPrincipal extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(TelaPrincipal.this, Registros.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        bt_procedimento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(TelaPrincipal.this, Procedimento.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();

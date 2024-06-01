@@ -51,6 +51,9 @@ public class Paciente {
         this.diagnostico = diagnostico;
     }
 
+    public Paciente() {
+    }
+
     public int getIdPaciente() {
         return idPaciente;
     }

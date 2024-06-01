@@ -6,16 +6,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.tccv2.contract.Contract;
+
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 
 public class DbHelper extends SQLiteOpenHelper {
     //Realiza a manipulação das tabelas no banco de dados
     //Responsável por fazer as operações de acesso do banco
-
-    public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NOME = "BDCEC";
 
+    public static final int DATABASE_VERSION = 15;
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -142,7 +147,7 @@ public class DbHelper extends SQLiteOpenHelper {
             +Contract.CalculoInicial.COLUNA_IRVP + " TEXT, "
             +Contract.CalculoInicial.COLUNA_OBS + " TEXT, "
             +Contract.CalculoInicial.COLUNA_HORAVALOR + " TEXT, "
-            + " FOREIGN KEY (" + Contract. Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + " FOREIGN KEY (" + Contract. CalculoInicial.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_EXAMESREP = " create table "
@@ -218,10 +223,12 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCir.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCec.TABELA);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.CalculoInicial.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Calculo_Rep.TABELA);
+
+        onCreate(sqLiteDatabase);
     }
 
     // Métodos CRUD para usuários
@@ -451,33 +458,81 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(Contract.CalculoInicial.COLUNA_OBS, obs);
         values.put(Contract.CalculoInicial.COLUNA_HORAVALOR, horaValor);
 
+        Log.d("DbHelper", "Salvando valores: vo2_escolhido = " + vo2_escolhido + ", areaSupC = " + areaSupC);
+
         long idCalculoInicial = sqLiteDatabase.insert(Contract.CalculoInicial.TABELA, null, values);
         return idCalculoInicial;
     }
 
     // Recuperar do BD vo2Escolhido
-    public double recuperarVo2Escolhido (long idCalculoInicial) {
+    // Método para recuperar o vo2_escolhido
+    public double recuperarVo2Escolhido(long idCalculoInicial) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(" SELECT vo2_escolhido FROM CalculoInicial " +
-                "WHERE idCalculoInicial = ? ", new String[]{String.valueOf(idCalculoInicial)});
-        if (cursor != null && cursor.moveToFirst()){
-            double vo2Escolhido = cursor.getDouble(0);
-            cursor.close();
-            return vo2Escolhido;
+        double vo2Escolhido = -1.0; // Valor padrão em caso de falha na recuperação
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT " + Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO + " FROM " + Contract.CalculoInicial.TABELA + " WHERE " + Contract.CalculoInicial._ID + " = ?";
+            cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(idCalculoInicial)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO);
+                if (columnIndex != -1) {
+                    vo2Escolhido = cursor.getDouble(columnIndex);
+                    Log.d("DbHelper", "recuperarVo2Escolhido: " + vo2Escolhido);
+                } else {
+                    Log.e("DbHelper", "recuperarVo2Escolhido: Column index not found");
+                }
+            } else {
+                Log.e("DbHelper", "recuperarVo2Escolhido: Cursor is null or empty");
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        return  0.0;
+
+        return vo2Escolhido;
     }
-    // Recuperar do BD vo2Escolhido
-    public double recuperarASC (long idCalculoInicial) {
+
+
+    // Recuperar do BD ASC
+    public double recuperarASC(long idCalculoInicial) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(" SELECT areaSupC FROM CalculoInicial " +
-                "WHERE idCalculoInicial = ? ", new String[]{String.valueOf(idCalculoInicial)});
-        if (cursor != null && cursor.moveToFirst()){
-            double areaSupC = cursor.getDouble(0);
-            cursor.close();
-            return areaSupC;
+        double areaSupC = -1.0; // Valor padrão em caso de falha na recuperação
+        Cursor cursor = null;
+
+        try {
+            String query = "SELECT " + Contract.CalculoInicial.COLUNA_AREASUPC + " FROM " + Contract.CalculoInicial.TABELA + " WHERE " + Contract.CalculoInicial._ID + " = ?";
+            cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(idCalculoInicial)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                int columnIndex = cursor.getColumnIndex(Contract.CalculoInicial.COLUNA_AREASUPC);
+                if (columnIndex != -1) {
+                    String areaSupCString = cursor.getString(columnIndex);
+                    // Utilize o locale padrão para conversão de strings para double
+                    DecimalFormat decimalFormat = (DecimalFormat) DecimalFormat.getInstance();
+                    NumberFormat numberFormat = NumberFormat.getInstance(Locale.getDefault());
+                    try {
+                        Number number = numberFormat.parse(areaSupCString);
+                        areaSupC = number.doubleValue();
+                        Log.d("DbHelper", "recuperarASC: " + areaSupC);
+                    } catch (ParseException e) {
+                        Log.e("DbHelper", "recuperarASC: Error parsing double value", e);
+                    }
+                } else {
+                    Log.e("DbHelper", "recuperarASC: Column index not found");
+                }
+            } else {
+                Log.e("DbHelper", "recuperarASC: Cursor is null or empty");
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
         }
-        return  0.0;
+
+        return areaSupC;
     }
 
     // Métodos CRUD para ExamesRep

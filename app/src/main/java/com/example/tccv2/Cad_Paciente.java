@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,14 +53,11 @@ public class Cad_Paciente extends AppCompatActivity {
         // Recuperar o idUser
         userId = getIntent().getIntExtra("USER_ID", -1);
         // Verifique se o userId é válido
-        if (userId == -1) {
-            Toast.makeText(this, "ID de usuário não foi passado corretamente.", Toast.LENGTH_SHORT).show();
-            finish(); // Encerra a atividade se o ID do usuário não for passado corretamente
-            return;
-        }
+        Log.d("Cad_Paciente", "userId: " + userId);
 
         // Recuperar o idEquipe
         idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+        Log.d("Cad_Equipe", "EQUIPE_ID: " + idEquipe);
 
         bt_salvar.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -58,14 +58,9 @@ public class ExamesAdicionais extends AppCompatActivity {
         // Inicialize a variável Locale com a localidade padrão do celualr
         locale = Locale.getDefault();
 
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
+        // Recuperar ids
+        recuperarIds();
 
-        // Recuperar o idEquipe
-        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
-
-        // Recuperar idPaciente
-        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
 
         // Configurar botão salvar
         bt_salvar_e.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +93,22 @@ public class ExamesAdicionais extends AppCompatActivity {
         id_tca = findViewById(R.id.id_tca);
         id_hora = findViewById(R.id.id_hora);
         bt_voltar = findViewById(R.id.bt_voltar);
+    }
+
+    private void recuperarIds(){
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
+        // Recuperar o idEquipe
+        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+
+        // Recuperar idPaciente
+        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
+
+        Log.d("ExamesAdicionais", "userId: " + userId);
+        Log.d("ExamesAdicionais", "EQUIPE_ID: " + idEquipe);
+        Log.d("ExamesAdicionais", "PACIENTE_ID: " + idPaciente);
+
     }
 
     private String formatarValor(String valor) {

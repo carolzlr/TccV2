@@ -45,17 +45,9 @@ public class P_Cir extends AppCompatActivity {
         // Inicialize a variável Locale com a localidade padrão do celualr
         locale = Locale.getDefault();
 
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
+        // Recuperar o ids
+        recuperarIds();
 
-        // Recuperar o idEquipe
-        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
-
-        // Recuperar idPaciente
-        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
-
-        // Recuperar idExamesAdicionais
-        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
 
         bt_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +66,26 @@ public class P_Cir extends AppCompatActivity {
         bt_iniciar = findViewById(R.id.bt_iniciar);
     }
 
+    private void recuperarIds(){
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
+        // Recuperar o idEquipe
+        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+
+        // Recuperar idPaciente
+        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
+
+        // Recuperar o idExamesAdicionais
+        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+
+        Log.d("P_Cir", "userId: " + userId);
+        Log.d("P_Cir", "EQUIPE_ID: " + idEquipe);
+        Log.d("P_Cir", "PACIENTE_ID: " + idPaciente);
+        Log.d("P_Cir", "EXAMESADICIONAIS_ID: " + idExamesAdicionais);
+
+    }
+
     private String formatarValor(String valor) {
         try {
             double doubleValue = Double.parseDouble(valor);
@@ -86,44 +98,40 @@ public class P_Cir extends AppCompatActivity {
 
     private void P_Cirurgia() {
 
-        if (idPaciente != -1) {
-            // Obtendo os valores dos EditText
-            String piaCir = id_piaCir.getText().toString();
-            String pvcCir = id_pvcCir.getText().toString();
-            String tempCir = id_tempCir.getText().toString();
-            String diureseCir = id_diureseCir.getText().toString();
-            String fcCir = id_fcCir.getText().toString();
+        // Obtendo os valores dos EditText
+        String piaCir = id_piaCir.getText().toString();
+        String pvcCir = id_pvcCir.getText().toString();
+        String tempCir = id_tempCir.getText().toString();
+        String diureseCir = id_diureseCir.getText().toString();
+        String fcCir = id_fcCir.getText().toString();
 
-            // Formatando os valores numéricos
-            piaCir = formatarValor(piaCir);
-            pvcCir = formatarValor(pvcCir);
-            tempCir = formatarValor(tempCir);
-            diureseCir = formatarValor(diureseCir);
-            fcCir = formatarValor(fcCir);
+        // Formatando os valores numéricos
+        piaCir = formatarValor(piaCir);
+        pvcCir = formatarValor(pvcCir);
+        tempCir = formatarValor(tempCir);
+        diureseCir = formatarValor(diureseCir);
+        fcCir = formatarValor(fcCir);
 
 
-            // Salvando os valores no banco de dados utilizando o DbHelper
-            if (userId != -1) {
-                long idPCir = dbHelper.adicionarParametrosCir(userId, piaCir, pvcCir, tempCir, diureseCir, fcCir);
-                if (idPCir != -1) {
-                    Intent intent = new Intent(P_Cir.this, P_Cec.class);
-                    // Passar ids para a próxima atividade
-                    intent.putExtra("USER_ID", userId);
-                    intent.putExtra("EQUIPE_ID", idEquipe);
-                    intent.putExtra("PACIENTE_ID", idPaciente);
-                    intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
-                    intent.putExtra("PCIR_ID", idPCir);
-                    startActivity(intent);
-                    finish();
-                    Toast.makeText(this, "Parametros adicionados com sucesso!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(this, "Falha ao adicionar parametros.", Toast.LENGTH_SHORT).show();
-                }
+        // Salvando os valores no banco de dados utilizando o DbHelper
+        if (userId != -1) {
+            long idPCir = dbHelper.adicionarParametrosCir(userId, piaCir, pvcCir, tempCir, diureseCir, fcCir);
+            if (idPCir != -1) {
+                Intent intent = new Intent(P_Cir.this, P_Cec.class);
+                // Passar ids para a próxima atividade
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("EQUIPE_ID", idEquipe);
+                intent.putExtra("PACIENTE_ID", idPaciente);
+                intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                intent.putExtra("PCIR_ID", idPCir);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "Parametros adicionados com sucesso!", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "ID de usuário inválido.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Falha ao adicionar parametros.", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "ID de paciente inválido.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "ID de usuário inválido.", Toast.LENGTH_SHORT).show();
         }
     }
 }

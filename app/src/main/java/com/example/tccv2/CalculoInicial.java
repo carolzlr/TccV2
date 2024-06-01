@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -59,7 +60,8 @@ public class CalculoInicial extends AppCompatActivity {
     private long idEquipe;
     private long idPaciente;
     private long idExamesAdicionais;
-    private double superficieCorporal;
+    private long idPCir;
+    private long idPCec;
 
 
     private Locale locale; // Declare a variável Locale
@@ -83,17 +85,8 @@ public class CalculoInicial extends AppCompatActivity {
         // Inicialize a variável Locale com a localidade padrão do celualr
         locale = new Locale("pt", "BR");
 
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
-
-        // Recuperar o idEquipe
-        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
-
-        // Recuperar idPaciente
-        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
-
-        // Recuperar idExamesAdicionais
-        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
+        // Recuperar os ids
+        recuperarIds();
 
         // Configurar o clique do botão "Novo" para salvar os dados no banco de dados
         bt_add.setOnClickListener(new View.OnClickListener() {
@@ -148,6 +141,33 @@ public class CalculoInicial extends AppCompatActivity {
         ed_horaValor = findViewById(R.id.ed_horaValor);
         bt_voltar = findViewById(R.id.bt_voltar);
         bt_add = findViewById(R.id.bt_add);
+    }
+
+    private void recuperarIds(){
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
+        // Recuperar o idEquipe
+        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+
+        // Recuperar idPaciente
+        idPaciente = getIntent().getLongExtra("PACIENTE_ID", -1);
+
+        // Recuperar idExamesAdicionais
+        idExamesAdicionais = getIntent().getLongExtra("EXAMESADICIONAIS_ID", -1);
+
+        // Recuperar idPCir
+        idPCir = getIntent().getLongExtra("PCIR_ID", idPCir);
+
+        // Recuperar idCec
+        idPCec = getIntent().getLongExtra("PCEC_ID", idPCec);
+
+        Log.d("CalculoInicial", "userId: " + userId);
+        Log.d("CalculoInicial", "EQUIPE_ID: " + idEquipe);
+        Log.d("CalculoInicial", "PACIENTE_ID: " + idPaciente);
+        Log.d("CalculoInicial", "EXAMESADICIONAIS_ID: " + idExamesAdicionais);
+        Log.d("CalculoInicial", "PCIR_ID: " + idPCir);
+        Log.d("CalculoInicial", "PCEC_ID" +idPCec);
     }
 
     private void adicionarTextWatchers() {
@@ -353,6 +373,8 @@ public class CalculoInicial extends AppCompatActivity {
                 intent.putExtra("EQUIPE_ID", idEquipe);
                 intent.putExtra("PACIENTE_ID", idPaciente);
                 intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                intent.putExtra("PCIR_ID", idPCir);
+                intent.putExtra("PCEC_ID", idPCec);
                 intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
                 startActivity(intent);
                 finish();
