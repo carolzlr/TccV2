@@ -83,7 +83,7 @@ public class Calculo_Rep extends AppCompatActivity {
         recuperardoBD();
 
         // Botão Repetir
-        bt_rep.setOnClickListener(new View.OnClickListener() {
+        bt_repetir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Salva os dados e repete o processo reiniciando ExamesRep

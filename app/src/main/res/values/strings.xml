@@ -36,9 +36,6 @@
     <string name="Lact">Lactato</string>
     <string name="data">Data</string>
     <string name="hora">Hora</string>
-    <string name="oxigenador">Oxigenador</string>
-    <string name="canulaAA">Canula Arterial Aortica</string>
-    <string name="canulaV">Canula Venosa</string>
     <string name="cirurgiao">Cirurgião</string>
     <string name="auxiliar1">Auxiliar 1</string>
     <string name="auxiliar2">Auxliar 2</string>
@@ -46,8 +43,6 @@
     <string name="perfusionista">Perfusionista</string>
     <string name="anestesista">Anestesista</string>
     <string name="circulante">Circulante</string>
-    <string name="hep">Heparina</string>
-    <string name="prot">Protamina</string>
     <string name="paracir">Parametros cirurgia</string>
     <string name="pia">Pia</string>
     <string name="temp">Temperatura</string>
@@ -108,6 +103,25 @@
     <string name="tipo">Profissão</string>
     <string name="novaSenha">Nova Senha</string>
     <string name="atualizar">Atualizar Senha</string>
+    <string name="datai">Data Início</string>
+    <string name="dataf">Data Encerramento</string>
+    <string name="horai">Hora Inicio</string>
+    <string name="horaf">Hora Enceramento</string>
+    <string name="hepMg">Heparina (mg)</string>
+    <string name="hepMl">Heparina (mL Hora)</string>
+    <string name="prot">Protamina</string>
+    <string name="canulaAA">Cânula Arterial Aórtica nº</string>
+    <string name="canulaV">Cânula Venosa</string>
+    <string name="horaICEC">Início CEC</string>
+    <string name="horaFCEC">Final CEC</string>
+    <string name="totalCEC">Total CEC (minutos)</string>
+    <string name="horaIClamp">Início Clamp</string>
+    <string name="horaFClamp">Final Clamp</string>
+    <string name="totalClamp">Total clmap (minutos)</string>
+    <string name="salvarFim">Salvar e Finalizar</string>
+    <string name="horafProc">Hora Encerramento</string>
+    <string name="datafProc">Data Encerramento</string>
+    <string name="oxi">Oxigenador</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

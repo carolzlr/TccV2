@@ -190,4 +190,60 @@ public class Contract {
                 "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
                         + Usuario.TABELA + "(" + Usuario._ID + ")";
     }
+
+    public static class Procedimento implements BaseColumns{
+        public static final String TABELA = "procedimento";
+        public static final String COLUNA_ID = "idProcedimento";
+        public static final String COLUNA_USUARIO = "usuario";
+        public static final String COLUNA_EQUIPE = "equipe";
+        public static final String COLUNA_PACIENTE = "paciente";
+        public static final String COLUNA_EXAMESAD = "examesAd";
+        public static final String COLUNA_PCIR = "pCir";
+        public static final String COLUNA_PCEC = "pCec";
+        public static final String COLUNA_CALCULOI = "calculoI";
+        public static final String COLUNA_EXAMESREP = "examesRep";
+        public static final String COLUNA_CALCULOREP = "calculoRep";
+        public static final String COLUNA_NOMEPROC = "nomeProc";
+        public static final String COLUNA_DATAINICIO = "dataInicio";
+        public static final String COLUNA_HORAINICO = "horaInicio";
+        public static final String COLUNA_OXI = "oxigendaor";
+        public static final String COLUNA_CANULAAA = "canulaAA";
+        public static final String COLUNA_CANULAV = "canulaV";
+        public static final String COLUNA_PROT = "protamina";
+        public static final String COLUNA_HEPMG = "hepMg";
+        public static final String COLUNA_HEPML = "hepMl";
+        public static final String COLUNA_INCIOCEC = "iCec";
+        public static final String COLUNA_FINALCEC = "fCec";
+        public static final String COLUNA_TCEC = "totalCec";
+        public static final String COLUNA_INCIOCALMP = "iClamp";
+        public static final String COLUNA_FIMCLAMP = "fClamp";
+        public static final String COLUNA_TCLAMP = "totalClamp";
+        public static final String COLUNA_DATAFPROC = "dataFProc";
+        public static final String COLUNA_HORAFPROC = "horafProc";
+        public static final String COLUNA_OBS = "obs";
+        public static final String FK_USUARIO =
+                "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
+                        + Usuario.TABELA + "(" + Usuario._ID + ")";
+        public static final String FK_EQUIPE =
+                "FOREIGN KEY(" + COLUNA_EQUIPE + ") REFERENCES "
+                        + Equipe.TABELA + "(" + Equipe._ID + ")";
+        public static final String FK_PACIENTE =
+                "FOREIGN KEY(" + COLUNA_PACIENTE + ") REFERENCES "
+                        + Paciente.TABELA + "(" + Paciente._ID + ")";
+        public static final String FK_EXAMESAD =
+                "FOREIGN KEY(" + COLUNA_EXAMESAD + ") REFERENCES "
+                        + ExamesAdicionais.TABELA + "(" + ExamesAdicionais._ID + ")";
+        public static final String FK_PCIR =
+                "FOREIGN KEY(" + COLUNA_PCIR + ") REFERENCES "
+                        + PCir.TABELA + "(" + PCir._ID + ")";
+        public static final String FK_PCEC =
+                "FOREIGN KEY(" + COLUNA_PCEC + ") REFERENCES "
+                        + PCec.TABELA + "(" + PCec._ID + ")";
+        public static final String FK_EXAMESREP =
+                "FOREIGN KEY(" + COLUNA_EXAMESREP + ") REFERENCES "
+                        + ExamesRep.TABELA + "(" + ExamesRep._ID + ")";
+        public static final String FK_CALCULOREP =
+                "FOREIGN KEY(" + COLUNA_CALCULOREP + ") REFERENCES "
+                        + Calculo_Rep.TABELA + "(" + Calculo_Rep._ID + ")";
+    }
 }

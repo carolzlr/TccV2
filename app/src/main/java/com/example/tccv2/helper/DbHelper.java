@@ -20,7 +20,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Responsável por fazer as operações de acesso do banco
     public static final String DATABASE_NOME = "BDCEC";
 
-    public static final int DATABASE_VERSION = 15;
+    public static final int DATABASE_VERSION = 17;
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -50,9 +50,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PACIENTE = " create table "
-            + Contract.Paciente.TABELA + "("
-            + Contract.Paciente._ID + " integer primary key autoincrement,"
-            + Contract.Paciente.COLUNA_USUARIO + " INTEGER, "
+            +Contract.Paciente.TABELA + "("
+            +Contract.Paciente._ID + " integer primary key autoincrement,"
+            +Contract.Paciente.COLUNA_USUARIO + " INTEGER, "
             +Contract.Paciente.COLUNA_IDADE + " TEXT, "
             +Contract.Paciente.COLUNA_GENERO + " TEXT, "
             +Contract.Paciente.COLUNA_PESO + " TEXT, "
@@ -66,9 +66,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_EXAMESADICIONAIS = " create table "
-            + Contract.ExamesAdicionais.TABELA + "("
-            + Contract.ExamesAdicionais._ID + " integer primary key autoincrement,"
-            + Contract.ExamesAdicionais.COLUNA_USUARIO + " INTEGER, "
+            +Contract.ExamesAdicionais.TABELA + "("
+            +Contract.ExamesAdicionais._ID + " integer primary key autoincrement,"
+            +Contract.ExamesAdicionais.COLUNA_USUARIO + " INTEGER, "
             +Contract.ExamesAdicionais.COLUNA_PH + " TEXT, "
             +Contract.ExamesAdicionais.COLUNA_PCO2 + " TEXT, "
             +Contract.ExamesAdicionais.COLUNA_PO2 + " TEXT, "
@@ -90,9 +90,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PCIR = " create table "
-            + Contract.PCir.TABELA + "("
-            + Contract.PCir._ID + " integer primary key autoincrement,"
-            + Contract.PCir.COLUNA_USUARIO + " INTEGER, "
+            +Contract.PCir.TABELA + "("
+            +Contract.PCir._ID + " integer primary key autoincrement,"
+            +Contract.PCir.COLUNA_USUARIO + " INTEGER, "
             +Contract.PCir.COLUNA_PIACIR + " TEXT, "
             +Contract.PCir.COLUNA_PVCCIR + " TEXT, "
             +Contract.PCir.COLUNA_TEMPCIR + " TEXT, "
@@ -102,9 +102,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PCEC = " create table "
-            + Contract.PCec.TABELA + "("
-            + Contract.PCec._ID + " integer primary key autoincrement,"
-            + Contract.PCec.COLUNA_USUARIO + " INTEGER, "
+            +Contract.PCec.TABELA + "("
+            +Contract.PCec._ID + " integer primary key autoincrement,"
+            +Contract.PCec.COLUNA_USUARIO + " INTEGER, "
             +Contract.PCec.COLUNA_PIACEC + " TEXT, "
             +Contract.PCec.COLUNA_PVCCEC + " TEXT, "
             +Contract.PCec.COLUNA_TEMPCEC + " TEXT, "
@@ -115,9 +115,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_CALCULOINICIAL = " create table "
-            + Contract.CalculoInicial.TABELA + "("
-            + Contract.CalculoInicial._ID + " integer primary key autoincrement,"
-            + Contract.CalculoInicial.COLUNA_USUARIO + " INTEGER, "
+            +Contract.CalculoInicial.TABELA + "("
+            +Contract.CalculoInicial._ID + " integer primary key autoincrement,"
+            +Contract.CalculoInicial.COLUNA_USUARIO + " INTEGER, "
             +Contract.CalculoInicial.COLUNA_PESO + " TEXT, "
             +Contract.CalculoInicial.COLUNA_ESTATURA + " TEXT, "
             +Contract.CalculoInicial.COLUNA_HB + " TEXT, "
@@ -151,9 +151,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_EXAMESREP = " create table "
-            + Contract.ExamesRep.TABELA + "("
-            + Contract.ExamesRep._ID + " integer primary key autoincrement,"
-            + Contract.ExamesRep.COLUNA_USUARIO + " INTEGER, "
+            +Contract.ExamesRep.TABELA + "("
+            +Contract.ExamesRep._ID + " integer primary key autoincrement,"
+            +Contract.ExamesRep.COLUNA_USUARIO + " INTEGER, "
             +Contract.ExamesRep.COLUNA_PHR_REP + " TEXT, "
             +Contract.ExamesRep.COLUNA_PCO2_REP + " TEXT, "
             +Contract.ExamesRep.COLUNA_PO2_REP + " TEXT, "
@@ -175,9 +175,9 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_CALCULO_REP = " create table "
-            + Contract.Calculo_Rep.TABELA + "("
-            + Contract.Calculo_Rep._ID + " integer primary key autoincrement,"
-            + Contract.Calculo_Rep.COLUNA_USUARIO + " INTEGER, "
+            +Contract.Calculo_Rep.TABELA + "("
+            +Contract.Calculo_Rep._ID + " integer primary key autoincrement,"
+            +Contract.Calculo_Rep.COLUNA_USUARIO + " INTEGER, "
             +Contract.Calculo_Rep.COLUNA_REP_HB + " TEXT, "
             +Contract.Calculo_Rep.COLUNA_REP_PAO2 + " TEXT, "
             +Contract.Calculo_Rep.COLUNA_REP_SAO2 + " TEXT, "
@@ -201,6 +201,47 @@ public class DbHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY (" + Contract.Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
+    private static final String CREATE_PROCEDIMENTO  = " create table "
+            + Contract.Procedimento.TABELA + "("
+            + Contract.Procedimento._ID + " integer primary key autoincrement,"
+            + Contract.Procedimento.COLUNA_USUARIO + " INTEGER, "
+            + Contract.Procedimento.COLUNA_EQUIPE + " INTEGER, "
+            + Contract.Procedimento.COLUNA_PACIENTE + " INTEGER, "
+            + Contract.Procedimento.COLUNA_EXAMESAD + " INTEGER, "
+            + Contract.Procedimento.COLUNA_PCIR + " INTEGER, "
+            + Contract.Procedimento.COLUNA_PCEC + " INTEGER, "
+            + Contract.Procedimento.COLUNA_CALCULOI + " INTEGER, "
+            + Contract.Procedimento.COLUNA_EXAMESREP + " INTEGER, "
+            + Contract.Procedimento.COLUNA_CALCULOREP + " INTEGER, "
+            + Contract.Procedimento.COLUNA_NOMEPROC + " TEXT, "
+            + Contract.Procedimento.COLUNA_DATAINICIO + " TEXT, "
+            + Contract.Procedimento.COLUNA_HORAINICO + " TEXT, "
+            + Contract.Procedimento.COLUNA_OXI + " TEXT, "
+            + Contract.Procedimento.COLUNA_CANULAAA + " TEXT, "
+            + Contract.Procedimento.COLUNA_CANULAV + " TEXT, "
+            + Contract.Procedimento.COLUNA_PROT + " TEXT, "
+            + Contract.Procedimento.COLUNA_HEPMG + " TEXT, "
+            + Contract.Procedimento.COLUNA_HEPML + " TEXT, "
+            + Contract.Procedimento.COLUNA_INCIOCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_FINALCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_TCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_INCIOCALMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_FIMCLAMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_TCLAMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_DATAFPROC + " TEXT, "
+            + Contract.Procedimento.COLUNA_HORAFPROC + " TEXT, "
+            + Contract.Procedimento.COLUNA_OBS + " TEXT, "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA + "(" + Contract.Usuario._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EQUIPE + ") REFERENCES " + Contract.Equipe.TABELA + "(" + Contract.Equipe._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PACIENTE + ") REFERENCES " + Contract.Paciente.TABELA + "(" + Contract.Paciente._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EXAMESAD + ") REFERENCES " + Contract.ExamesAdicionais.TABELA + "(" + Contract.ExamesAdicionais._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PCIR + ") REFERENCES " + Contract.PCir.TABELA + "(" + Contract.PCir._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PCEC + ") REFERENCES " + Contract.PCec.TABELA + "(" + Contract.PCec._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_CALCULOI + ") REFERENCES " + Contract.CalculoInicial.TABELA + "(" + Contract.CalculoInicial._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EXAMESREP + ") REFERENCES " + Contract.ExamesRep.TABELA + "(" + Contract.ExamesRep._ID + "), "
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_CALCULOREP + ") REFERENCES " + Contract.Calculo_Rep.TABELA + "(" + Contract.Calculo_Rep._ID + ")"
+            + ");";
+
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_USUARIO);
@@ -212,6 +253,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_CALCULOINICIAL);
         sqLiteDatabase.execSQL(CREATE_EXAMESREP);
         sqLiteDatabase.execSQL(CREATE_CALCULO_REP);
+        sqLiteDatabase.execSQL(CREATE_PROCEDIMENTO);
 
     }
 
@@ -227,6 +269,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.CalculoInicial.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Calculo_Rep.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Procedimento.TABELA);
 
         onCreate(sqLiteDatabase);
     }
