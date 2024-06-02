@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.tccv2.Procedimento;
 import com.example.tccv2.contract.Contract;
 
 import java.text.DecimalFormat;
@@ -20,7 +21,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Responsável por fazer as operações de acesso do banco
     public static final String DATABASE_NOME = "BDCEC";
 
-    public static final int DATABASE_VERSION = 17;
+    public static final int DATABASE_VERSION = 18;
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -265,7 +266,6 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesAdicionais.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCir.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.PCec.TABELA);
-        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.CalculoInicial.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Calculo_Rep.TABELA);
@@ -646,10 +646,73 @@ public class DbHelper extends SQLiteOpenHelper {
         return idCalculo_Rep;
     }
 
-
     // Métodos CRUD para Procedimento
 
+    // Método genérico para recuperar FKS
+    private int recuperarFKS(String nomeTabela, String userIdColuna, int userId){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(nomeTabela, new String[]{"_ID"}, userIdColuna + "userId = ?",
+                new String []{String.valueOf(userId)}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()){
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("_ID"));
+            cursor.close();
+            return id;
+        }
+        return -1; // se der erro retorna esse valor
+    }
+
     // Adicionar Procedimento
+    private long adicionarProcedimento (int userId, String nomeProc, String dataInicio, String horaInicio,
+                                        String oxigenador, String canulaAA, String canulaV, String protamina,
+                                        String hepMg, String hepMl, String iCec, String fCec, String totalCec,
+                                        String iClamp, String fClamp, String totalClamp, String datafProc,
+                                        String horafProc, String obs){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        // Adicionar os valores inseridos pelo usuário logado
+        values.put(Contract.Procedimento.COLUNA_USUARIO, userId);
+        values.put(Contract.Procedimento.COLUNA_NOMEPROC, nomeProc);
+        values.put(Contract.Procedimento.COLUNA_DATAINICIO, dataInicio);
+        values.put(Contract.Procedimento.COLUNA_HORAINICO, horaInicio);
+        values.put(Contract.Procedimento.COLUNA_OXI, oxigenador);
+        values.put(Contract.Procedimento.COLUNA_CANULAAA, canulaAA);
+        values.put(Contract.Procedimento.COLUNA_CANULAV, canulaV);
+        values.put(Contract.Procedimento.COLUNA_PROT, protamina);
+        values.put(Contract.Procedimento.COLUNA_HEPMG, hepMg);
+        values.put(Contract.Procedimento.COLUNA_HEPML, hepMl);
+        values.put(Contract.Procedimento.COLUNA_INCIOCEC, iCec);
+        values.put(Contract.Procedimento.COLUNA_FINALCEC, fCec);
+        values.put(Contract.Procedimento.COLUNA_TCEC, totalCec);
+        values.put(Contract.Procedimento.COLUNA_INCIOCALMP, iClamp);
+        values.put(Contract.Procedimento.COLUNA_FIMCLAMP, fClamp);
+        values.put(Contract.Procedimento.COLUNA_TCLAMP, totalClamp);
+        values.put(Contract.Procedimento.COLUNA_DATAFPROC, datafProc);
+        values.put(Contract.Procedimento.COLUNA_HORAFPROC, horafProc);
+        values.put(Contract.Procedimento.COLUNA_OBS, obs);
+
+        // Recuperar Fks
+        int equipe = recuperarFKS("Equipe", "userId", userId);
+        int paciente = recuperarFKS("Paciente", "userId", userId);
+        int examesAd = recuperarFKS("ExamesAdicionais", "userId", userId);
+        int pCir= recuperarFKS("PCir", "userId", userId);
+        int pCec = recuperarFKS("PCec", "userId", userId);
+        int calculoI = recuperarFKS("CalculoInicial", "userId", userId);
+        int examesRep = recuperarFKS("ExamesRep", "userID", userId);
+        int calculoRep= recuperarFKS("Calculo_Rep", "userId", userId);
+
+        // Adicionar FKs na tabela Procedimento
+        values.put("equipe", equipe);
+        values.put("paciente", paciente);
+        values.put("exames", examesAd);
+        values.put("pCir", pCir);
+        values.put("pCec", pCec);
+        values.put("calculoI", calculoI);
+        values.put("examesRep", examesRep);
+        values.put("calculoRep", calculoRep);
+
+        long idProcedimento = sqLiteDatabase.insert(Contract.Procedimento.TABELA, null, values);
+        return idProcedimento;
+    }
 
     // Métodos CRUD para Registros
 
