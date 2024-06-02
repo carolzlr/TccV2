@@ -86,10 +86,18 @@ public class Calculo_Rep extends AppCompatActivity {
         bt_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Salva os dados e repete o processo reiniciando ExamesRep
+                salvarDadosNoBanco("ExamesRep");
             }
         });
         //Botão Finalizar
+        bt_finaliza.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Encerra e vai para próxima atividade é Procedimento
+                salvarDadosNoBanco("Procedimento");
+            }
+        });
 
     }
 
@@ -343,7 +351,7 @@ public class Calculo_Rep extends AppCompatActivity {
         // Substituir vírgulas por pontos e converter para double
         return Double.parseDouble(value.replace(",", "."));
     }
-    private void salvarDadosNoBanco() {
+    private void salvarDadosNoBanco(String proximaAtividade) {
         // Obtenha os valores dos campos como strings
         String rep_hbStr = hb_rep.getText().toString();
         String rep_sao2Str = sao2_rep.getText().toString();
@@ -369,23 +377,41 @@ public class Calculo_Rep extends AppCompatActivity {
 
         // Chame o método para adicionar os cálculos iniciais ao banco de dados
         if (userId != -1) {
-            long idCalculoRep = dbHelper.adicionarValoresRep(userId, rep_hbStr, rep_pao2Str, rep_sao2Str, rep_pvo2Str,
+            long idCalculo_Rep = dbHelper.adicionarValoresRep(userId, rep_hbStr, rep_pao2Str, rep_sao2Str, rep_pvo2Str,
                     rep_svo2Str, rep_pamStr, rep_pvcStr, rep_papmStr, rep_pcpStr, rep_fcStr, rep_cao2Str, rep_cvo2Str,
-                    rep_reo2Str, rep_dcStr, rep_icStr, rep_vsStr, rep_irvsStr, rep_irvpStr, rep_obsStr, rep_dataHoraInicioStr );
-            if (idCalculoRep!= -1) {
-                Intent intent = new Intent(Calculo_Rep.this, Exames_Rep.class);
-                // Passar ids para a próxima atividade
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("EQUIPE_ID", idEquipe);
-                intent.putExtra("PACIENTE_ID", idPaciente);
-                intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
-                intent.putExtra("PCIR_ID", idPCir);
-                intent.putExtra("PCEC_ID", idPCec);
-                intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
-                intent.putExtra("EXAMESREP_ID", idExamesRep);
-                intent.putExtra("CALCULOREP_ID", idCalculoRep);
-                startActivity(intent);
-                finish();
+                    rep_reo2Str, rep_dcStr, rep_icStr, rep_vsStr, rep_irvsStr, rep_irvpStr, rep_obsStr, rep_dataHoraInicioStr);
+            if (idCalculo_Rep != -1) {
+                // Verificar o valor de proximaAtividade
+                if (proximaAtividade.equals("ExamesRep")) {
+                    // Redirecionar para a atividade ExamesRep
+                    Intent intent = new Intent(Calculo_Rep.this, Exames_Rep.class);
+                    // Passar os extras para a próxima atividade
+                    intent.putExtra("USER_ID", userId);
+                    intent.putExtra("EQUIPE_ID", idEquipe);
+                    intent.putExtra("PACIENTE_ID", idPaciente);
+                    intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                    intent.putExtra("PCIR_ID", idPCir);
+                    intent.putExtra("PCEC_ID", idPCec);
+                    intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
+                    intent.putExtra("EXAMESREP_ID", idExamesRep);
+                    intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
+                    startActivity(intent);
+                } else if (proximaAtividade.equals("Procedimento")) {
+                    // Redirecionar para a atividade Procedimento
+                    Intent intent = new Intent(Calculo_Rep.this, Procedimento.class);
+                    // Passar os extras para a próxima atividade
+                    intent.putExtra("USER_ID", userId);
+                    intent.putExtra("EQUIPE_ID", idEquipe);
+                    intent.putExtra("PACIENTE_ID", idPaciente);
+                    intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                    intent.putExtra("PCIR_ID", idPCir);
+                    intent.putExtra("PCEC_ID", idPCec);
+                    intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
+                    intent.putExtra("EXAMESREP_ID", idExamesRep);
+                    intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
+                    startActivity(intent);
+                }
+                finish(); // Encerrar a atividade atual
                 Toast.makeText(this, "Exames adicionados com sucesso!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Falha ao adicionar exames.", Toast.LENGTH_SHORT).show();

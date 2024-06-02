@@ -599,7 +599,7 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(Contract.Calculo_Rep.COLUNA_REP_OBS, Rep_obs);
         values.put(Contract.Calculo_Rep.COLUNA_REP_HORAVALOR, Rep_horaValor);
 
-        long idCalculo_Rep = sqLiteDatabase.insert(Contract.CalculoInicial.TABELA, null, values);
+        long idCalculo_Rep = sqLiteDatabase.insert(Contract.Calculo_Rep.TABELA, null, values);
         return idCalculo_Rep;
     }
 
