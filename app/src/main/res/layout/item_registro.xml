@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TableLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_Registro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/registro"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idRegistro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_Equipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/equipes"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idEquipe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_Paciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paciente"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_ExamesA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exames"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idExamesA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_PCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paracir"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idPCir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_PCec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/paracec"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idPCec"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_CalculoI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/calcularInicio"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idCalculoI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_ExamesRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/examesrep"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idExamesRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_CalculoRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ajusteCEC"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idCalculoRep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_Procedimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/procedimento"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_idProcedimento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

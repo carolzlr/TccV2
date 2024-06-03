@@ -124,6 +124,9 @@
     <string name="oxi">Oxigenador</string>
     <string name="atualizarCad">Alterar Dados</string>
     <string name="voltar">Voltar</string>
+    <string name="registro">Registro:</string>
+    <string name="examesrep">Exames-Repetição</string>
+    <string name="ajusteCEC">Ajuste Fluxo</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
