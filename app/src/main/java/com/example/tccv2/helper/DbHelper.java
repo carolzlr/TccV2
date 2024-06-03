@@ -10,10 +10,13 @@ import android.util.Log;
 
 import com.example.tccv2.Procedimento;
 import com.example.tccv2.contract.Contract;
+import com.example.tccv2.entidades.Registro;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -21,7 +24,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Responsável por fazer as operações de acesso do banco
     public static final String DATABASE_NOME = "BDCEC";
 
-    public static final int DATABASE_VERSION = 18;
+    public static final int DATABASE_VERSION = 21;
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -206,14 +209,6 @@ public class DbHelper extends SQLiteOpenHelper {
             + Contract.Procedimento.TABELA + "("
             + Contract.Procedimento._ID + " integer primary key autoincrement,"
             + Contract.Procedimento.COLUNA_USUARIO + " INTEGER, "
-            + Contract.Procedimento.COLUNA_EQUIPE + " INTEGER, "
-            + Contract.Procedimento.COLUNA_PACIENTE + " INTEGER, "
-            + Contract.Procedimento.COLUNA_EXAMESAD + " INTEGER, "
-            + Contract.Procedimento.COLUNA_PCIR + " INTEGER, "
-            + Contract.Procedimento.COLUNA_PCEC + " INTEGER, "
-            + Contract.Procedimento.COLUNA_CALCULOI + " INTEGER, "
-            + Contract.Procedimento.COLUNA_EXAMESREP + " INTEGER, "
-            + Contract.Procedimento.COLUNA_CALCULOREP + " INTEGER, "
             + Contract.Procedimento.COLUNA_NOMEPROC + " TEXT, "
             + Contract.Procedimento.COLUNA_DATAINICIO + " TEXT, "
             + Contract.Procedimento.COLUNA_HORAINICO + " TEXT, "
@@ -232,16 +227,44 @@ public class DbHelper extends SQLiteOpenHelper {
             + Contract.Procedimento.COLUNA_DATAFPROC + " TEXT, "
             + Contract.Procedimento.COLUNA_HORAFPROC + " TEXT, "
             + Contract.Procedimento.COLUNA_OBS + " TEXT, "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA + "(" + Contract.Usuario._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EQUIPE + ") REFERENCES " + Contract.Equipe.TABELA + "(" + Contract.Equipe._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PACIENTE + ") REFERENCES " + Contract.Paciente.TABELA + "(" + Contract.Paciente._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EXAMESAD + ") REFERENCES " + Contract.ExamesAdicionais.TABELA + "(" + Contract.ExamesAdicionais._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PCIR + ") REFERENCES " + Contract.PCir.TABELA + "(" + Contract.PCir._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_PCEC + ") REFERENCES " + Contract.PCec.TABELA + "(" + Contract.PCec._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_CALCULOI + ") REFERENCES " + Contract.CalculoInicial.TABELA + "(" + Contract.CalculoInicial._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_EXAMESREP + ") REFERENCES " + Contract.ExamesRep.TABELA + "(" + Contract.ExamesRep._ID + "), "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_CALCULOREP + ") REFERENCES " + Contract.Calculo_Rep.TABELA + "(" + Contract.Calculo_Rep._ID + ")"
-            + ");";
+            + " FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "))";
+
+    private static final String CREATE_REGISTRO  = " create table "
+            + Contract.Registro.TABELA + "("
+            + Contract.Registro._ID + " integer primary key autoincrement,"
+            + Contract.Registro.COLUNA_USUARIO + " INTEGER, "
+            + Contract.Registro.COLUNA_EQUIPE + " INTEGER, "
+            + Contract.Registro.COLUNA_PACIENTE + " INTEGER, "
+            + Contract.Registro.COLUNA_EXAMESADICIONAIS + " INTEGER, "
+            + Contract.Registro.COLUNA_PCIR + " INTEGER, "
+            + Contract.Registro.COLUNA_PCEC + " INTEGER, "
+            + Contract.Registro.COLUNA_CALCULOINICIAL + " INTEGER, "
+            + Contract.Registro.COLUNA_EXAMESREP + " INTEGER, "
+            + Contract.Registro.COLUNA_CALCULOREP + " INTEGER, "
+            + Contract.Registro.COLUNA_PROCEDIMENTO + " INTEGER, "
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_PACIENTE + ") REFERENCES " + Contract.Paciente.TABELA
+            + "( " + Contract.Paciente._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_EXAMESADICIONAIS + ") REFERENCES " + Contract.ExamesAdicionais.TABELA
+            + "( " + Contract.ExamesAdicionais._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_PCIR + ") REFERENCES " + Contract.PCir.TABELA
+            + "( " + Contract.PCir._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_PCEC + ") REFERENCES " + Contract.PCec.TABELA
+            + "( " + Contract.PCec._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_CALCULOINICIAL + ") REFERENCES " + Contract.CalculoInicial.TABELA
+            + "( " + Contract.CalculoInicial._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_EXAMESREP + ") REFERENCES " + Contract.ExamesRep.TABELA
+            + "( " + Contract.ExamesRep._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_CALCULOREP + ") REFERENCES " + Contract.Calculo_Rep.TABELA
+            + "( " + Contract.Calculo_Rep._ID + "),"
+            + " FOREIGN KEY (" + Contract.Registro.COLUNA_PROCEDIMENTO + ") REFERENCES " + Contract.Procedimento.TABELA
+            + "( " + Contract.Procedimento._ID + "))";
+
+
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
@@ -255,6 +278,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(CREATE_EXAMESREP);
         sqLiteDatabase.execSQL(CREATE_CALCULO_REP);
         sqLiteDatabase.execSQL(CREATE_PROCEDIMENTO);
+        sqLiteDatabase.execSQL(CREATE_REGISTRO);
 
     }
 
@@ -270,6 +294,7 @@ public class DbHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.ExamesRep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Calculo_Rep.TABELA);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Procedimento.TABELA);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + Contract.Registro.TABELA);
 
         onCreate(sqLiteDatabase);
     }
@@ -648,19 +673,6 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos CRUD para Procedimento
 
-    // Método genérico para recuperar FKS
-    private int recuperarFKS(String nomeTabela, String userIdColuna, int userId){
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(nomeTabela, new String[]{"_ID"}, userIdColuna + "userId = ?",
-                new String []{String.valueOf(userId)}, null, null, null);
-        if (cursor != null && cursor.moveToFirst()){
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow("_ID"));
-            cursor.close();
-            return id;
-        }
-        return -1; // se der erro retorna esse valor
-    }
-
     // Adicionar Procedimento
     private long adicionarProcedimento (int userId, String nomeProc, String dataInicio, String horaInicio,
                                         String oxigenador, String canulaAA, String canulaV, String protamina,
@@ -690,25 +702,6 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(Contract.Procedimento.COLUNA_HORAFPROC, horafProc);
         values.put(Contract.Procedimento.COLUNA_OBS, obs);
 
-        // Recuperar Fks
-        int equipe = recuperarFKS("Equipe", "userId", userId);
-        int paciente = recuperarFKS("Paciente", "userId", userId);
-        int examesAd = recuperarFKS("ExamesAdicionais", "userId", userId);
-        int pCir= recuperarFKS("PCir", "userId", userId);
-        int pCec = recuperarFKS("PCec", "userId", userId);
-        int calculoI = recuperarFKS("CalculoInicial", "userId", userId);
-        int examesRep = recuperarFKS("ExamesRep", "userID", userId);
-        int calculoRep= recuperarFKS("Calculo_Rep", "userId", userId);
-
-        // Adicionar FKs na tabela Procedimento
-        values.put("equipe", equipe);
-        values.put("paciente", paciente);
-        values.put("exames", examesAd);
-        values.put("pCir", pCir);
-        values.put("pCec", pCec);
-        values.put("calculoI", calculoI);
-        values.put("examesRep", examesRep);
-        values.put("calculoRep", calculoRep);
 
         long idProcedimento = sqLiteDatabase.insert(Contract.Procedimento.TABELA, null, values);
         return idProcedimento;
@@ -716,7 +709,95 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos CRUD para Registros
 
+    private int getIntFromCursor(Cursor cursor, String columnName) {
+        int columnIndex = cursor.getColumnIndex(columnName);
+        if (columnIndex != -1) {
+            return cursor.getInt(columnIndex);
+        }
+        return 0; // ou qualquer valor padrão apropriado
+    }
+
     // Adicionar Registros
+
+    public void adicionarRegistro (Registro registro){
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        sqLiteDatabase.execSQL(" INSERT INTO registro (idRegistro, usuario, equipe, paciente, examesAdicionais, " +
+                "pCir, pCec, calculoInicial, examesRep, calculoRep, procedimento) VALUES " + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                new Object[]{
+                        registro.getIdRegistro(),
+                        registro.getUsuario(),
+                        registro.getEquipe(),
+                        registro.getPaciente(),
+                        registro.getExamesAdicionais(),
+                        registro.getpCir(),
+                        registro.getpCec(),
+                        registro.getCalculoInicial(),
+                        registro.getExamesRep(),
+                        registro.getCalculoRep(),
+                        registro.getProcedimento()
+        });
+    }
+
+    // Encontrar registro pela id do Usuário
+    // Exibe todos os registros gerados pelo usuário logado
+    public List<Registro> encontrarRegistroPorUsuario (int usuario){
+        List<Registro> registros = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM registro WHERE usuario = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(usuario)});
+        if (cursor != null && cursor.moveToFirst()){
+            do{ // vai preencher o array com os registros baseados na id do usuário
+                Registro registro = new Registro();
+                registro.setIdRegistro(getIntFromCursor(cursor, "idRegistro"));
+                registro.setUsuario(getIntFromCursor(cursor, "usuario"));
+                registro.setEquipe(getIntFromCursor(cursor, "equipe"));
+                registro.setPaciente(getIntFromCursor(cursor, "paciente"));
+                registro.setExamesAdicionais(getIntFromCursor(cursor, "examesAdicionais"));
+                registro.setpCir(getIntFromCursor(cursor, "pCir"));
+                registro.setpCec(getIntFromCursor(cursor, "pCec"));
+                registro.setCalculoInicial(getIntFromCursor(cursor, "calculoInicial"));
+                registro.setCalculoRep(getIntFromCursor(cursor, "examesRep"));
+                registro.setCalculoRep(getIntFromCursor(cursor, "calculoRep"));
+                registro.setProcedimento(getIntFromCursor(cursor, "procedimento"));
+                registros.add(registro);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return registros;
+    }
+
+    // Encontrar registro pela id do Registro
+    // Exibe um registro por vez
+
+    public Registro exibirRegistro (int idRegistro){
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        String query = "SELECT * FROM registro WHERE idRegistro = ?";
+        Cursor cursor = sqLiteDatabase.rawQuery(query, new String[]{String.valueOf(idRegistro)});
+        if (cursor != null && cursor.moveToFirst()){
+            Registro registro = new Registro();
+            registro.setIdRegistro(getIntFromCursor(cursor, "idRegistro"));
+            registro.setUsuario(getIntFromCursor(cursor, "usuario"));
+            registro.setEquipe(getIntFromCursor(cursor, "equipe"));
+            registro.setPaciente(getIntFromCursor(cursor, "paciente"));
+            registro.setExamesAdicionais(getIntFromCursor(cursor, "examesAdicionais"));
+            registro.setpCir(getIntFromCursor(cursor, "pCir"));
+            registro.setpCec(getIntFromCursor(cursor, "pCec"));
+            registro.setCalculoInicial(getIntFromCursor(cursor, "calculoInicial"));
+            registro.setCalculoRep(getIntFromCursor(cursor, "examesRep"));
+            registro.setCalculoRep(getIntFromCursor(cursor, "calculoRep"));
+            registro.setProcedimento(getIntFromCursor(cursor, "procedimento"));
+            cursor.close();
+            sqLiteDatabase.close();
+            return registro;
+        }else{
+            cursor.close();
+            sqLiteDatabase.close();
+            return null;
+        }
+    }
+
+
 
 
 }

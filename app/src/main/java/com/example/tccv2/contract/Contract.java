@@ -195,14 +195,6 @@ public class Contract {
         public static final String TABELA = "procedimento";
         public static final String COLUNA_ID = "idProcedimento";
         public static final String COLUNA_USUARIO = "usuario";
-        public static final String COLUNA_EQUIPE = "equipe";
-        public static final String COLUNA_PACIENTE = "paciente";
-        public static final String COLUNA_EXAMESAD = "examesAd";
-        public static final String COLUNA_PCIR = "pCir";
-        public static final String COLUNA_PCEC = "pCec";
-        public static final String COLUNA_CALCULOI = "calculoI";
-        public static final String COLUNA_EXAMESREP = "examesRep";
-        public static final String COLUNA_CALCULOREP = "calculoRep";
         public static final String COLUNA_NOMEPROC = "nomeProc";
         public static final String COLUNA_DATAINICIO = "dataInicio";
         public static final String COLUNA_HORAINICO = "horaInicio";
@@ -224,6 +216,25 @@ public class Contract {
         public static final String FK_USUARIO =
                 "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
                         + Usuario.TABELA + "(" + Usuario._ID + ")";
+    }
+
+    public static class Registro implements BaseColumns {
+        public static final String TABELA = "registro";
+        public static final String COLUNA_ID = "idRegistro";
+        public static final String COLUNA_USUARIO = "usuario";
+        public static final String COLUNA_EQUIPE = "equipe";
+        public static final String COLUNA_PACIENTE = "paciente";
+        public static final String COLUNA_EXAMESADICIONAIS = "examesAdicionais";
+        public static final String COLUNA_PCIR = "pCir";
+        public static final String COLUNA_PCEC = "pCec";
+        public static final String COLUNA_CALCULOINICIAL = "calculoInicial";
+        public static final String COLUNA_EXAMESREP = "examesRep";
+        public static final String COLUNA_CALCULOREP = "calculoRep";
+        public static final String COLUNA_PROCEDIMENTO = "procedimento";
+
+        public static final String FK_USUARIO =
+                "FOREIGN KEY(" + COLUNA_USUARIO + ") REFERENCES "
+                        + Usuario.TABELA + "(" + Usuario._ID + ")";
         public static final String FK_EQUIPE =
                 "FOREIGN KEY(" + COLUNA_EQUIPE + ") REFERENCES "
                         + Equipe.TABELA + "(" + Equipe._ID + ")";
@@ -231,7 +242,7 @@ public class Contract {
                 "FOREIGN KEY(" + COLUNA_PACIENTE + ") REFERENCES "
                         + Paciente.TABELA + "(" + Paciente._ID + ")";
         public static final String FK_EXAMESAD =
-                "FOREIGN KEY(" + COLUNA_EXAMESAD + ") REFERENCES "
+                "FOREIGN KEY(" + COLUNA_EXAMESADICIONAIS + ") REFERENCES "
                         + ExamesAdicionais.TABELA + "(" + ExamesAdicionais._ID + ")";
         public static final String FK_PCIR =
                 "FOREIGN KEY(" + COLUNA_PCIR + ") REFERENCES "
@@ -239,11 +250,18 @@ public class Contract {
         public static final String FK_PCEC =
                 "FOREIGN KEY(" + COLUNA_PCEC + ") REFERENCES "
                         + PCec.TABELA + "(" + PCec._ID + ")";
+        public static final String FK_CALCULOINICIAL =
+                "FOREIGN KEY(" + COLUNA_CALCULOINICIAL + ") REFERENCES "
+                        + CalculoInicial.TABELA + "(" + CalculoInicial._ID + ")";
         public static final String FK_EXAMESREP =
                 "FOREIGN KEY(" + COLUNA_EXAMESREP + ") REFERENCES "
                         + ExamesRep.TABELA + "(" + ExamesRep._ID + ")";
         public static final String FK_CALCULOREP =
                 "FOREIGN KEY(" + COLUNA_CALCULOREP + ") REFERENCES "
                         + Calculo_Rep.TABELA + "(" + Calculo_Rep._ID + ")";
+
+        public static final String FK_PROCEDIMENTO =
+                "FOREIGN KEY(" + COLUNA_PROCEDIMENTO+ ") REFERENCES "
+                        + Procedimento.TABELA + "(" +Procedimento._ID + ")";
     }
 }

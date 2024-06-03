@@ -6,11 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tccv2.helper.DbHelper;
 
@@ -23,6 +19,8 @@ public class Perfil extends AppCompatActivity {
     private Button bt_sair;
     private DbHelper dbHelper;
 
+    private int userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +32,34 @@ public class Perfil extends AppCompatActivity {
         // Inicializando o helper do banco de dados
         dbHelper = new DbHelper(this);
 
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
         bt_editar_senha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Perfil.this, Senha.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        bt_sair.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Perfil.this, TelaPrincipal.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        bt_editar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Perfil.this, AlterarDados.class);
+                intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
             }

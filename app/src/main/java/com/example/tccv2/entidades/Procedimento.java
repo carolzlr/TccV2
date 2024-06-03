@@ -5,14 +5,6 @@ import androidx.annotation.NonNull;
 public class Procedimento {
     private int idProcedimento;
     private int usuario; // FK
-    private int equipe; // FK
-    private int paciente; // FK
-    private int examesAd; // FK
-    private int pCir; // FK
-    private int pCec; // FK
-    private int calculoI; // FK
-    private int examesRep; // FK
-    private int caluloRep; // FK
     private String nomeProc;
     private long dataInicio;
     private long horaInicio;
@@ -32,21 +24,11 @@ public class Procedimento {
     private long horafProc;
     private String obs;
 
-    public Procedimento(int idProcedimento, int usuario, int equipe, int paciente, int examesAd, int pCir, int pCec,
-                        int calculoI, int examesRep, int caluloRep, String nomeProc, long dataInicio, long horaInicio,
-                        String oxigenador, String canulaAA, String canulaV, String protamina, String hepMg,
-                        String hepMl, long iCec, long fCec, long totalCec, long iClamp, long fClamp, long totalClamp,
-                        long datafProc, long horafProc, String obs) {
+    public Procedimento(int idProcedimento, int usuario, String nomeProc, long dataInicio, long horaInicio, String oxigenador, String canulaAA,
+                        String canulaV, String protamina, String hepMg, String hepMl, long iCec, long fCec, long totalCec, long iClamp,
+                        long fClamp, long totalClamp, long datafProc, long horafProc, String obs) {
         this.idProcedimento = idProcedimento;
         this.usuario = usuario;
-        this.equipe = equipe;
-        this.paciente = paciente;
-        this.examesAd = examesAd;
-        this.pCir = pCir;
-        this.pCec = pCec;
-        this.calculoI = calculoI;
-        this.examesRep = examesRep;
-        this.caluloRep = caluloRep;
         this.nomeProc = nomeProc;
         this.dataInicio = dataInicio;
         this.horaInicio = horaInicio;
@@ -67,44 +49,9 @@ public class Procedimento {
         this.obs = obs;
     }
 
-    public Procedimento(int usuario, int equipe, int paciente, int examesAd, int pCir, int pCec, int calculoI,
-                        int examesRep, int caluloRep, String nomeProc, long dataInicio, long horaInicio,
-                        String oxigenador, String canulaAA, String canulaV, String protamina, String hepMg,
-                        String hepMl, long iCec, long fCec, long totalCec, long iClamp, long fClamp, long totalClamp,
-                        long datafProc, long horafProc, String obs) {
-        this.usuario = usuario;
-        this.equipe = equipe;
-        this.paciente = paciente;
-        this.examesAd = examesAd;
-        this.pCir = pCir;
-        this.pCec = pCec;
-        this.calculoI = calculoI;
-        this.examesRep = examesRep;
-        this.caluloRep = caluloRep;
-        this.nomeProc = nomeProc;
-        this.dataInicio = dataInicio;
-        this.horaInicio = horaInicio;
-        this.oxigenador = oxigenador;
-        this.canulaAA = canulaAA;
-        this.canulaV = canulaV;
-        this.protamina = protamina;
-        this.hepMg = hepMg;
-        this.hepMl = hepMl;
-        this.iCec = iCec;
-        this.fCec = fCec;
-        this.totalCec = totalCec;
-        this.iClamp = iClamp;
-        this.fClamp = fClamp;
-        this.totalClamp = totalClamp;
-        this.datafProc = datafProc;
-        this.horafProc = horafProc;
-        this.obs = obs;
-    }
-
-    public Procedimento(int usuario, String nomeProc, long dataInicio, long horaInicio, String oxigenador,
-                        String canulaAA, String canulaV, String protamina, String hepMg, String hepMl, long iCec,
-                        long fCec, long totalCec, long iClamp, long fClamp, long totalClamp, long datafProc,
-                        long horafProc, String obs) {
+    public Procedimento(int usuario, String nomeProc, long dataInicio, long horaInicio, String oxigenador, String canulaAA, String canulaV,
+                        String protamina, String hepMg, String hepMl, long iCec, long fCec, long totalCec, long iClamp, long fClamp,
+                        long totalClamp, long datafProc, long horafProc, String obs) {
         this.usuario = usuario;
         this.nomeProc = nomeProc;
         this.dataInicio = dataInicio;
@@ -140,70 +87,6 @@ public class Procedimento {
 
     public void setUsuario(int usuario) {
         this.usuario = usuario;
-    }
-
-    public int getEquipe() {
-        return equipe;
-    }
-
-    public void setEquipe(int equipe) {
-        this.equipe = equipe;
-    }
-
-    public int getPaciente() {
-        return paciente;
-    }
-
-    public void setPaciente(int paciente) {
-        this.paciente = paciente;
-    }
-
-    public int getExamesAd() {
-        return examesAd;
-    }
-
-    public void setExamesAd(int examesAd) {
-        this.examesAd = examesAd;
-    }
-
-    public int getpCir() {
-        return pCir;
-    }
-
-    public void setpCir(int pCir) {
-        this.pCir = pCir;
-    }
-
-    public int getpCec() {
-        return pCec;
-    }
-
-    public void setpCec(int pCec) {
-        this.pCec = pCec;
-    }
-
-    public int getCalculoI() {
-        return calculoI;
-    }
-
-    public void setCalculoI(int calculoI) {
-        this.calculoI = calculoI;
-    }
-
-    public int getExamesRep() {
-        return examesRep;
-    }
-
-    public void setExamesRep(int examesRep) {
-        this.examesRep = examesRep;
-    }
-
-    public int getCaluloRep() {
-        return caluloRep;
-    }
-
-    public void setCaluloRep(int caluloRep) {
-        this.caluloRep = caluloRep;
     }
 
     public String getNomeProc() {
@@ -356,14 +239,6 @@ public class Procedimento {
         return "Procedimento{" +
                 "idProcedimento=" + idProcedimento +
                 ", usuario=" + usuario +
-                ", equipe=" + equipe +
-                ", paciente=" + paciente +
-                ", examesAd=" + examesAd +
-                ", pCir=" + pCir +
-                ", pCec=" + pCec +
-                ", calculoI=" + calculoI +
-                ", examesRep=" + examesRep +
-                ", caluloRep=" + caluloRep +
                 ", nomeProc='" + nomeProc + '\'' +
                 ", dataInicio=" + dataInicio +
                 ", horaInicio=" + horaInicio +
