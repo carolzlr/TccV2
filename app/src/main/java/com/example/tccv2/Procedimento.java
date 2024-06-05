@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -70,7 +71,13 @@ public class Procedimento extends AppCompatActivity {
         adicionarTextWatchersCLAMP();
 
         // Salvar dados
-        salvarProcedimento();
+        bt_salvar_proc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                salvarProcedimento();
+            }
+        });
+
     }
 
     private void iniciarComponentes(){
@@ -212,12 +219,22 @@ public class Procedimento extends AppCompatActivity {
         }
     }
 
-    // Método para converter hora no formato "HH:mm" para minutos
     private int converterParaMinutos(String hora) {
         String[] partes = hora.split(":");
-        int horas = Integer.parseInt(partes[0]);
-        int minutos = Integer.parseInt(partes[1]);
-        return horas * 60 + minutos;
+        if (partes.length >= 2) {
+            int horas = Integer.parseInt(partes[0]);
+            int minutos = Integer.parseInt(partes[1]);
+            if (horas >= 0 && horas <= 23 && minutos >= 0 && minutos <= 59) {
+                // Se as horas e os minutos estiverem dentro dos limites válidos
+                return horas * 60 + minutos;
+            } else {
+                // Trate o caso em que as horas ou os minutos estão fora dos limites válidos
+                return 0; // Ou algum valor padrão apropriado para o seu caso
+            }
+        } else {
+            // Trate o caso em que a string de hora não tem o formato esperado
+            return 0; // Ou algum valor padrão apropriado para o seu caso
+        }
     }
 
     private void salvarProcedimento() {
@@ -245,17 +262,7 @@ public class Procedimento extends AppCompatActivity {
                     oxigenador, canulaAA, canulaV, protamina, hepMg, hepMl, iCec, fCec, totalCecString, iClamp,
                     fClamp, totalClampString, datafProc, horafProc, obs);
             if (idProcedimento != -1) {
-                Intent intent = new Intent(Procedimento.this, Relatorio.class);
-                intent.putExtra("USER_ID", userId);
-                intent.putExtra("EQUIPE_ID", idEquipe);
-                intent.putExtra("PACIENTE_ID", idPaciente);
-                intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
-                intent.putExtra("PCIR_ID", idPCir);
-                intent.putExtra("PCEC_ID", idPCec);
-                intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
-                intent.putExtra("EXAMESREP_ID", idExamesRep);
-                intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
-                intent.putExtra("PROCEDIMENTO_ID", idProcedimento);
+                Intent intent = passarExtras(idProcedimento);
                 startActivity(intent);
                 finish();
                 Toast.makeText(this, "Procedimento adicionado com sucesso!", Toast.LENGTH_SHORT).show();
@@ -265,5 +272,20 @@ public class Procedimento extends AppCompatActivity {
         } else {
             Toast.makeText(this, "ID de usuário inválido.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private Intent passarExtras(long idProcedimento){
+        Intent intent = new Intent(Procedimento.this, Relatorio.class);
+        intent.putExtra("USER_ID", userId);
+        intent.putExtra("EQUIPE_ID", idEquipe);
+        intent.putExtra("PACIENTE_ID", idPaciente);
+        intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+        intent.putExtra("PCIR_ID", idPCir);
+        intent.putExtra("PCEC_ID", idPCec);
+        intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
+        intent.putExtra("EXAMESREP_ID", idExamesRep);
+        intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
+        intent.putExtra("PROCEDIMENTO_ID", idProcedimento);
+        return intent;
     }
 }
