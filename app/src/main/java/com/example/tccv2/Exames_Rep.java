@@ -70,7 +70,7 @@ public class Exames_Rep extends AppCompatActivity {
         bt_salvar_rep.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ExamesRep();
+                salvarExamesRep();
             }
         });
     }
@@ -142,7 +142,7 @@ public class Exames_Rep extends AppCompatActivity {
         return valor;
     }
 
-    private void ExamesRep(){
+    private void salvarExamesRep(){
         // Obtendo os valores dos EditText
         String ph_rep = rep_ph.getText().toString();
         String pco2_rep = rep_pco2.getText().toString();

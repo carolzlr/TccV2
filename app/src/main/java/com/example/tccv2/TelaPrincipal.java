@@ -145,7 +145,7 @@ public class TelaPrincipal extends AppCompatActivity {
         bt_registros.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Registros.class);
+                Intent intent = new Intent(TelaPrincipal.this, Relatorio.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();

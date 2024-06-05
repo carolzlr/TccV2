@@ -15,6 +15,8 @@ public class Paciente {
     private double fluxo3;
     private String diagnostico;
 
+
+
     public Paciente(int idPaciente, int usuario, int idade, String genero, double peso, double estatura, double superficieCorporea,
                     double fluxo1, double fluxo2, double fluxo3, String diagnostico) {
         this.idPaciente = idPaciente;

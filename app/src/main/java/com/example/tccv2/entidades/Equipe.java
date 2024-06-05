@@ -14,6 +14,8 @@ public class Equipe {
     private String circulante;
     private String hospital;
 
+
+
     public Equipe(int idEquipe, int usuario, String cirurgiao, String auxiliar1, String auxiliar2, String perfusionista,
                   String instrumentador, String anestesista, String circulante, String hospital) {
         this.idEquipe = idEquipe;

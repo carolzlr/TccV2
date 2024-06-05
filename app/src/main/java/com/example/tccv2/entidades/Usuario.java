@@ -2,6 +2,8 @@ package com.example.tccv2.entidades;
 
 import androidx.annotation.NonNull;
 
+import java.util.List;
+
 public class Usuario {
 
     private int idUsuario;
@@ -10,6 +12,10 @@ public class Usuario {
     private  String email;
     private  String tipo;
     private String senha;
+    private List<Relatorio> relatorios;
+
+    public Usuario() {
+    }
 
     public Usuario(int idUsuario, String nome, String userName, String email, String tipo, String senha) {
             this.idUsuario = idUsuario;
@@ -32,6 +38,10 @@ public class Usuario {
             this.userName = userName;
             this.senha = senha;
         }
+
+    public Usuario(List<Relatorio> relatorios) {
+        this.relatorios = relatorios;
+    }
 
     public int getIdUsuario() {
             return idUsuario;
@@ -81,7 +91,19 @@ public class Usuario {
             this.senha = senha;
         }
 
-        @NonNull
+    public List<Relatorio> getRelatorios() {
+        return relatorios;
+    }
+
+    public void setRelatorios(List<Relatorio> relatorios) {
+        this.relatorios = relatorios;
+    }
+
+    public void adicionarRelatorio(Relatorio relatorio){
+        this.relatorios.add(relatorio);
+    }
+
+    @NonNull
         @Override
         public String toString() {
             return "Usuario{" +

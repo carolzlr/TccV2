@@ -12,6 +12,9 @@ public class PCec {
     private double fcCec;
     private long horaInicioCec;
 
+    public PCec() {
+    }
+
     public PCec(int idParametrosCeC, int usuario, double piaCec, double pvcCec, double tempCec, double diureseCec,
                 double fcCec, long horaInicioCec) {
         this.idParametrosCeC = idParametrosCeC;

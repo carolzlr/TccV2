@@ -66,7 +66,7 @@ public class ExamesAdicionais extends AppCompatActivity {
         bt_salvar_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Exames();
+                salvarExames();
             }
         });
 
@@ -121,7 +121,7 @@ public class ExamesAdicionais extends AppCompatActivity {
         return valor;
     }
     
-    private void Exames(){
+    private void salvarExames(){
         // Obtendo os valores dos EditText
         String ph = id_ph.getText().toString();
         String pco2 = id_pco2.getText().toString();

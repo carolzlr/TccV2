@@ -35,6 +35,9 @@ public class CalculoInicial {
     private String obs;
     private long horaValor;
 
+    public CalculoInicial() {
+    }
+
     public CalculoInicial(int idCalculos, int usuario, double peso, double estatura, double hb, double pao2, double sao2,
                           double pvo2, double svo2, double pam, double pvc, double papm, double pcp, double fc,
                           double areaSupC, double vo2_36, double vo2_35, double vo2_34, double vo2_33, double vo2_32,

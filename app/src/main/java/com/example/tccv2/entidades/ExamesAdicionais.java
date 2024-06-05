@@ -23,6 +23,9 @@ public class ExamesAdicionais {
     private double tca;
     private long hora;
 
+    public ExamesAdicionais() {
+    }
+
     public ExamesAdicionais(int idExames, int usuario, double ph, double pco2, double po2, double svo2, double hco3,
                             double beecf, double k, double na, double ca, double cl, double glic, double lact, double hb,
                             double htc, double plaq, double tca, long hora) {

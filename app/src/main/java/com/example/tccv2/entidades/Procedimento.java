@@ -24,6 +24,9 @@ public class Procedimento {
     private long horafProc;
     private String obs;
 
+    public Procedimento() {
+    }
+
     public Procedimento(int idProcedimento, int usuario, String nomeProc, long dataInicio, long horaInicio, String oxigenador, String canulaAA,
                         String canulaV, String protamina, String hepMg, String hepMl, long iCec, long fCec, long totalCec, long iClamp,
                         long fClamp, long totalClamp, long datafProc, long horafProc, String obs) {

@@ -52,7 +52,7 @@ public class P_Cir extends AppCompatActivity {
         bt_iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                P_Cirurgia();
+                salvarP_Cirurgia();
             }
         });
     }
@@ -96,7 +96,7 @@ public class P_Cir extends AppCompatActivity {
         return valor;
     }
 
-    private void P_Cirurgia() {
+    private void salvarP_Cirurgia() {
 
         // Obtendo os valores dos EditText
         String piaCir = id_piaCir.getText().toString();

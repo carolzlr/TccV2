@@ -62,7 +62,7 @@ public class Cad_Paciente extends AppCompatActivity {
         bt_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Paciente();
+                salvarPaciente();
             }
         });
 
@@ -137,7 +137,7 @@ public class Cad_Paciente extends AppCompatActivity {
         }
     }
 
-    private void Paciente() {
+    private void salvarPaciente() {
         // Coletar todos os dados dos campos
         String idade = id_idade.getText().toString();
         String genero = id_genero.getText().toString();

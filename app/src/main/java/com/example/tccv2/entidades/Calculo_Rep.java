@@ -27,6 +27,9 @@ public class Calculo_Rep {
     private String rep_obs;
     private long rep_dataHora;
 
+    public Calculo_Rep() {
+    }
+
     public Calculo_Rep(int idCalculoRep, int usuario, double rep_hb, double rep_pao2, double rep_sao2,
                        double rep_pvo2, double rep_svo2, double rep_pam, double rep_pvc, double rep_papm,
                        double rep_pcp, double rep_fc, double rep_cao2, double rep_cvo2, double rep_reo2,

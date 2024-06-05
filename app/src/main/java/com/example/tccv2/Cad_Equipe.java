@@ -45,7 +45,7 @@ public class Cad_Equipe extends AppCompatActivity {
         bt_salvar_e.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Equipe();
+                salvarEquipe();
             }
         });
     }
@@ -64,7 +64,7 @@ public class Cad_Equipe extends AppCompatActivity {
             bt_salvar_e = findViewById(R.id.bt_salvar_e);
     }
 
-    private void Equipe() {
+    private void salvarEquipe() {
         // Coletar todos os dados dos campos
         String cirurgiao = id_cirurgiao.getText().toString();
         String auxiliar1 = id_auxiliar1.getText().toString();

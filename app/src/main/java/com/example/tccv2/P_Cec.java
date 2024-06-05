@@ -49,7 +49,7 @@ public class P_Cec extends AppCompatActivity {
         bt_salvar_p.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PCec();
+                salvarPCec();
             }
         });
 
@@ -98,7 +98,7 @@ public class P_Cec extends AppCompatActivity {
         return valor;
     }
 
-    private void PCec (){
+    private void salvarPCec (){
         // Obtendo os valores dos EditText
         String piaCec = id_piaCec.getText().toString();
         String pvcCec = id_pvcCec.getText().toString();

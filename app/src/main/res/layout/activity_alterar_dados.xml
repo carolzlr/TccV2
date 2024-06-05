@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".Senha">
+    tools:context=".AlterarDados">
 
     <TextView
         android:id="@+id/alterar_cad"
@@ -23,14 +23,26 @@
         />
 
     <EditText
-        android:id="@+id/id_email"
+        android:id="@+id/id_nome"
         style="@style/Edit_Text"
-        android:hint="@string/email"
+        android:hint="@string/nome"
         android:drawableEnd="@drawable/ic_email"
         android:inputType="textEmailAddress"
         app:layout_constraintTop_toBottomOf="@id/alterar_cad"
         app:layout_constraintStart_toStartOf="@id/alterar_cad"
         app:layout_constraintEnd_toEndOf="@id/alterar_cad"
+        android:layout_marginTop="16dp"
+        />
+
+    <EditText
+        android:id="@+id/id_email"
+        style="@style/Edit_Text"
+        android:hint="@string/email"
+        android:drawableEnd="@drawable/ic_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintTop_toBottomOf="@id/id_nome"
+        app:layout_constraintStart_toStartOf="@id/id_nome"
+        app:layout_constraintEnd_toEndOf="@id/id_nome"
         android:layout_marginTop="16dp"
         />
 

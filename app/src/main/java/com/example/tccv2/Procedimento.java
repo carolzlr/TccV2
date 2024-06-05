@@ -1,10 +1,14 @@
 package com.example.tccv2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -58,9 +62,16 @@ public class Procedimento extends AppCompatActivity {
 
         // Recuperar extras
         recuperarExtras();
+
+        // Adicionando TextWatchers para cec
+        adicionarTextWatchersCEC();
+
+        // Adicionando TextWatchers para clamp
+        adicionarTextWatchersCLAMP();
+
+        // Salvar dados
+        salvarProcedimento();
     }
-
-
 
     private void iniciarComponentes(){
        id_nomeP = findViewById(R.id.id_nomeP);
@@ -121,5 +132,138 @@ public class Procedimento extends AppCompatActivity {
         Log.d("Procedimento", "CALCULOINICIAL_ID: " + idCalculoInicial);
         Log.d("Procedimento", "EXAMESREP_ID:" + idExamesRep);
         Log.d("Procedimento", "CALCULOREP_ID:" + idCalculo_Rep);
+    }
+
+    private void adicionarTextWatchersCEC() {
+        // Adicionar TextWatchers para os campos relevantes para recalcular os valores iniciais
+        TextWatcher initialWatcher = new Procedimento.TextWatcherCEC();
+        id_iCEC.addTextChangedListener(initialWatcher);
+        id_fCEC.addTextChangedListener(initialWatcher);
+    }
+
+    private void adicionarTextWatchersCLAMP() {
+        // Adicionar TextWatchers para os campos relevantes para recalcular os valores iniciais
+        TextWatcher initialWatcher = new Procedimento.TextWatcherCLAMP();
+        id_iClamp.addTextChangedListener(initialWatcher);
+        id_fClamp.addTextChangedListener(initialWatcher);
+    }
+
+    private class TextWatcherCEC implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            calcularEExibirTotalCec();
+        }
+    }
+
+    private class TextWatcherCLAMP implements TextWatcher {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) { }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            calcularEExibirTotalClamp();
+        }
+    }
+
+    // Método para calcular a diferença entre iClamp e fClamp e exibir o resultado
+    private void calcularEExibirTotalCec() {
+        String iClampStr = id_iCEC.getText().toString();
+        String fClampStr = id_fCEC.getText().toString();
+
+        // Verifica se os EditText não estão vazios
+        if (!iClampStr.isEmpty() && !fClampStr.isEmpty()) {
+            int iCecMinutos = converterParaMinutos(iClampStr);
+            int fCecMinutos = converterParaMinutos(fClampStr);
+            int diferencaMinutosCec = fCecMinutos - iCecMinutos;
+
+            // Exibe o resultado no textViewTotalClamp
+            id_totalClamp.setText(String.valueOf(diferencaMinutosCec) + " minutos");
+        } else {
+            // Se algum dos EditText estiver vazio, exibe um texto padrão no textViewTotalClamp
+            id_totalClamp.setText("Calcule a diferença");
+        }
+    }
+
+    // Método para calcular a diferença entre iClamp e fClamp e exibir o resultado
+    private void calcularEExibirTotalClamp() {
+        String iClampStr = id_iClamp.getText().toString();
+        String fClampStr = id_fClamp.getText().toString();
+
+        // Verifica se os EditText não estão vazios
+        if (!iClampStr.isEmpty() && !fClampStr.isEmpty()) {
+            int iClampMinutos = converterParaMinutos(iClampStr);
+            int fClampMinutos = converterParaMinutos(fClampStr);
+            int diferencaMinutosClamp = fClampMinutos - iClampMinutos;
+
+            // Exibe o resultado no textViewTotalClamp
+            id_totalClamp.setText(String.valueOf(diferencaMinutosClamp) + " minutos");
+        } else {
+            // Se algum dos EditText estiver vazio, exibe um texto padrão no textViewTotalClamp
+            id_totalClamp.setText("Calcule a diferença");
+        }
+    }
+
+    // Método para converter hora no formato "HH:mm" para minutos
+    private int converterParaMinutos(String hora) {
+        String[] partes = hora.split(":");
+        int horas = Integer.parseInt(partes[0]);
+        int minutos = Integer.parseInt(partes[1]);
+        return horas * 60 + minutos;
+    }
+
+    private void salvarProcedimento() {
+        String nomeProc = id_nomeP.getText().toString();
+        String dataInicio = id_dataI.getText().toString();
+        String horaInicio = id_horaI.getText().toString();
+        String oxigenador = id_oxi.getText().toString();
+        String canulaAA = id_canulaAA.getText().toString();
+        String canulaV= id_canulaV.getText().toString();
+        String protamina = id_prot.getText().toString();
+        String hepMg = id_hepMg.getText().toString();
+        String hepMl = id_hepMl.getText().toString();
+        String iCec = id_iCEC.getText().toString();
+        String fCec = id_fCEC.getText().toString();
+        String totalCecString = id_totalCEC.getText().toString();
+        String iClamp = id_iClamp.getText().toString();
+        String fClamp = id_fClamp.getText().toString();
+        String totalClampString = id_totalClamp.getText().toString();
+        String datafProc = id_datafProc.getText().toString();
+        String horafProc = id_horafProc.getText().toString();
+        String obs = id_obsP.getText().toString();
+
+        if (userId != -1) {
+            long idProcedimento = dbHelper.adicionarProcedimento(userId, nomeProc, dataInicio, horaInicio,
+                    oxigenador, canulaAA, canulaV, protamina, hepMg, hepMl, iCec, fCec, totalCecString, iClamp,
+                    fClamp, totalClampString, datafProc, horafProc, obs);
+            if (idProcedimento != -1) {
+                Intent intent = new Intent(Procedimento.this, Relatorio.class);
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("EQUIPE_ID", idEquipe);
+                intent.putExtra("PACIENTE_ID", idPaciente);
+                intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
+                intent.putExtra("PCIR_ID", idPCir);
+                intent.putExtra("PCEC_ID", idPCec);
+                intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
+                intent.putExtra("EXAMESREP_ID", idExamesRep);
+                intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
+                intent.putExtra("PROCEDIMENTO_ID", idProcedimento);
+                startActivity(intent);
+                finish();
+                Toast.makeText(this, "Procedimento adicionado com sucesso!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Falha ao adicionar procedimento.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "ID de usuário inválido.", Toast.LENGTH_SHORT).show();
+        }
     }
 }

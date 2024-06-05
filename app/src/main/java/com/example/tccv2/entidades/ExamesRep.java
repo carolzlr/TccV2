@@ -23,6 +23,9 @@ public class ExamesRep {
     private double rep_tca;
     private long rep_hora;
 
+    public ExamesRep() {
+    }
+
     public ExamesRep(int idExamesRep, int usuario, double rep_ph, double rep_pco2, double rep_po2, double rep_svo2,
                      double rep_hco3, double rep_beecf, double rep_k, double rep_na, double rep_ca, double rep_cl,
                      double rep_glic, double rep_lact, double rep_hb, double rep_htc, double rep_plaq, double rep_tca,

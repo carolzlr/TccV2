@@ -12,6 +12,9 @@ public class PCir {
     private double diureseCir;
     private double fcCir;
 
+    public PCir() {
+    }
+
     public PCir(int idParametrosCir, int usuario, double  piaCir, double  pvcCir, double tempCir, double diureseCir, double fcCir) {
         this.idParametrosCir = idParametrosCir;
         this.usuario = usuario;
