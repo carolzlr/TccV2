@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class Cad_Paciente extends AppCompatActivity {
     private EditText id_estatura;
     private EditText id_diagnostico;
     private Button bt_salvar;
+    private ImageButton bt_voltar;
 
     private DbHelper dbHelper;
 
@@ -50,19 +52,25 @@ public class Cad_Paciente extends AppCompatActivity {
         // Inicialize a variável Locale com a localidade padrão do celualr
         locale = Locale.getDefault();
 
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
-        // Verifique se o userId é válido
-        Log.d("Cad_Paciente", "userId: " + userId);
+        // Recuperar os ids
+        recuperaIds();
 
-        // Recuperar o idEquipe
-        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
-        Log.d("Cad_Equipe", "EQUIPE_ID: " + idEquipe);
 
         bt_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 salvarPaciente();
+            }
+        });
+
+        bt_voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cad_Paciente.this, TelaPrincipal.class);
+                // Passar ids para a próxima atividade
+                intent.putExtra("USER_ID", userId);
+                intent.putExtra("EQUIPE_ID", idEquipe);
+                startActivity(intent);
             }
         });
 
@@ -100,6 +108,7 @@ public class Cad_Paciente extends AppCompatActivity {
 
     private void iniciarComponentes() {
         bt_salvar = findViewById(R.id.bt_salvar);
+        bt_voltar = findViewById(R.id.bt_voltar);
         id_idade = findViewById(R.id.id_idade);
         id_genero = findViewById(R.id.id_genero);
         id_peso = findViewById(R.id.id_peso);
@@ -109,6 +118,16 @@ public class Cad_Paciente extends AppCompatActivity {
         id_fluxo2 = findViewById(R.id.id_fluxo2);
         id_fluxo3 = findViewById(R.id.id_fluxo3);
         id_diagnostico = findViewById(R.id.id_diagnostico);
+    }
+
+    private void recuperaIds(){
+        userId = getIntent().getIntExtra("USER_ID", -1);
+        // Verifique se o userId é válido
+        Log.d("Cad_Paciente", "userId: " + userId);
+
+        // Recuperar o idEquipe
+        idEquipe = getIntent().getLongExtra("EQUIPE_ID", -1);
+        Log.d("Cad_Equipe", "EQUIPE_ID: " + idEquipe);
     }
 
     private void calcularValores() {

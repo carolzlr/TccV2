@@ -381,17 +381,23 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:padding="8dp" />
             </TableRow>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/bt_salvar_proc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/salvarFim"
-                style="@style/Button"
-                android:layout_marginTop="6dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hospital"
-                tools:ignore="VisualLintButtonSize" />
+            <TableRow>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_salvar"
+                    style="@style/Button"
+                    android:text="Salvar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_dataHora" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/bt_pdf"
+                    style="@style/Button"
+                    android:text="Gerar PDF"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dataHora_rep" />
+            </TableRow>
 
         </TableLayout>
     </LinearLayout>

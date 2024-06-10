@@ -6,7 +6,6 @@
     android:padding="16dp">
 
     <TableLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
@@ -47,6 +46,23 @@
 
         <TableRow>
             <TextView
+                android:id="@+id/tv_auxiliar2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auxiliar2"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_auxiliar2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
                 android:id="@+id/tv_perfusionista_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -61,6 +77,58 @@
                 android:text=""
                 android:textSize="16sp" />
         </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_instrumentador_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instrumentador"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_instrumentador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_anestesista_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/anestesista"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_anestesista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_circulante_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/circulante"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_circulante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
 
         <TableRow>
             <TextView

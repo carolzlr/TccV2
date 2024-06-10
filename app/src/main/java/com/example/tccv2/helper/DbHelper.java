@@ -25,6 +25,8 @@ import com.example.tccv2.entidades.Usuario;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 public class DbHelper extends SQLiteOpenHelper {
@@ -1065,6 +1067,82 @@ public class DbHelper extends SQLiteOpenHelper {
         Relatorio relatorio = new Relatorio();
         //Recuperar os dados do usuário
         return relatorio;
+    }
+
+    // Métodos para recuperar resumos e depois exibir na tela
+    // Resumo equipe
+    public List<Equipe> resumirEquipe(int usuario){
+        List<Equipe> resumoEquipe = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                Contract.Equipe.TABELA,
+                null,
+                Contract.Equipe.COLUNA_USUARIO + "=?",
+                new String[]{String.valueOf(usuario)},
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst()){
+            do {
+                Equipe equipe = new Equipe();
+                equipe.setIdEquipe(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Equipe._ID)));
+                equipe.setCirurgiao(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
+                equipe.setAuxiliar1(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR1)));
+                equipe.setAuxiliar2(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR2)));
+                equipe.setPerfusionista(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_PERFUSIONISTA)));
+                equipe.setInstrumentador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_INSTRUMENTADOR)));
+                equipe.setAnestesista(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_ANESTESISTA)));
+                equipe.setCirculante(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRCULANTE)));
+                equipe.setHospital(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_HOSPITAL)));
+                resumoEquipe.add(equipe);
+            } while (cursor.moveToNext());
+        } else {
+            Log.e("DbHelper", "Cursor is null or empty");
+        }
+
+        // Fecha o cursor para liberar os recursos
+        if (cursor != null) {
+            cursor.close();
+        }
+        return resumoEquipe;
+    }
+
+    // Resumo Paciente
+    public List<Paciente> resumirPaciente(int usuario){
+        List<Paciente> resumoPaciente = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                Contract.Paciente.TABELA,
+                null,
+                Contract.Paciente.COLUNA_USUARIO + "=?",
+                new String[]{String.valueOf(usuario)},
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst()){
+            do {
+                Paciente paciente = new Paciente();
+                paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente._ID)));
+                paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_IDADE)));
+                paciente.setGenero(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_GENERO)));
+                paciente.setFluxo1(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_FLUXO1)));
+                paciente.setFluxo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_FLUXO2)));
+                paciente.setFluxo3(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_FLUXO3)));
+                paciente.setDiagnostico(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_DIAGNOSTICO)));
+
+                resumoPaciente.add(paciente);
+            } while (cursor.moveToNext());
+        } else {
+            Log.e("DbHelper", "Cursor is null or empty");
+        }
+
+        // Fecha o cursor para liberar os recursos
+        if (cursor != null) {
+            cursor.close();
+        }
+        return resumoPaciente;
     }
 
 

@@ -96,6 +96,7 @@
                 android:layout_marginTop="4dp"
                 android:textAllCaps="true"
                 android:textStyle="bold"
+                android:text="CAROL"
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView3"
@@ -132,7 +133,8 @@
                 android:src="@drawable/ic_user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.125" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -168,8 +170,8 @@
 
                 <ImageView
                     android:id="@+id/bt_paciente"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="35dp"
                     android:src="@drawable/ic_paciente"
                     app:layout_constraintBottom_toTopOf="@+id/paciente"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -198,7 +200,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_parametros"
+            android:id="@+id/card_equipe"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -214,22 +216,22 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/bt_parametros"
+                    android:id="@+id/bt_equipe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_parametro"
-                    app:layout_constraintBottom_toTopOf="@+id/parametros"
+                    android:src="@drawable/ic_equipe"
+                    app:layout_constraintBottom_toTopOf="@+id/equipe"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/parametros"
+                    android:id="@+id/equipe"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/parametros"
+                    android:text="@string/equipes"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -238,7 +240,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bt_parametros" />
+                    app:layout_constraintTop_toBottomOf="@+id/bt_equipe" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -364,7 +366,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_registros"
+            android:id="@+id/card_info"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -380,22 +382,22 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/bt_registros"
+                    android:id="@+id/bt_info"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_registro"
-                    app:layout_constraintBottom_toTopOf="@+id/registros"
+                    android:src="@drawable/ic_info"
+                    app:layout_constraintBottom_toTopOf="@+id/info"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/registros"
+                    android:id="@+id/info"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/reg"
+                    android:text="@string/info"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -404,14 +406,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bt_registros" />
+                    app:layout_constraintTop_toBottomOf="@+id/bt_info" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/card_exames"
+            android:id="@+id/card_formulas"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_margin="8dp"
@@ -427,22 +429,22 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/bt_exames"
+                    android:id="@+id/bt_formulas"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_exames"
-                    app:layout_constraintBottom_toTopOf="@+id/exames"
+                    android:src="@drawable/ic_formulas"
+                    app:layout_constraintBottom_toTopOf="@+id/formulas"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/exames"
+                    android:id="@+id/formulas"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/exames"
+                    android:text="@string/formulas"
                     android:textAllCaps="true"
                     android:textColor="@color/black"
                     android:textSize="14sp"
@@ -451,7 +453,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/bt_exames" />
+                    app:layout_constraintTop_toBottomOf="@+id/bt_formulas" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

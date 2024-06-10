@@ -38,7 +38,8 @@ public class Procedimento extends AppCompatActivity {
     private TextView id_totalClamp;
     private EditText id_datafProc;
     private EditText id_horafProc;
-    private Button bt_salvar_proc;
+    private Button bt_salvar;
+    private Button bt_pdf;
     private int userId;
     private long idEquipe;
     private long idPaciente;
@@ -71,10 +72,17 @@ public class Procedimento extends AppCompatActivity {
         adicionarTextWatchersCLAMP();
 
         // Salvar dados
-        bt_salvar_proc.setOnClickListener(new View.OnClickListener() {
+        bt_salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 salvarProcedimento();
+            }
+        });
+
+        bt_pdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 
@@ -99,7 +107,8 @@ public class Procedimento extends AppCompatActivity {
        id_datafProc = findViewById(R.id.id_datafProc);
        id_horafProc = findViewById(R.id.id_horafProc);
        id_obsP = findViewById(R.id.id_obsP);
-       bt_salvar_proc = findViewById(R.id.bt_salvar_proc);
+       bt_salvar = findViewById(R.id.bt_salvar);
+       bt_pdf = findViewById(R.id.bt_pdf);
     }
 
     private void recuperarExtras(){
@@ -193,10 +202,10 @@ public class Procedimento extends AppCompatActivity {
             int diferencaMinutosCec = fCecMinutos - iCecMinutos;
 
             // Exibe o resultado no textViewTotalClamp
-            id_totalClamp.setText(String.valueOf(diferencaMinutosCec) + " minutos");
+            id_totalCEC.setText(String.valueOf(diferencaMinutosCec) + " minutos");
         } else {
             // Se algum dos EditText estiver vazio, exibe um texto padrão no textViewTotalClamp
-            id_totalClamp.setText("Calcule a diferença");
+            id_totalCEC.setText("Calcule a diferença");
         }
     }
 

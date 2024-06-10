@@ -47,6 +47,59 @@
 
         <TableRow>
             <TextView
+                android:id="@+id/tv_f1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/f1"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_f1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_f2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/f2"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_f2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_f3_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/f3"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_f3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+
+
+        <TableRow>
+            <TextView
                 android:id="@+id/tv_diagnostico_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

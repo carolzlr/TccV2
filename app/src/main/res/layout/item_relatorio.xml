@@ -10,7 +10,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Nome do Procedimento"
-        android:gravity="center"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +19,7 @@
         android:id="@+id/txt_team"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cirurgião: "
+        android:text="Cirurgião"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_procedure_name" />
@@ -28,7 +27,7 @@
         android:id="@+id/txt_team1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Auxiliar 1: "
+        android:text="Auxiliar 1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_team" />
@@ -36,7 +35,7 @@
         android:id="@+id/txt_team2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Perfusionista: "
+        android:text="Perfusionista"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_team1" />
@@ -44,7 +43,7 @@
         android:id="@+id/txt_team3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hospital: "
+        android:text="Hospital"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_team2" />
@@ -53,7 +52,7 @@
         android:id="@+id/txt_vo2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="VO2 Escolhido: "
+        android:text="VO2 Escolhido"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_team3" />
@@ -62,7 +61,7 @@
         android:id="@+id/txt_start_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Data e Hora Início: "
+        android:text="Data e Hora Início"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_vo2" />
@@ -71,7 +70,7 @@
         android:id="@+id/txt_end_time"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Data e Hora Fim: "
+        android:text="Data e Hora Fim"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_start_time" />
@@ -80,7 +79,7 @@
         android:id="@+id/txt_oxygenator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Oxigenador: "
+        android:text="Oxigenador"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_end_time" />
@@ -89,7 +88,7 @@
         android:id="@+id/txt_aortic_cannula"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cânula Aórtica: "
+        android:text="Cânula Aórtica"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_oxygenator" />
@@ -98,7 +97,7 @@
         android:id="@+id/txt_venous_valve"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Válvula Venosa: "
+        android:text="Válvula Venosa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_aortic_cannula" />
@@ -107,7 +106,7 @@
         android:id="@+id/txt_total_cec"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Total CEC: "
+        android:text="Total CEC"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_venous_valve" />
@@ -116,7 +115,7 @@
         android:id="@+id/txt_total_clamp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Total Clamp: "
+        android:text="Total Clamp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txt_total_cec" />
