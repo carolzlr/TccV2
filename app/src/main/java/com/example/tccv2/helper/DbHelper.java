@@ -35,6 +35,7 @@ public class DbHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NOME = "BDCEC";
 
     public static final int DATABASE_VERSION = 23;
+
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
     }
@@ -64,158 +65,158 @@ public class DbHelper extends SQLiteOpenHelper {
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PACIENTE = " create table "
-            +Contract.Paciente.TABELA + "("
-            +Contract.Paciente._ID + " integer primary key autoincrement,"
-            +Contract.Paciente.COLUNA_USUARIO + " INTEGER, "
-            +Contract.Paciente.COLUNA_IDADE + " TEXT, "
-            +Contract.Paciente.COLUNA_GENERO + " TEXT, "
-            +Contract.Paciente.COLUNA_PESO + " TEXT, "
-            +Contract.Paciente.COLUNA_ESTATURA + " TEXT, "
-            +Contract.Paciente.COLUNA_SUPERFICIECORPOREA + " TEXT, "
-            +Contract.Paciente.COLUNA_FLUXO1 + " TEXT, "
-            +Contract.Paciente.COLUNA_FLUXO2 + " TEXT, "
-            +Contract.Paciente.COLUNA_FLUXO3 + " TEXT, "
-            +Contract.Paciente.COLUNA_DIAGNOSTICO + " TEXT, "
+            + Contract.Paciente.TABELA + "("
+            + Contract.Paciente._ID + " integer primary key autoincrement,"
+            + Contract.Paciente.COLUNA_USUARIO + " INTEGER, "
+            + Contract.Paciente.COLUNA_IDADE + " TEXT, "
+            + Contract.Paciente.COLUNA_GENERO + " TEXT, "
+            + Contract.Paciente.COLUNA_PESO + " TEXT, "
+            + Contract.Paciente.COLUNA_ESTATURA + " TEXT, "
+            + Contract.Paciente.COLUNA_SUPERFICIECORPOREA + " TEXT, "
+            + Contract.Paciente.COLUNA_FLUXO1 + " TEXT, "
+            + Contract.Paciente.COLUNA_FLUXO2 + " TEXT, "
+            + Contract.Paciente.COLUNA_FLUXO3 + " TEXT, "
+            + Contract.Paciente.COLUNA_DIAGNOSTICO + " TEXT, "
             + " FOREIGN KEY (" + Contract.Paciente.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_EXAMESADICIONAIS = " create table "
-            +Contract.ExamesAdicionais.TABELA + "("
-            +Contract.ExamesAdicionais._ID + " integer primary key autoincrement,"
-            +Contract.ExamesAdicionais.COLUNA_USUARIO + " INTEGER, "
-            +Contract.ExamesAdicionais.COLUNA_PH + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_PCO2 + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_PO2 + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_SVO2 + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_HCO3 + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_BEECF + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_K + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_NA + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_CA + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_CL + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_GLIC + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_LACT + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_HB + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_HTC + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_PLAQ + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_TCA + " TEXT, "
-            +Contract.ExamesAdicionais.COLUNA_HORA + " TEXT, "
+            + Contract.ExamesAdicionais.TABELA + "("
+            + Contract.ExamesAdicionais._ID + " integer primary key autoincrement,"
+            + Contract.ExamesAdicionais.COLUNA_USUARIO + " INTEGER, "
+            + Contract.ExamesAdicionais.COLUNA_PH + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_PCO2 + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_PO2 + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_SVO2 + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_HCO3 + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_BEECF + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_K + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_NA + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_CA + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_CL + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_GLIC + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_LACT + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_HB + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_HTC + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_PLAQ + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_TCA + " TEXT, "
+            + Contract.ExamesAdicionais.COLUNA_HORA + " TEXT, "
             + " FOREIGN KEY (" + Contract.ExamesAdicionais.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PCIR = " create table "
-            +Contract.PCir.TABELA + "("
-            +Contract.PCir._ID + " integer primary key autoincrement,"
-            +Contract.PCir.COLUNA_USUARIO + " INTEGER, "
-            +Contract.PCir.COLUNA_PIACIR + " TEXT, "
-            +Contract.PCir.COLUNA_PVCCIR + " TEXT, "
-            +Contract.PCir.COLUNA_TEMPCIR + " TEXT, "
-            +Contract.PCir.COLUNA_DIURESECIR + " TEXT, "
-            +Contract.PCir.COLUNA_FCCIR + " TEXT, "
+            + Contract.PCir.TABELA + "("
+            + Contract.PCir._ID + " integer primary key autoincrement,"
+            + Contract.PCir.COLUNA_USUARIO + " INTEGER, "
+            + Contract.PCir.COLUNA_PIACIR + " TEXT, "
+            + Contract.PCir.COLUNA_PVCCIR + " TEXT, "
+            + Contract.PCir.COLUNA_TEMPCIR + " TEXT, "
+            + Contract.PCir.COLUNA_DIURESECIR + " TEXT, "
+            + Contract.PCir.COLUNA_FCCIR + " TEXT, "
             + " FOREIGN KEY (" + Contract.PCir.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_PCEC = " create table "
-            +Contract.PCec.TABELA + "("
-            +Contract.PCec._ID + " integer primary key autoincrement,"
-            +Contract.PCec.COLUNA_USUARIO + " INTEGER, "
-            +Contract.PCec.COLUNA_PIACEC + " TEXT, "
-            +Contract.PCec.COLUNA_PVCCEC + " TEXT, "
-            +Contract.PCec.COLUNA_TEMPCEC + " TEXT, "
-            +Contract.PCec.COLUNA_DIURESECEC + " TEXT, "
-            +Contract.PCec.COLUNA_FCCEC + " TEXT, "
-            +Contract.PCec.COLUNA_HORAINICIOCEC + " TEXT, "
+            + Contract.PCec.TABELA + "("
+            + Contract.PCec._ID + " integer primary key autoincrement,"
+            + Contract.PCec.COLUNA_USUARIO + " INTEGER, "
+            + Contract.PCec.COLUNA_PIACEC + " TEXT, "
+            + Contract.PCec.COLUNA_PVCCEC + " TEXT, "
+            + Contract.PCec.COLUNA_TEMPCEC + " TEXT, "
+            + Contract.PCec.COLUNA_DIURESECEC + " TEXT, "
+            + Contract.PCec.COLUNA_FCCEC + " TEXT, "
+            + Contract.PCec.COLUNA_HORAINICIOCEC + " TEXT, "
             + " FOREIGN KEY (" + Contract.PCir.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_CALCULOINICIAL = " create table "
-            +Contract.CalculoInicial.TABELA + "("
-            +Contract.CalculoInicial._ID + " integer primary key autoincrement,"
-            +Contract.CalculoInicial.COLUNA_USUARIO + " INTEGER, "
-            +Contract.CalculoInicial.COLUNA_PESO + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_ESTATURA + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_HB + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PAO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_SAO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PVO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_SVO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PAM + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PVC + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PAPM + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_PCP + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_FC + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_AREASUPC + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_32 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_33 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_34 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_35 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_36 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_CAO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_CVO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_REO2 + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_DC + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_IC + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_VS + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_IRVS + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_IRVP + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_OBS + " TEXT, "
-            +Contract.CalculoInicial.COLUNA_HORAVALOR + " TEXT, "
-            + " FOREIGN KEY (" + Contract. CalculoInicial.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + Contract.CalculoInicial.TABELA + "("
+            + Contract.CalculoInicial._ID + " integer primary key autoincrement,"
+            + Contract.CalculoInicial.COLUNA_USUARIO + " INTEGER, "
+            + Contract.CalculoInicial.COLUNA_PESO + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_ESTATURA + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_HB + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PAO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_SAO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PVO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_SVO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PAM + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PVC + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PAPM + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_PCP + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_FC + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_AREASUPC + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_32 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_33 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_34 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_35 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_36 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_CAO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_CVO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_REO2 + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_DC + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_IC + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_VS + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_IRVS + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_IRVP + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_OBS + " TEXT, "
+            + Contract.CalculoInicial.COLUNA_HORAVALOR + " TEXT, "
+            + " FOREIGN KEY (" + Contract.CalculoInicial.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_EXAMESREP = " create table "
-            +Contract.ExamesRep.TABELA + "("
-            +Contract.ExamesRep._ID + " integer primary key autoincrement,"
-            +Contract.ExamesRep.COLUNA_USUARIO + " INTEGER, "
-            +Contract.ExamesRep.COLUNA_PHR_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_PCO2_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_PO2_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_SVO2_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_HCO3_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_BEECF_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_K_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_NA_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_CA_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_CL_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_GLIC_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_LACT_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_HB_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_HTC_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_PLAQ_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_TCA_REP + " TEXT, "
-            +Contract.ExamesRep.COLUNA_HORA_REP + " TEXT, "
+            + Contract.ExamesRep.TABELA + "("
+            + Contract.ExamesRep._ID + " integer primary key autoincrement,"
+            + Contract.ExamesRep.COLUNA_USUARIO + " INTEGER, "
+            + Contract.ExamesRep.COLUNA_PHR_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_PCO2_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_PO2_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_SVO2_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_HCO3_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_BEECF_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_K_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_NA_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_CA_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_CL_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_GLIC_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_LACT_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_HB_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_HTC_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_PLAQ_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_TCA_REP + " TEXT, "
+            + Contract.ExamesRep.COLUNA_HORA_REP + " TEXT, "
             + " FOREIGN KEY (" + Contract.ExamesRep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
     private static final String CREATE_CALCULO_REP = " create table "
-            +Contract.Calculo_Rep.TABELA + "("
-            +Contract.Calculo_Rep._ID + " integer primary key autoincrement,"
-            +Contract.Calculo_Rep.COLUNA_USUARIO + " INTEGER, "
-            +Contract.Calculo_Rep.COLUNA_REP_HB + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_PAO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_SAO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_PVO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_SVO2 + " TEXT, "
-            +Contract. Calculo_Rep.COLUNA_REP_PAM + " TEXT, "
-            +Contract. Calculo_Rep.COLUNA_REP_PVC + " TEXT, "
-            +Contract. Calculo_Rep.COLUNA_REP_PAPM + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_PCP + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_FC + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_CAO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_CVO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_REO2 + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_DC + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_IC + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_VS + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_IRVS + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_IRVP + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_OBS + " TEXT, "
-            +Contract.Calculo_Rep.COLUNA_REP_HORAVALOR + " TEXT, "
+            + Contract.Calculo_Rep.TABELA + "("
+            + Contract.Calculo_Rep._ID + " integer primary key autoincrement,"
+            + Contract.Calculo_Rep.COLUNA_USUARIO + " INTEGER, "
+            + Contract.Calculo_Rep.COLUNA_REP_HB + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PAO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_SAO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PVO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_SVO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PAM + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PVC + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PAPM + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_PCP + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_FC + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_CAO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_CVO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_REO2 + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_DC + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_IC + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_VS + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_IRVS + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_IRVP + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_OBS + " TEXT, "
+            + Contract.Calculo_Rep.COLUNA_REP_HORAVALOR + " TEXT, "
             + " FOREIGN KEY (" + Contract.Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
-    private static final String CREATE_PROCEDIMENTO  = " create table "
+    private static final String CREATE_PROCEDIMENTO = " create table "
             + Contract.Procedimento.TABELA + "("
             + Contract.Procedimento._ID + " integer primary key autoincrement,"
             + Contract.Procedimento.COLUNA_USUARIO + " INTEGER, "
@@ -239,7 +240,6 @@ public class DbHelper extends SQLiteOpenHelper {
             + Contract.Procedimento.COLUNA_OBS + " TEXT, "
             + " FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
-
 
 
     @Override
@@ -276,7 +276,7 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para usuários
 
     // Adicionar Usuário
-    public boolean adicionarUsuario (String nome, String userName, String email, String tipo, String senha){
+    public boolean adicionarUsuario(String nome, String userName, String email, String tipo, String senha) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.Usuario.COLUNA_NOME, nome);
@@ -289,9 +289,9 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Verificar se o usuário foi criado no BD
-    public boolean verificarUsuario (String userName, String senha){
+    public boolean verificarUsuario(String userName, String senha) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String [] columns = {Contract.Usuario._ID};
+        String[] columns = {Contract.Usuario._ID};
         String selection = Contract.Usuario.COLUNA_NOME_USUARIO + " = ? AND " + Contract.Usuario.COLUNA_SENHA + " = ? ";
         String[] selectionArgs = {userName, senha};
         Cursor cursor = sqLiteDatabase.query(Contract.Usuario.TABELA, columns, selection, selectionArgs, null, null, null);
@@ -301,21 +301,21 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Obter a ID do Usuário
-    public int obterIdUsuario (String userName){
+    public int obterIdUsuario(String userName) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        String [] columns = {Contract.Usuario._ID};
+        String[] columns = {Contract.Usuario._ID};
         String selection = Contract.Usuario.COLUNA_NOME_USUARIO + " = ? ";
-        String [] selectionArgs = {userName};
-        Cursor cursor = sqLiteDatabase.query (Contract.Usuario.TABELA, columns, selection, selectionArgs, null, null, null);
-        if (cursor != null && cursor.moveToFirst()){
+        String[] selectionArgs = {userName};
+        Cursor cursor = sqLiteDatabase.query(Contract.Usuario.TABELA, columns, selection, selectionArgs, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
             int userId = cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Usuario._ID));
             cursor.close();
             return userId;
         } else {
-            if (cursor != null){
+            if (cursor != null) {
                 cursor.close();
             }
-            return  -1;
+            return -1;
         }
     }
 
@@ -403,8 +403,8 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para Equipe
 
     // Adicionar Usuário
-    public long adicionarEquipe (int userId, String cirurgiao, String auxiliar1, String auxiliar2, String perfusionista,
-                                 String instrumentador, String anestesista, String circulante, String hospital){
+    public long adicionarEquipe(int userId, String cirurgiao, String auxiliar1, String auxiliar2, String perfusionista,
+                                String instrumentador, String anestesista, String circulante, String hospital) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.Equipe.COLUNA_USUARIO, userId);
@@ -513,11 +513,11 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para CalculoInicial
 
     // Adicionar Valores para o cálculo
-    public long adicionarValores (int userId, String peso, String estatura, String hb, String pao2, String sao2,
-                                  String pvo2, String svo2, String pam, String pvc, String papm, String pcp, String fc,
-                                  String areaSupC, String vo2_32, String vo2_33, String vo2_34, String vo2_35,
-                                  String vo2_36, String vo2_escolhido, String cao2, String cvo2, String reo2,
-                                  String dc, String ic, String vs, String irvs, String irvp, String obs, String horaValor ){
+    public long adicionarValores(int userId, String peso, String estatura, String hb, String pao2, String sao2,
+                                 String pvo2, String svo2, String pam, String pvc, String papm, String pcp, String fc,
+                                 String areaSupC, String vo2_32, String vo2_33, String vo2_34, String vo2_35,
+                                 String vo2_36, String vo2_escolhido, String cao2, String cvo2, String reo2,
+                                 String dc, String ic, String vs, String irvs, String irvp, String obs, String horaValor) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.CalculoInicial.COLUNA_USUARIO, userId);
@@ -663,11 +663,11 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para Calculo_Rep
 
     // Adicionar para Calculo_Rep
-    public long adicionarValoresRep (int userId, String Rep_hb, String Rep_pao2, String Rep_sao2, String Rep_pvo2,
-                                     String Rep_svo2, String Rep_pam, String Rep_pvc, String Rep_papm,
-                                     String Rep_pcp, String Rep_fc, String Rep_cao2, String Rep_cvo2,
-                                     String Rep_reo2, String Rep_dc, String Rep_ic, String Rep_vs,
-                                     String Rep_irvs, String Rep_irvp, String Rep_obs, String Rep_horaValor ){
+    public long adicionarValoresRep(int userId, String Rep_hb, String Rep_pao2, String Rep_sao2, String Rep_pvo2,
+                                    String Rep_svo2, String Rep_pam, String Rep_pvc, String Rep_papm,
+                                    String Rep_pcp, String Rep_fc, String Rep_cao2, String Rep_cvo2,
+                                    String Rep_reo2, String Rep_dc, String Rep_ic, String Rep_vs,
+                                    String Rep_irvs, String Rep_irvp, String Rep_obs, String Rep_horaValor) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(Contract.Calculo_Rep.COLUNA_USUARIO, userId);
@@ -699,11 +699,11 @@ public class DbHelper extends SQLiteOpenHelper {
     // Métodos CRUD para Procedimento
 
     // Adicionar Procedimento
-    public long adicionarProcedimento (int userId, String nomeProc, String dataInicio, String horaInicio,
-                                        String oxigenador, String canulaAA, String canulaV, String protamina,
-                                        String hepMg, String hepMl, String iCec, String fCec, String totalCec,
-                                        String iClamp, String fClamp, String totalClamp, String datafProc,
-                                        String horafProc, String obs){
+    public long adicionarProcedimento(int userId, String nomeProc, String dataInicio, String horaInicio,
+                                      String oxigenador, String canulaAA, String canulaV, String protamina,
+                                      String hepMg, String hepMl, String iCec, String fCec, String totalCec,
+                                      String iClamp, String fClamp, String totalClamp, String datafProc,
+                                      String horafProc, String obs) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         // Adicionar os valores inseridos pelo usuário logado
@@ -734,7 +734,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos para recuperar dados das tabelas
     // Método para recuperar dados da tabela Usuario
-    private Usuario recuperarUsuario(int idUsuario, SQLiteDatabase sqLiteDatabase){
+    private Usuario recuperarUsuario(int idUsuario, SQLiteDatabase sqLiteDatabase) {
         Usuario usuario = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.Usuario.TABELA,
@@ -745,7 +745,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             usuario = new Usuario();
             usuario.setIdUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Usuario._ID)));
             usuario.setNome(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Usuario.COLUNA_NOME)));
@@ -757,7 +757,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela Equipe
-    private Equipe recuperarEquipe(int usuario, SQLiteDatabase sqLiteDatabase){
+    private Equipe recuperarEquipe(int usuario, SQLiteDatabase sqLiteDatabase) {
         Equipe equipe = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.Equipe.TABELA,
@@ -768,7 +768,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             equipe = new Equipe();
             equipe.setIdEquipe(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Equipe._ID)));
             equipe.setCirurgiao(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
@@ -785,7 +785,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela Paciente
-    private Paciente recuperarPaciente(int usuario, SQLiteDatabase sqLiteDatabase){
+    private Paciente recuperarPaciente(int usuario, SQLiteDatabase sqLiteDatabase) {
         Paciente paciente = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.Paciente.TABELA,
@@ -796,7 +796,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             paciente = new Paciente();
             paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente._ID)));
             paciente.setIdade(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_IDADE)));
@@ -808,7 +808,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela ExamesAdicionais
-    private ExamesAdicionais recuperarExamesAdicionais(int usuario, SQLiteDatabase sqLiteDatabase){
+    private ExamesAdicionais recuperarExamesAdicionais(int usuario, SQLiteDatabase sqLiteDatabase) {
         ExamesAdicionais examesAdicionais = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.ExamesAdicionais.TABELA,
@@ -819,7 +819,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             examesAdicionais = new ExamesAdicionais();
             examesAdicionais.setIdExames(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais._ID)));
             examesAdicionais.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_USUARIO)));
@@ -846,7 +846,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela PCir
-    private PCir recuperarPcir(int usuario, SQLiteDatabase sqLiteDatabase){
+    private PCir recuperarPcir(int usuario, SQLiteDatabase sqLiteDatabase) {
         PCir pCir = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.PCir.TABELA,
@@ -857,7 +857,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             pCir = new PCir();
             pCir.setIdParametrosCir(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCir._ID)));
             pCir.setPiaCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_PIACIR)));
@@ -871,7 +871,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela PCec
-    private PCec recuperarPcec (int usuario, SQLiteDatabase sqLiteDatabase){
+    private PCec recuperarPcec(int usuario, SQLiteDatabase sqLiteDatabase) {
         PCec pCec = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.PCec.TABELA,
@@ -882,7 +882,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             pCec = new PCec();
             pCec.setIdParametrosCeC(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCec._ID)));
             pCec.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_USUARIO)));
@@ -897,18 +897,18 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela CalculoInicial
-    private CalculoInicial recuperarCalculoinicial(int usuario, SQLiteDatabase sqLiteDatabase){
+    private CalculoInicial recuperarCalculoinicial(int usuario, SQLiteDatabase sqLiteDatabase) {
         CalculoInicial calculoInicial = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.CalculoInicial.TABELA,
                 null,
-                Contract.CalculoInicial.COLUNA_USUARIO +"=?",
+                Contract.CalculoInicial.COLUNA_USUARIO + "=?",
                 new String[]{String.valueOf(usuario)},
                 null,
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             calculoInicial = new CalculoInicial();
             calculoInicial.setIdCalculos(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.CalculoInicial._ID)));
             calculoInicial.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_USUARIO)));
@@ -945,7 +945,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela ExamesRep
-    private ExamesRep recuperarExamesRep(int usuario, SQLiteDatabase sqLiteDatabase){
+    private ExamesRep recuperarExamesRep(int usuario, SQLiteDatabase sqLiteDatabase) {
         ExamesRep examesRep = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.ExamesRep.TABELA,
@@ -956,7 +956,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             examesRep = new ExamesRep();
             examesRep.setIdExamesRep(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesRep._ID)));
             examesRep.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_USUARIO)));
@@ -983,18 +983,18 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela Calculo_Rep
-    private Calculo_Rep recuperarCalculoRep(int usuario, SQLiteDatabase sqLiteDatabase){
+    private Calculo_Rep recuperarCalculoRep(int usuario, SQLiteDatabase sqLiteDatabase) {
         Calculo_Rep calculoRep = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.Calculo_Rep.TABELA,
                 null,
-                Contract.Calculo_Rep.COLUNA_USUARIO +"=?",
+                Contract.Calculo_Rep.COLUNA_USUARIO + "=?",
                 new String[]{String.valueOf(usuario)},
                 null,
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             calculoRep = new Calculo_Rep();
             calculoRep.setIdCalculoRep(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep._ID)));
             calculoRep.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_USUARIO)));
@@ -1022,7 +1022,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Método para recuperar dados da tabela Procedimento
-    private Procedimento recuperarProcedimento(int usuario, SQLiteDatabase sqLiteDatabase){
+    private Procedimento recuperarProcedimento(int usuario, SQLiteDatabase sqLiteDatabase) {
         Procedimento procedimento = null;
         Cursor cursor = sqLiteDatabase.query(
                 Contract.Procedimento.TABELA,
@@ -1033,7 +1033,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             procedimento = new Procedimento();
             procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento._ID)));
             procedimento.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_USUARIO)));
@@ -1062,7 +1062,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos para Relatório
 
-    public Relatorio gerarRelatorio(int idUsuario){
+    public Relatorio gerarRelatorio(int idUsuario) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Relatorio relatorio = new Relatorio();
         //Recuperar os dados do usuário
@@ -1071,7 +1071,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     // Métodos para recuperar resumos e depois exibir na tela
     // Resumo equipe
-    public List<Equipe> resumirEquipe(int usuario){
+    public List<Equipe> resumirEquipe(int usuario) {
         List<Equipe> resumoEquipe = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
@@ -1083,7 +1083,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 Equipe equipe = new Equipe();
                 equipe.setIdEquipe(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Equipe._ID)));
@@ -1109,7 +1109,7 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Resumo Paciente
-    public List<Paciente> resumirPaciente(int usuario){
+    public List<Paciente> resumirPaciente(int usuario) {
         List<Paciente> resumoPaciente = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(
@@ -1121,7 +1121,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 null,
                 null
         );
-        if (cursor.moveToFirst()){
+        if (cursor.moveToFirst()) {
             do {
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente._ID)));
@@ -1145,9 +1145,61 @@ public class DbHelper extends SQLiteOpenHelper {
         return resumoPaciente;
     }
 
+    // Resumo Procedimento
+    public List<Procedimento> resumirProcedimento(int usuario) {
+        List<Procedimento> resumoProcedimento = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                Contract.Procedimento.TABELA,
+                null,
+                Contract.Procedimento.COLUNA_USUARIO + "=?",
+                new String[]{String.valueOf(usuario)},
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst()) {
+            do {
+                Procedimento procedimento = new Procedimento();
+                procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_ID)));
+                procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
+                procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
+                procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
+                procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
+                procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
+                procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
+                procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
+                procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
+                resumoProcedimento.add(procedimento);
+            } while (cursor.moveToFirst());
+        } else {
+            Log.e("DbHelper", "Cursor is null or empty");
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+        return resumoProcedimento;
+    }
 
+    /*private void exibirRelatorioPorUsuario(int usuario) {
+    // Recuperar uma instância de SQLiteDatabase, dependendo de como você gerencia as conexões com o banco de dados
 
+    // Recuperar o procedimento associado ao usuário
+    Procedimento procedimento = dbHelper.recuperarProcedimento(usuario, sqLiteDatabase);
 
-
-
+    // Verificar se o procedimento foi encontrado
+    if (procedimento != null) {
+        // Exibir os dados do procedimento em algum tipo de visualização, como TextViews, RecyclerViews, etc.
+        // Por exemplo:
+        textViewNomeProc.setText(procedimento.getNomeProc());
+        textViewDataInicio.setText(String.valueOf(procedimento.getDataInicio()));
+        // e assim por diante para todos os dados que você deseja exibir no relatório
+    } else {
+        // Tratar o caso em que nenhum procedimento foi encontrado para o usuário
+        // Por exemplo:
+        Toast.makeText(context, "Nenhum procedimento encontrado para este usuário", Toast.LENGTH_SHORT).show();
+    }
+}*/
 }
+
+

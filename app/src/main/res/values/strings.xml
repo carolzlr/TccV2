@@ -117,7 +117,7 @@
     <string name="totalCEC">Total CEC (minutos)</string>
     <string name="horaIClamp">Início Clamp</string>
     <string name="horaFClamp">Final Clamp</string>
-    <string name="totalClamp">Total clmap (minutos)</string>
+    <string name="totalClamp">Total Clamp (minutos)</string>
     <string name="salvarFim">Salvar e Finalizar</string>
     <string name="horafProc">Hora Encerramento</string>
     <string name="datafProc">Data Encerramento</string>
