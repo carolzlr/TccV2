@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.tccv2.contract.Contract;
 import com.example.tccv2.entidades.CalculoInicial;
@@ -1060,14 +1059,6 @@ public class DbHelper extends SQLiteOpenHelper {
         return procedimento;
     }
 
-    // Métodos para Relatório
-
-    public Relatorio gerarRelatorio(int idUsuario) {
-        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Relatorio relatorio = new Relatorio();
-        //Recuperar os dados do usuário
-        return relatorio;
-    }
 
     // Métodos para recuperar resumos e depois exibir na tela
     // Resumo equipe
@@ -1181,25 +1172,50 @@ public class DbHelper extends SQLiteOpenHelper {
         return resumoProcedimento;
     }
 
-    /*private void exibirRelatorioPorUsuario(int usuario) {
-    // Recuperar uma instância de SQLiteDatabase, dependendo de como você gerencia as conexões com o banco de dados
+    // Métodos para Relatório
 
-    // Recuperar o procedimento associado ao usuário
-    Procedimento procedimento = dbHelper.recuperarProcedimento(usuario, sqLiteDatabase);
+    public Relatorio gerarRelatorio(int idUsuario) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Relatorio relatorio = new Relatorio();
+        //Consulta SQL para recuperar os dados das diferentes tabelas
+        String queryProcedimento = "SELECT * FROM " + Contract.Procedimento.TABELA + " WHERE " + Contract.Procedimento.COLUNA_USUARIO + " = ?";
+        String queryEquipe = "SELECT * FROM " + Contract.Equipe.TABELA + " WHERE " + Contract.Equipe.COLUNA_USUARIO + " = ?";
+        String queryCalculos = "SELECT * FROM " + Contract.CalculoInicial.TABELA + " WHERE " + Contract.CalculoInicial.COLUNA_USUARIO + " = ?";
 
-    // Verificar se o procedimento foi encontrado
-    if (procedimento != null) {
-        // Exibir os dados do procedimento em algum tipo de visualização, como TextViews, RecyclerViews, etc.
-        // Por exemplo:
-        textViewNomeProc.setText(procedimento.getNomeProc());
-        textViewDataInicio.setText(String.valueOf(procedimento.getDataInicio()));
-        // e assim por diante para todos os dados que você deseja exibir no relatório
-    } else {
-        // Tratar o caso em que nenhum procedimento foi encontrado para o usuário
-        // Por exemplo:
-        Toast.makeText(context, "Nenhum procedimento encontrado para este usuário", Toast.LENGTH_SHORT).show();
+        Cursor cursorProc = sqLiteDatabase.rawQuery(queryProcedimento, new String[]{String.valueOf(idUsuario)});
+        if (cursorProc != null && cursorProc.moveToFirst()){
+            relatorio.setProcedimento(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
+            relatorio.setDataInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
+            relatorio.setHoraInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
+            relatorio.setOxigenador(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
+            relatorio.setCanulaAA(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
+            relatorio.setCanulaV(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
+            relatorio.setTotalCEC(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
+            relatorio.setTotalClamp(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
+            relatorio.setDataFim(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAFPROC)));
+            relatorio.setHoraFim(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAFPROC)));
+            cursorProc.close();
+        }
+        Cursor cursorEq = sqLiteDatabase.rawQuery(queryEquipe, new String[]{String.valueOf(idUsuario)});
+        if(cursorEq != null && cursorEq.moveToFirst()){
+            relatorio.setCirurgiao(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
+            relatorio.setAuxiliar1(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR1)));
+            relatorio.setAuxiliar2(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR2)));
+            relatorio.setPerfusionista(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_PERFUSIONISTA)));
+            relatorio.setHospital(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_HOSPITAL)));
+            cursorEq.close();
+        }
+        Cursor cursorCalculo = sqLiteDatabase.rawQuery(queryCalculos, new String[]{String.valueOf(idUsuario)});
+        if(cursorCalculo !=null && cursorCalculo.moveToFirst()){
+            relatorio.setVo2Escolhido(cursorCalculo.getString(cursorCalculo.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO)));
+            cursorCalculo.close();
+        }
+
+        return relatorio;
     }
-}*/
+
+
 }
+
 
 

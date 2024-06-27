@@ -130,6 +130,8 @@
     <string name="nome">Nome</string>
     <string name="examesRep">Exames Repetição</string>
     <string name="info">Informações Úteis</string>
+    <string name="rela">Relatório</string>
+    <string name="escolhido">VO2 escolhido</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 

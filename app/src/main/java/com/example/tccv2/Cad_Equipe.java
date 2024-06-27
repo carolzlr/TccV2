@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,7 @@ public class Cad_Equipe extends AppCompatActivity {
     private EditText id_circulante;
     private EditText id_hospital;
     private Button bt_salvar_e;
+    private ImageButton bt_voltar;
     private DbHelper dbHelper;
     private int userId;
 
@@ -48,6 +50,15 @@ public class Cad_Equipe extends AppCompatActivity {
                 salvarEquipe();
             }
         });
+
+        bt_voltar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Cad_Equipe.this, TelaPrincipal.class);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -62,6 +73,7 @@ public class Cad_Equipe extends AppCompatActivity {
             id_circulante = findViewById(R.id.id_circulante);
             id_hospital= findViewById(R.id.id_hospital);
             bt_salvar_e = findViewById(R.id.bt_salvar_e);
+            bt_voltar = findViewById(R.id.bt_voltar);
     }
 
     private void salvarEquipe() {
