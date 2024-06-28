@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tccv2.helper.DbHelper;
 
-public class Relatorio extends AppCompatActivity {
+public class GerarRelatorio extends AppCompatActivity {
     private int userId;
     private long idEquipe;
     private long idPaciente;
@@ -51,7 +51,7 @@ public class Relatorio extends AppCompatActivity {
         recuperarExtras();
 
         // Recuperar os dados do relatorio
-        criarRelatorio();
+        //criarRelatorio();
     }
 
     private void iniciarComponentes(){
@@ -116,7 +116,7 @@ public class Relatorio extends AppCompatActivity {
         Log.d("Relatorio", "PROCEDIMENTO_ID: " +idProcedimento);
     }
 
-    private void criarRelatorio() {
+   /*private void criarRelatorio() {
         Relatorio relatorio = dbHelper.gerarRelatorio(userId);
         if (relatorio != null) {
             id_proc.setText(relatorio.getProcedimento());
@@ -135,6 +135,6 @@ public class Relatorio extends AppCompatActivity {
             id_canulaVe.setText(relatorio.getCanulaV());
             id_CEC.setText(relatorio.getTotlaCEC);
             id_Clamp.setText(relatorio.getTotalClamp);
-        }
+        }*/
     }
 }

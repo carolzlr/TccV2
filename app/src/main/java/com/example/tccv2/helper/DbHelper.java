@@ -1177,13 +1177,14 @@ public class DbHelper extends SQLiteOpenHelper {
     public Relatorio gerarRelatorio(int idUsuario) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Relatorio relatorio = new Relatorio();
-        //Consulta SQL para recuperar os dados das diferentes tabelas
+
+        // Consulta SQL para recuperar os dados das diferentes tabelas
         String queryProcedimento = "SELECT * FROM " + Contract.Procedimento.TABELA + " WHERE " + Contract.Procedimento.COLUNA_USUARIO + " = ?";
         String queryEquipe = "SELECT * FROM " + Contract.Equipe.TABELA + " WHERE " + Contract.Equipe.COLUNA_USUARIO + " = ?";
         String queryCalculos = "SELECT * FROM " + Contract.CalculoInicial.TABELA + " WHERE " + Contract.CalculoInicial.COLUNA_USUARIO + " = ?";
 
         Cursor cursorProc = sqLiteDatabase.rawQuery(queryProcedimento, new String[]{String.valueOf(idUsuario)});
-        if (cursorProc != null && cursorProc.moveToFirst()){
+        if (cursorProc != null && cursorProc.moveToFirst()) {
             relatorio.setProcedimento(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
             relatorio.setDataInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
             relatorio.setHoraInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
@@ -1196,8 +1197,9 @@ public class DbHelper extends SQLiteOpenHelper {
             relatorio.setHoraFim(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAFPROC)));
             cursorProc.close();
         }
+
         Cursor cursorEq = sqLiteDatabase.rawQuery(queryEquipe, new String[]{String.valueOf(idUsuario)});
-        if(cursorEq != null && cursorEq.moveToFirst()){
+        if (cursorEq != null && cursorEq.moveToFirst()) {
             relatorio.setCirurgiao(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
             relatorio.setAuxiliar1(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR1)));
             relatorio.setAuxiliar2(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR2)));
@@ -1205,14 +1207,16 @@ public class DbHelper extends SQLiteOpenHelper {
             relatorio.setHospital(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_HOSPITAL)));
             cursorEq.close();
         }
+
         Cursor cursorCalculo = sqLiteDatabase.rawQuery(queryCalculos, new String[]{String.valueOf(idUsuario)});
-        if(cursorCalculo !=null && cursorCalculo.moveToFirst()){
+        if (cursorCalculo != null && cursorCalculo.moveToFirst()) {
             relatorio.setVo2Escolhido(cursorCalculo.getString(cursorCalculo.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO)));
             cursorCalculo.close();
         }
 
         return relatorio;
     }
+
 
 
 }

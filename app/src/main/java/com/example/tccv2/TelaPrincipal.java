@@ -2,10 +2,8 @@ package com.example.tccv2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -120,7 +118,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_procedimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Relatorio.class);
+                Intent intent = new Intent(TelaPrincipal.this, GerarRelatorio.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();

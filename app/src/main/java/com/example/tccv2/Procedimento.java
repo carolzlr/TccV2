@@ -10,14 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
+import com.example.tccv2.entidades.Relatorio;
 import com.example.tccv2.helper.DbHelper;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
 
 public class Procedimento extends AppCompatActivity {
     private EditText id_nomeP;
@@ -82,6 +82,7 @@ public class Procedimento extends AppCompatActivity {
         bt_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                gerarRelatorioPDF();
 
             }
         });
@@ -284,7 +285,7 @@ public class Procedimento extends AppCompatActivity {
     }
 
     private Intent passarExtras(long idProcedimento){
-        Intent intent = new Intent(Procedimento.this, Relatorio.class);
+        Intent intent = new Intent(Procedimento.this, GerarRelatorio.class);
         intent.putExtra("USER_ID", userId);
         intent.putExtra("EQUIPE_ID", idEquipe);
         intent.putExtra("PACIENTE_ID", idPaciente);
@@ -296,5 +297,45 @@ public class Procedimento extends AppCompatActivity {
         intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
         intent.putExtra("PROCEDIMENTO_ID", idProcedimento);
         return intent;
+    }
+
+    private void gerarRelatorioPDF() {
+        Relatorio relatorio = dbHelper.gerarRelatorio(userId);
+
+        if (relatorio != null) {
+            String filePath = getExternalFilesDir(null) + "/Relatorio_" + userId + ".pdf";
+
+            try {
+                PdfWriter writer = new PdfWriter(filePath);
+                PdfDocument pdfDoc = new PdfDocument(writer);
+                Document document = new Document(pdfDoc);
+
+                document.add(new Paragraph("Relatório do Procedimento"));
+                document.add(new Paragraph("Nome do Procedimento: " + relatorio.getProcedimento()));
+                document.add(new Paragraph("Data de Início: " + relatorio.getDataInicio()));
+                document.add(new Paragraph("Hora de Início: " + relatorio.getHoraInicio()));
+                document.add(new Paragraph("Oxigenador: " + relatorio.getOxigenador()));
+                document.add(new Paragraph("Cânula AA: " + relatorio.getCanulaAA()));
+                document.add(new Paragraph("Cânula V: " + relatorio.getCanulaV()));
+                document.add(new Paragraph("Total de CEC: " + relatorio.getTotalCEC()));
+                document.add(new Paragraph("Total de Clamp: " + relatorio.getTotalClamp()));
+                document.add(new Paragraph("Data de Fim: " + relatorio.getDataFim()));
+                document.add(new Paragraph("Hora de Fim: " + relatorio.getHoraFim()));
+                document.add(new Paragraph("Cirurgião: " + relatorio.getCirurgiao()));
+                document.add(new Paragraph("Auxiliar 1: " + relatorio.getAuxiliar1()));
+                document.add(new Paragraph("Auxiliar 2: " + relatorio.getAuxiliar2()));
+                document.add(new Paragraph("Perfusionista: " + relatorio.getPerfusionista()));
+                document.add(new Paragraph("Hospital: " + relatorio.getHospital()));
+                document.add(new Paragraph("VO2 Escolhido: " + relatorio.getVo2Escolhido()));
+
+                document.close();
+                Toast.makeText(this, "Relatório gerado com sucesso!", Toast.LENGTH_SHORT).show();
+            } catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(this, "Erro ao gerar relatório.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Erro ao recuperar dados para o relatório.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
