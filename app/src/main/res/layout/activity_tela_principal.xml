@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/bt_menu_lateral"
+        android:id="@+id/heart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,9 +27,10 @@
         android:background="?attr/selectableItemBackground"
         android:focusable="true"
         android:padding="8dp"
-        android:src="@drawable/ic_menu"
+        android:src="@drawable/ic_heart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/nome_app"
@@ -40,10 +41,10 @@
         android:gravity="center_horizontal"
         android:letterSpacing="0.025"
         android:text="CEC APP"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/bt_menu_lateral"
+        app:layout_constraintStart_toEndOf="@+id/heart"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
@@ -57,7 +58,8 @@
         android:src="@drawable/ic_sair"
         app:layout_constraintCircleRadius="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -104,24 +106,13 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_iniciar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="358dp"
+                android:layout_height="51dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="16dp"
                 android:text="@string/iniciarP"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/bt_pesquisar"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/buscar"
-                android:textColor="@color/azul_pastel"
-                app:layout_constraintBottom_toBottomOf="@+id/bt_iniciar"
-                app:layout_constraintStart_toEndOf="@+id/bt_iniciar" />
 
             <ImageButton
                 android:id="@+id/bt_perfil"
@@ -134,7 +125,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.125" />
+                app:layout_constraintVertical_bias="0.125"
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

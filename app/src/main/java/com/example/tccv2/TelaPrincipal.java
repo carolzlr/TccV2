@@ -14,7 +14,6 @@ import com.google.android.material.button.MaterialButton;
 
 public class TelaPrincipal extends AppCompatActivity {
     private ImageButton bt_perfil;
-    private ImageButton bt_menu_lateral;
     private ImageButton bt_sair;
     private TextView nome_app;
     private TextView nome_usuario;
@@ -24,7 +23,6 @@ public class TelaPrincipal extends AppCompatActivity {
     private CardView card_relatorio;
     private CardView card_info;
     private CardView card_equipe;
-    private MaterialButton bt_pesquisar;
     private MaterialButton bt_iniciar;
     private int userId;
     private DbHelper dbHelper;
@@ -63,16 +61,6 @@ public class TelaPrincipal extends AppCompatActivity {
             }
         });
 
-        bt_pesquisar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Calculo_Rep.class);
-                intent.putExtra("USER_ID", userId);
-                startActivity(intent);
-                finish();
-            }
-        });
-
         bt_perfil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +75,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_paciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Cad_Paciente.class);
+                Intent intent = new Intent(TelaPrincipal.this, PacienteResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -98,7 +86,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_formulas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, P_Cir.class);
+                Intent intent = new Intent(TelaPrincipal.this, Formulas.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -128,7 +116,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Procedimento.class);
+                Intent intent = new Intent(TelaPrincipal.this, Infos.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -148,9 +136,7 @@ public class TelaPrincipal extends AppCompatActivity {
 
     // Método para inicializar os componentes de interface
     private void iniciarComponentes() {
-        bt_menu_lateral = findViewById(R.id.bt_menu_lateral);
         bt_sair = findViewById(R.id.bt_sair);
-        bt_pesquisar = findViewById(R.id.bt_pesquisar);
         bt_iniciar = findViewById(R.id.bt_iniciar);
         bt_perfil = findViewById(R.id.bt_perfil);
 
