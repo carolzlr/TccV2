@@ -10,18 +10,19 @@
         android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".GerarRelatorio">
+        tools:context=".Infos">
 
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="128dp"
+            android:background="@drawable/custom_rectangle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/relatorio"
+            android:id="@+id/info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -29,7 +30,7 @@
             android:background="?attr/selectableItemBackground"
             android:focusable="true"
             android:padding="8dp"
-            android:src="@drawable/ic_relatorios"
+            android:src="@drawable/ic_info"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,24 +42,25 @@
             android:layout_marginEnd="16dp"
             android:background="?attr/selectableItemBackground"
             android:padding="8dp"
-            android:src="@drawable/ic_voltar"
+            android:src="@drawable/ic_home"
             app:layout_constraintCircleRadius="24dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <TextView
-            android:id="@+id/Procedimento"
+            android:id="@+id/Info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:gravity="center_horizontal"
             android:letterSpacing="0.025"
-            android:text="@string/rela"
+            android:text="@string/Info"
             android:textColor="@color/black"
             android:textSize="28sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/relatorio"
+            app:layout_constraintStart_toEndOf="@+id/info"
             app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
@@ -81,14 +83,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/procedimento"
+                        android:text="@string/peso"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_proc"
+                        android:id="@+id/id_peso"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/pesokg"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -97,14 +100,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/cirurgiao"
+                        android:text="@string/est"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_cir"
+                        android:id="@+id/id_estatura"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/estcm"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -113,14 +117,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/auxiliar1"
+                        android:text="@string/hb"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_aux1"
+                        android:id="@+id/id_hb"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/hemogl"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -129,14 +134,32 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/auxiliar2"
+                        android:text="@string/pao2"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_aux2"
+                        android:id="@+id/id_pao2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:padding="8dp"
+                        android:text="@string/pressaooxi" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sao2"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_sao2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/satarterail"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -145,14 +168,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/perfusionista"
+                        android:text="@string/pvo2"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_perf"
+                        android:id="@+id/id_pvo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/pv"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -161,32 +185,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/hosp"
+                        android:text="@string/svo2"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_hosp"
+                        android:id="@+id/id_svo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="8dp" />
-                </TableRow>
-
-
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/datai"
-                        android:padding="8dp" />
-
-                    <TextView
-                        android:id="@+id/id_dataIni"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:text="@string/sv"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -195,14 +202,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/horai"
+                        android:text="@string/pam"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_horaIni"
+                        android:id="@+id/id_pam"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/pm"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -211,14 +219,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/oxi"
+                        android:text="@string/pvc"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_oxig"
+                        android:id="@+id/id_pvc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/pve"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -227,14 +236,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/canulaAA"
+                        android:text="@string/papm"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_canulaAoA"
+                        android:id="@+id/id_papm"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/pulmonar"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -243,14 +253,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/canulaV"
+                        android:text="@string/pcp"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_canulaVe"
+                        android:id="@+id/id_pcp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/capilar"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -259,14 +270,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/escolhido"
+                        android:text="@string/fc"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_escolhido"
+                        android:id="@+id/id_fc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/freq"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -275,32 +287,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/totalCEC"
+                        android:text="@string/ic"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_CEC"
+                        android:id="@+id/id_ic"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:padding="8dp" />
-                </TableRow>
-
-               
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/totalClamp"
-                        android:padding="8dp" />
-
-                    <TextView
-                        android:id="@+id/id_Clamp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
+                        android:text="@string/indice"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -309,14 +304,15 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/datafProc"
+                        android:text="@string/vs"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_dataFim"
+                        android:id="@+id/id_vs"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/volume"
                         android:padding="8dp" />
                 </TableRow>
 
@@ -325,17 +321,153 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="@string/horafProc"
+                        android:text="@string/reo2"
                         android:padding="8dp" />
 
                     <TextView
-                        android:id="@+id/id_horaFim"
+                        android:id="@+id/id_reo2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:text="@string/relacao"
                         android:padding="8dp" />
                 </TableRow>
 
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vo2"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_vo2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vol"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/irvs"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_irvs"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/resistencia"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/irvp"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_irvp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vascular"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cao2"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_cao2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/conteudo"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/cvo2"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_cvo2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/conteudov"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dc"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_dc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/debito"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/asc"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_asc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/areaSupC"
+                        android:padding="8dp" />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/vo2_escolhidocor"
+                        android:padding="8dp" />
+
+                    <TextView
+                        android:id="@+id/id_vo2e"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/valor"
+                        android:padding="8dp" />
+                </TableRow>
 
             </TableLayout>
         </LinearLayout>

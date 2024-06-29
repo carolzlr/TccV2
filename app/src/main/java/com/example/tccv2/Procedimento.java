@@ -1,7 +1,10 @@
 package com.example.tccv2;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -10,7 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.tccv2.entidades.Relatorio;
 import com.example.tccv2.helper.DbHelper;
@@ -18,6 +24,8 @@ import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
+
+import java.io.File;
 
 public class Procedimento extends AppCompatActivity {
     private EditText id_nomeP;
@@ -51,6 +59,8 @@ public class Procedimento extends AppCompatActivity {
     private long idCalculo_Rep;
     private DbHelper dbHelper;
 
+    private static final int REQUEST_CODE_WRITE_EXTERNAL_STORAGE = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +92,7 @@ public class Procedimento extends AppCompatActivity {
         bt_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                gerarRelatorioPDF();
+                checkPermissions();
 
             }
         });
@@ -272,9 +282,6 @@ public class Procedimento extends AppCompatActivity {
                     oxigenador, canulaAA, canulaV, protamina, hepMg, hepMl, iCec, fCec, totalCecString, iClamp,
                     fClamp, totalClampString, datafProc, horafProc, obs);
             if (idProcedimento != -1) {
-                Intent intent = passarExtras(idProcedimento);
-                startActivity(intent);
-                finish();
                 Toast.makeText(this, "Procedimento adicionado com sucesso!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "Falha ao adicionar procedimento.", Toast.LENGTH_SHORT).show();
@@ -284,26 +291,35 @@ public class Procedimento extends AppCompatActivity {
         }
     }
 
-    private Intent passarExtras(long idProcedimento){
-        Intent intent = new Intent(Procedimento.this, GerarRelatorio.class);
-        intent.putExtra("USER_ID", userId);
-        intent.putExtra("EQUIPE_ID", idEquipe);
-        intent.putExtra("PACIENTE_ID", idPaciente);
-        intent.putExtra("EXAMESADICIONAIS_ID", idExamesAdicionais);
-        intent.putExtra("PCIR_ID", idPCir);
-        intent.putExtra("PCEC_ID", idPCec);
-        intent.putExtra("CALCULOINICIAL_ID", idCalculoInicial);
-        intent.putExtra("EXAMESREP_ID", idExamesRep);
-        intent.putExtra("CALCULOREP_ID", idCalculo_Rep);
-        intent.putExtra("PROCEDIMENTO_ID", idProcedimento);
-        return intent;
+    private void checkPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
+        } else {
+            gerarRelatorioPDF(); // Permissão já concedida, gerar o relatório
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                gerarRelatorioPDF(); // Permissão concedida, gerar o relatório
+            } else {
+                Toast.makeText(this, "Permissão de escrita no armazenamento necessária para salvar o relatório.", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private void gerarRelatorioPDF() {
         Relatorio relatorio = dbHelper.gerarRelatorio(userId);
 
         if (relatorio != null) {
-            String filePath = getExternalFilesDir(null) + "/Relatorio_" + userId + ".pdf";
+            File docsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+            if (!docsDir.exists()) {
+                docsDir.mkdirs();
+            }
+            String filePath = docsDir.getAbsolutePath() + "/Relatorio_" + userId + ".pdf";
 
             try {
                 PdfWriter writer = new PdfWriter(filePath);
@@ -329,7 +345,13 @@ public class Procedimento extends AppCompatActivity {
                 document.add(new Paragraph("VO2 Escolhido: " + relatorio.getVo2Escolhido()));
 
                 document.close();
-                Toast.makeText(this, "Relatório gerado com sucesso!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Relatório gerado com sucesso e salvo em Documentos!", Toast.LENGTH_SHORT).show();
+
+                // Redirecionar o usuário de volta para a tela inicial
+                Intent intent = new Intent(this, TelaPrincipal.class);
+                startActivity(intent);
+                finish(); // Opcional: finaliza a atividade atual se não precisar voltar a ela
+
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Erro ao gerar relatório.", Toast.LENGTH_SHORT).show();

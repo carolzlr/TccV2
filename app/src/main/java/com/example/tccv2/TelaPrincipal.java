@@ -118,7 +118,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_procedimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, GerarRelatorio.class);
+                Intent intent = new Intent(TelaPrincipal.this, Procedimento.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
