@@ -106,9 +106,9 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/bt_iniciar"
-                android:layout_width="358dp"
-                android:layout_height="51dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginBottom="16dp"
                 android:text="@string/iniciarP"
                 app:layout_constraintBottom_toBottomOf="parent"

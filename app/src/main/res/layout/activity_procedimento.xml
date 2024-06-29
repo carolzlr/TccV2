@@ -107,7 +107,8 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:inputType="date"
+                android:inputType="text"
+                android:hint="dd/mm/aaa"
                 android:padding="8dp" />
         </TableRow>
 
@@ -125,6 +126,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:inputType="time"
+                android:hint="hh:mmm"
                 android:padding="8dp" />
         </TableRow>
 
@@ -244,6 +246,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="time"
+                    android:hint="hh:mm"
                     android:padding="8dp" />
             </TableRow>
 
@@ -261,6 +264,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="time"
+                    android:hint="hh:mm"
                     android:padding="8dp" />
             </TableRow>
 
@@ -294,6 +298,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="time"
+                    android:hint="hh:mm"
                     android:padding="8dp" />
             </TableRow>
 
@@ -311,6 +316,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="time"
+                    android:hint="hh:mm"
                     android:padding="8dp" />
             </TableRow>
 
@@ -361,6 +367,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:inputType="text"
+                    android:hint="dd/mm/aaaa"
                     android:padding="8dp" />
             </TableRow>
 

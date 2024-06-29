@@ -92,7 +92,7 @@ public class Procedimento extends AppCompatActivity {
         bt_pdf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                checkPermissions();
+               gerarRelatorioPDF();
 
             }
         });
@@ -291,35 +291,11 @@ public class Procedimento extends AppCompatActivity {
         }
     }
 
-    private void checkPermissions() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_CODE_WRITE_EXTERNAL_STORAGE);
-        } else {
-            gerarRelatorioPDF(); // Permissão já concedida, gerar o relatório
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == REQUEST_CODE_WRITE_EXTERNAL_STORAGE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                gerarRelatorioPDF(); // Permissão concedida, gerar o relatório
-            } else {
-                Toast.makeText(this, "Permissão de escrita no armazenamento necessária para salvar o relatório.", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-
     private void gerarRelatorioPDF() {
         Relatorio relatorio = dbHelper.gerarRelatorio(userId);
 
         if (relatorio != null) {
-            File docsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-            if (!docsDir.exists()) {
-                docsDir.mkdirs();
-            }
-            String filePath = docsDir.getAbsolutePath() + "/Relatorio_" + userId + ".pdf";
+            String filePath = getExternalFilesDir(null) + "/Relatorio_" + userId + ".pdf";
 
             try {
                 PdfWriter writer = new PdfWriter(filePath);
@@ -345,13 +321,7 @@ public class Procedimento extends AppCompatActivity {
                 document.add(new Paragraph("VO2 Escolhido: " + relatorio.getVo2Escolhido()));
 
                 document.close();
-                Toast.makeText(this, "Relatório gerado com sucesso e salvo em Documentos!", Toast.LENGTH_SHORT).show();
-
-                // Redirecionar o usuário de volta para a tela inicial
-                Intent intent = new Intent(this, TelaPrincipal.class);
-                startActivity(intent);
-                finish(); // Opcional: finaliza a atividade atual se não precisar voltar a ela
-
+                Toast.makeText(this, "Relatório gerado com sucesso!", Toast.LENGTH_SHORT).show();
             } catch (Exception e) {
                 e.printStackTrace();
                 Toast.makeText(this, "Erro ao gerar relatório.", Toast.LENGTH_SHORT).show();
