@@ -28,7 +28,7 @@ public class AdapterPaciente extends RecyclerView.Adapter<AdapterPaciente.Pacien
     @Override
     public void onBindViewHolder(PacienteViewHolder holder, int position) {
         Paciente paciente = resumoPaciente.get(position);
-        holder.tv_idade.setText(paciente.getIdade());
+        holder.tv_idade.setText(String.valueOf(paciente.getIdade()));
         holder.tv_genero.setText(paciente.getGenero());
         holder.tv_f1.setText(String.valueOf(paciente.getFluxo1()));
         holder.tv_f2.setText(String.valueOf(paciente.getFluxo2()));
@@ -53,6 +53,7 @@ public class AdapterPaciente extends RecyclerView.Adapter<AdapterPaciente.Pacien
             super(itemView);
             tv_idade = itemView.findViewById(R.id.tv_idade);
             tv_genero = itemView.findViewById(R.id.tv_genero);
+            tv_f1 = itemView.findViewById(R.id.tv_f1);
             tv_f2 = itemView.findViewById(R.id.tv_f2);
             tv_f3 = itemView.findViewById(R.id.tv_f3);
             tv_diag = itemView.findViewById(R.id.tv_diag);

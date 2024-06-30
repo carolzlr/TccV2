@@ -283,6 +283,10 @@ public class Procedimento extends AppCompatActivity {
                     fClamp, totalClampString, datafProc, horafProc, obs);
             if (idProcedimento != -1) {
                 Toast.makeText(this, "Procedimento adicionado com sucesso!", Toast.LENGTH_SHORT).show();
+                // Direcionar para a tela inicial do aplicativo
+                Intent intent = new Intent(this, TelaPrincipal.class);
+                startActivity(intent);
+                finish(); // Finaliza a atividade atual para evitar que o usuário volte para ela ao pressionar o botão "voltar"
             } else {
                 Toast.makeText(this, "Falha ao adicionar procedimento.", Toast.LENGTH_SHORT).show();
             }

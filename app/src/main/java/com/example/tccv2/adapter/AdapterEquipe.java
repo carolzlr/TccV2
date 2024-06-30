@@ -35,6 +35,7 @@ public class AdapterEquipe extends RecyclerView.Adapter<AdapterEquipe.EquipeView
         holder.tv_anestesista.setText(equipe.getAnestesista());
         holder.tv_circulante.setText(equipe.getCirculante());
         holder.tv_hospital.setText(equipe.getHospital());
+
     }
 
     @Override

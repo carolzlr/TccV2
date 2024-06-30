@@ -33,7 +33,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Responsável por fazer as operações de acesso do banco
     public static final String DATABASE_NOME = "BDCEC";
 
-    public static final int DATABASE_VERSION = 23;
+    public static final int DATABASE_VERSION = 24;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
@@ -215,30 +215,30 @@ public class DbHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY (" + Contract.Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
-    private static final String CREATE_PROCEDIMENTO = " create table "
+    private static final String CREATE_PROCEDIMENTO = "CREATE TABLE "
             + Contract.Procedimento.TABELA + "("
-            + Contract.Procedimento._ID + " integer primary key autoincrement,"
+            + Contract.Procedimento._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + Contract.Procedimento.COLUNA_USUARIO + " INTEGER, "
             + Contract.Procedimento.COLUNA_NOMEPROC + " TEXT, "
-            + Contract.Procedimento.COLUNA_DATAINICIO + " TEXT, "
-            + Contract.Procedimento.COLUNA_HORAINICO + " TEXT, "
+            + Contract.Procedimento.COLUNA_DATAINICIO + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_HORAINICO + " INTEGER, " // Alterado para INTEGER
             + Contract.Procedimento.COLUNA_OXI + " TEXT, "
             + Contract.Procedimento.COLUNA_CANULAAA + " TEXT, "
             + Contract.Procedimento.COLUNA_CANULAV + " TEXT, "
             + Contract.Procedimento.COLUNA_PROT + " TEXT, "
-            + Contract.Procedimento.COLUNA_HEPMG + " TEXT, "
-            + Contract.Procedimento.COLUNA_HEPML + " TEXT, "
-            + Contract.Procedimento.COLUNA_INCIOCEC + " TEXT, "
-            + Contract.Procedimento.COLUNA_FINALCEC + " TEXT, "
-            + Contract.Procedimento.COLUNA_TCEC + " TEXT, "
-            + Contract.Procedimento.COLUNA_INCIOCALMP + " TEXT, "
-            + Contract.Procedimento.COLUNA_FIMCLAMP + " TEXT, "
-            + Contract.Procedimento.COLUNA_TCLAMP + " TEXT, "
-            + Contract.Procedimento.COLUNA_DATAFPROC + " TEXT, "
-            + Contract.Procedimento.COLUNA_HORAFPROC + " TEXT, "
+            + Contract.Procedimento.COLUNA_HEPMG + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_HEPML + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_INCIOCEC + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_FINALCEC + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_TCEC + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_INCIOCALMP + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_FIMCLAMP + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_TCLAMP + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_DATAFPROC + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_HORAFPROC + " INTEGER, " // Alterado para INTEGER
             + Contract.Procedimento.COLUNA_OBS + " TEXT, "
-            + " FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
-            + "( " + Contract.Usuario._ID + "))";
+            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "(" + Contract.Usuario._ID + "))";
 
 
     @Override
@@ -731,336 +731,8 @@ public class DbHelper extends SQLiteOpenHelper {
         return idProcedimento;
     }
 
-    // Métodos para recuperar dados das tabelas
-    // Método para recuperar dados da tabela Usuario
-    private Usuario recuperarUsuario(int idUsuario, SQLiteDatabase sqLiteDatabase) {
-        Usuario usuario = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Usuario.TABELA,
-                null,
-                Contract.Usuario._ID + "=?",
-                new String[]{String.valueOf(idUsuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            usuario = new Usuario();
-            usuario.setIdUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Usuario._ID)));
-            usuario.setNome(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Usuario.COLUNA_NOME)));
-            usuario.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Usuario.COLUNA_EMAIL)));
-            usuario.setTipo(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Usuario.COLUNA_TIPO)));
-        }
-        cursor.close();
-        return usuario;
-    }
-
-    // Método para recuperar dados da tabela Equipe
-    private Equipe recuperarEquipe(int usuario, SQLiteDatabase sqLiteDatabase) {
-        Equipe equipe = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Equipe.TABELA,
-                null,
-                Contract.Equipe.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            equipe = new Equipe();
-            equipe.setIdEquipe(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Equipe._ID)));
-            equipe.setCirurgiao(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
-            equipe.setAuxiliar1(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR1)));
-            equipe.setAuxiliar2(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR2)));
-            equipe.setPerfusionista(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_PERFUSIONISTA)));
-            equipe.setInstrumentador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_INSTRUMENTADOR)));
-            equipe.setAnestesista(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_ANESTESISTA)));
-            equipe.setCirculante(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRCULANTE)));
-            equipe.setHospital(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Equipe.COLUNA_HOSPITAL)));
-        }
-        cursor.close();
-        return equipe;
-    }
-
-    // Método para recuperar dados da tabela Paciente
-    private Paciente recuperarPaciente(int usuario, SQLiteDatabase sqLiteDatabase) {
-        Paciente paciente = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Paciente.TABELA,
-                null,
-                Contract.Paciente.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            paciente = new Paciente();
-            paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente._ID)));
-            paciente.setIdade(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_IDADE)));
-            paciente.setGenero(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_GENERO)));
-            paciente.setDiagnostico(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_DIAGNOSTICO)));
-        }
-        cursor.close();
-        return paciente;
-    }
-
-    // Método para recuperar dados da tabela ExamesAdicionais
-    private ExamesAdicionais recuperarExamesAdicionais(int usuario, SQLiteDatabase sqLiteDatabase) {
-        ExamesAdicionais examesAdicionais = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.ExamesAdicionais.TABELA,
-                null,
-                Contract.ExamesAdicionais.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            examesAdicionais = new ExamesAdicionais();
-            examesAdicionais.setIdExames(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais._ID)));
-            examesAdicionais.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_USUARIO)));
-            examesAdicionais.setPh(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_PH)));
-            examesAdicionais.setPco2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_PCO2)));
-            examesAdicionais.setPo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_PO2)));
-            examesAdicionais.setSvo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_SVO2)));
-            examesAdicionais.setHco3(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_HCO3)));
-            examesAdicionais.setBeecf(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_BEECF)));
-            examesAdicionais.setK(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_K)));
-            examesAdicionais.setNa(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_NA)));
-            examesAdicionais.setCa(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_CA)));
-            examesAdicionais.setCl(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_CL)));
-            examesAdicionais.setGlic(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_GLIC)));
-            examesAdicionais.setLact(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_LACT)));
-            examesAdicionais.setHb(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_HB)));
-            examesAdicionais.setHtc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_HTC)));
-            examesAdicionais.setPlaq(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_PLAQ)));
-            examesAdicionais.setTca(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_TCA)));
-            examesAdicionais.setHora(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.ExamesAdicionais.COLUNA_HORA)));
-        }
-        cursor.close();
-        return examesAdicionais;
-    }
-
-    // Método para recuperar dados da tabela PCir
-    private PCir recuperarPcir(int usuario, SQLiteDatabase sqLiteDatabase) {
-        PCir pCir = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.PCir.TABELA,
-                null,
-                Contract.PCir.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            pCir = new PCir();
-            pCir.setIdParametrosCir(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCir._ID)));
-            pCir.setPiaCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_PIACIR)));
-            pCir.setPvcCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_PVCCIR)));
-            pCir.setTempCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_TEMPCIR)));
-            pCir.setDiureseCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_DIURESECIR)));
-            pCir.setFcCir(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCir.COLUNA_FCCIR)));
-        }
-        cursor.close();
-        return pCir;
-    }
-
-    // Método para recuperar dados da tabela PCec
-    private PCec recuperarPcec(int usuario, SQLiteDatabase sqLiteDatabase) {
-        PCec pCec = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.PCec.TABELA,
-                null,
-                Contract.PCec.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            pCec = new PCec();
-            pCec.setIdParametrosCeC(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCec._ID)));
-            pCec.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_USUARIO)));
-            pCec.setPiaCec(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_PVCCEC)));
-            pCec.setTempCec(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_TEMPCEC)));
-            pCec.setDiureseCec(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_DIURESECEC)));
-            pCec.setFcCec(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_FCCEC)));
-            pCec.setHoraInicioCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.PCec.COLUNA_HORAINICIOCEC)));
-        }
-        cursor.close();
-        return pCec;
-    }
-
-    // Método para recuperar dados da tabela CalculoInicial
-    private CalculoInicial recuperarCalculoinicial(int usuario, SQLiteDatabase sqLiteDatabase) {
-        CalculoInicial calculoInicial = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.CalculoInicial.TABELA,
-                null,
-                Contract.CalculoInicial.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            calculoInicial = new CalculoInicial();
-            calculoInicial.setIdCalculos(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.CalculoInicial._ID)));
-            calculoInicial.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_USUARIO)));
-            calculoInicial.setPeso(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PESO)));
-            calculoInicial.setEstatura(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_ESTATURA)));
-            calculoInicial.setHb(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_HB)));
-            calculoInicial.setPao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PAO2)));
-            calculoInicial.setSao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_SAO2)));
-            calculoInicial.setPvo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PVO2)));
-            calculoInicial.setSvo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_SVO2)));
-            calculoInicial.setPam(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PAM)));
-            calculoInicial.setPvc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PVC)));
-            calculoInicial.setPapm(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PAPM)));
-            calculoInicial.setPcp(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_PCP)));
-            calculoInicial.setFc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_FC)));
-            calculoInicial.setAreaSupC(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_AREASUPC)));
-            calculoInicial.setVo2_36(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_36)));
-            calculoInicial.setVo2_35(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_35)));
-            calculoInicial.setVo2_34(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_34)));
-            calculoInicial.setVo2_33(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_33)));
-            calculoInicial.setVo2_32(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_32)));
-            calculoInicial.setVo2_escolhido(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO)));
-            calculoInicial.setCao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_CAO2)));
-            calculoInicial.setReo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_REO2)));
-            calculoInicial.setDc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_DC)));
-            calculoInicial.setIc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_IC)));
-            calculoInicial.setVs(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VS)));
-            calculoInicial.setIrvs(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_IRVP)));
-            calculoInicial.setObs(cursor.getString(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_OBS)));
-            calculoInicial.sethoraValor(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_HORAVALOR)));
-        }
-        cursor.close();
-        return calculoInicial;
-    }
-
-    // Método para recuperar dados da tabela ExamesRep
-    private ExamesRep recuperarExamesRep(int usuario, SQLiteDatabase sqLiteDatabase) {
-        ExamesRep examesRep = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.ExamesRep.TABELA,
-                null,
-                Contract.ExamesRep.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            examesRep = new ExamesRep();
-            examesRep.setIdExamesRep(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesRep._ID)));
-            examesRep.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_USUARIO)));
-            examesRep.setRep_ph(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_PHR_REP)));
-            examesRep.setRep_pco2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_PCO2_REP)));
-            examesRep.setRep_po2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_PO2_REP)));
-            examesRep.setRep_svo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_SVO2_REP)));
-            examesRep.setRep_hco3(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_HCO3_REP)));
-            examesRep.setRep_beecf(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_BEECF_REP)));
-            examesRep.setRep_k(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_K_REP)));
-            examesRep.setRep_na(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_NA_REP)));
-            examesRep.setRep_ca(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_CA_REP)));
-            examesRep.setRep_cl(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_CL_REP)));
-            examesRep.setRep_glic(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_GLIC_REP)));
-            examesRep.setRep_lact(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_LACT_REP)));
-            examesRep.setRep_hb(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_HB_REP)));
-            examesRep.setRep_htc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_HTC_REP)));
-            examesRep.setRep_plaq(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_PLAQ_REP)));
-            examesRep.setRep_tca(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_TCA_REP)));
-            examesRep.setRep_hora(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.ExamesRep.COLUNA_HORA_REP)));
-        }
-        cursor.close();
-        return examesRep;
-    }
-
-    // Método para recuperar dados da tabela Calculo_Rep
-    private Calculo_Rep recuperarCalculoRep(int usuario, SQLiteDatabase sqLiteDatabase) {
-        Calculo_Rep calculoRep = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Calculo_Rep.TABELA,
-                null,
-                Contract.Calculo_Rep.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            calculoRep = new Calculo_Rep();
-            calculoRep.setIdCalculoRep(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep._ID)));
-            calculoRep.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_USUARIO)));
-            calculoRep.setRep_hb(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_HB)));
-            calculoRep.setRep_pao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PAO2)));
-            calculoRep.setRep_sao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_SAO2)));
-            calculoRep.setRep_pvo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PVO2)));
-            calculoRep.setRep_svo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_SVO2)));
-            calculoRep.setRep_pam(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PAM)));
-            calculoRep.setRep_pvc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PVC)));
-            calculoRep.setRep_papm(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PAPM)));
-            calculoRep.setRep_pcp(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_PCP)));
-            calculoRep.setRep_fc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_FC)));
-            calculoRep.setRep_cao2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_CAO2)));
-            calculoRep.setRep_reo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_REO2)));
-            calculoRep.setRep_dc(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_DC)));
-            calculoRep.setRep_ic(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_IC)));
-            calculoRep.setRep_vs(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_VS)));
-            calculoRep.setRep_irvs(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_IRVP)));
-            calculoRep.setRep_obs(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_OBS)));
-            calculoRep.setRep_dataHora(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Calculo_Rep.COLUNA_REP_HORAVALOR)));
-        }
-        cursor.close();
-        return calculoRep;
-    }
-
-    // Método para recuperar dados da tabela Procedimento
-    private Procedimento recuperarProcedimento(int usuario, SQLiteDatabase sqLiteDatabase) {
-        Procedimento procedimento = null;
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Procedimento.TABELA,
-                null,
-                Contract.Procedimento.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
-        );
-        if (cursor.moveToFirst()) {
-            procedimento = new Procedimento();
-            procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento._ID)));
-            procedimento.setUsuario(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_USUARIO)));
-            procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
-            procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
-            procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
-            procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
-            procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
-            procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
-            procedimento.setProtamina(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_PROT)));
-            procedimento.setHepMg(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HEPMG)));
-            procedimento.setHepMl(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HEPML)));
-            procedimento.setiCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_INCIOCEC)));
-            procedimento.setfCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_FINALCEC)));
-            procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
-            procedimento.setiClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_INCIOCALMP)));
-            procedimento.setfClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_FIMCLAMP)));
-            procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
-            procedimento.setDatafProc(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAFPROC)));
-            procedimento.setHorafProc(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAFPROC)));
-            procedimento.setObs(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OBS)));
-        }
-        cursor.close();
-        return procedimento;
-    }
-
-
     // Métodos para recuperar resumos e depois exibir na tela
+
     // Resumo equipe
     public List<Equipe> resumirEquipe(int usuario) {
         List<Equipe> resumoEquipe = new ArrayList<>();
@@ -1116,7 +788,7 @@ public class DbHelper extends SQLiteOpenHelper {
             do {
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente._ID)));
-                paciente.setIdPaciente(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_IDADE)));
+                paciente.setIdade(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_IDADE)));
                 paciente.setGenero(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_GENERO)));
                 paciente.setFluxo1(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_FLUXO1)));
                 paciente.setFluxo2(cursor.getDouble(cursor.getColumnIndexOrThrow(Contract.Paciente.COLUNA_FLUXO2)));
@@ -1136,33 +808,32 @@ public class DbHelper extends SQLiteOpenHelper {
         return resumoPaciente;
     }
 
-    // Resumo Procedimento
     public List<Procedimento> resumirProcedimento(int usuario) {
         List<Procedimento> resumoProcedimento = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(
-                Contract.Procedimento.TABELA,
-                null,
-                Contract.Procedimento.COLUNA_USUARIO + "=?",
-                new String[]{String.valueOf(usuario)},
-                null,
-                null,
-                null
+        Cursor cursor = sqLiteDatabase.rawQuery(
+                "SELECT idProcedimento AS _id, usuario, nomeProc, dataInicio, horaInicio, " +
+                        "oxigendaor, canulaAA, canulaV, protamina, hepMg, hepMl, iCec, fCec, " +
+                        "totalCec, iClamp, fClamp, totalClamp, dataFProc, horafProc, obs " +
+                        "FROM procedimento WHERE usuario = ?",
+                new String[]{String.valueOf(usuario)}
         );
         if (cursor.moveToFirst()) {
             do {
                 Procedimento procedimento = new Procedimento();
-                procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_ID)));
-                procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
-                procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
-                procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
-                procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
-                procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
-                procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
-                procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
-                procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
+                procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
+                procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow("nomeProc")));
+                procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow("dataInicio")));
+                procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow("horaInicio")));
+                procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow("oxigendaor")));
+                procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow("canulaAA")));
+                procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow("canulaV")));
+                procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow("totalCec")));
+                procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow("totalClamp")));
+                procedimento.setDatafProc(cursor.getLong(cursor.getColumnIndexOrThrow("dataFProc")));
+                procedimento.setHorafProc(cursor.getLong(cursor.getColumnIndexOrThrow("horafProc")));
                 resumoProcedimento.add(procedimento);
-            } while (cursor.moveToFirst());
+            } while (cursor.moveToNext());
         } else {
             Log.e("DbHelper", "Cursor is null or empty");
         }
@@ -1173,7 +844,6 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
     // Métodos para Relatório
-
     public Relatorio gerarRelatorio(int idUsuario) {
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
         Relatorio relatorio = new Relatorio();
@@ -1215,6 +885,56 @@ public class DbHelper extends SQLiteOpenHelper {
         }
 
         return relatorio;
+    }
+
+    //Resumo dos Relatórios
+    public List<Relatorio> resumoRelatorios(int idUsuario) {
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        List<Relatorio> relatorios = new ArrayList<>();
+
+        // Consulta SQL para recuperar os dados das diferentes tabelas
+        String queryProcedimento = "SELECT * FROM " + Contract.Procedimento.TABELA + " WHERE " + Contract.Procedimento.COLUNA_USUARIO + " = ?";
+        String queryEquipe = "SELECT * FROM " + Contract.Equipe.TABELA + " WHERE " + Contract.Equipe.COLUNA_USUARIO + " = ?";
+        String queryCalculos = "SELECT * FROM " + Contract.CalculoInicial.TABELA + " WHERE " + Contract.CalculoInicial.COLUNA_USUARIO + " = ?";
+
+        Cursor cursorProc = sqLiteDatabase.rawQuery(queryProcedimento, new String[]{String.valueOf(idUsuario)});
+        if (cursorProc != null && cursorProc.moveToFirst()) {
+            do {
+                Relatorio relatorio = new Relatorio();
+                relatorio.setProcedimento(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
+                relatorio.setDataInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
+                relatorio.setHoraInicio(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
+                relatorio.setOxigenador(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
+                relatorio.setCanulaAA(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
+                relatorio.setCanulaV(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
+                relatorio.setTotalCEC(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
+                relatorio.setTotalClamp(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
+                relatorio.setDataFim(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAFPROC)));
+                relatorio.setHoraFim(cursorProc.getString(cursorProc.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAFPROC)));
+
+                Cursor cursorEq = sqLiteDatabase.rawQuery(queryEquipe, new String[]{String.valueOf(idUsuario)});
+                if (cursorEq != null && cursorEq.moveToFirst()) {
+                    relatorio.setCirurgiao(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_CIRURGIAO)));
+                    relatorio.setAuxiliar1(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR1)));
+                    relatorio.setAuxiliar2(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_AUXILIAR2)));
+                    relatorio.setPerfusionista(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_PERFUSIONISTA)));
+                    relatorio.setHospital(cursorEq.getString(cursorEq.getColumnIndexOrThrow(Contract.Equipe.COLUNA_HOSPITAL)));
+                    cursorEq.close();
+                }
+
+                Cursor cursorCalculo = sqLiteDatabase.rawQuery(queryCalculos, new String[]{String.valueOf(idUsuario)});
+                if (cursorCalculo != null && cursorCalculo.moveToFirst()) {
+                    relatorio.setVo2Escolhido(cursorCalculo.getString(cursorCalculo.getColumnIndexOrThrow(Contract.CalculoInicial.COLUNA_VO2_ESCOLHIDO)));
+                    cursorCalculo.close();
+                }
+
+                relatorios.add(relatorio);
+            } while (cursorProc.moveToNext());
+
+            cursorProc.close();
+        }
+
+        return relatorios;
     }
 
 

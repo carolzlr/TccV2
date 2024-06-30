@@ -1,122 +1,294 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txt_procedure_name"
-        android:layout_width="0dp"
+    <TableLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nome do Procedimento"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="16dp">
 
-    <TextView
-        android:id="@+id/txt_team"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cirurgião"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_procedure_name" />
-    <TextView
-        android:id="@+id/txt_team1"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Auxiliar 1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_team" />
-    <TextView
-        android:id="@+id/txt_team2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Perfusionista"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_team1" />
-    <TextView
-        android:id="@+id/txt_team3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Hospital"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_team2" />
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_nome_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/procedimento"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
 
-    <TextView
-        android:id="@+id/txt_vo2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="VO2 Escolhido"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_team3" />
+            <TextView
+                android:id="@+id/tv_nome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/txt_start_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Data e Hora Início"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_vo2" />
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_datainicio_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datai"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
 
-    <TextView
-        android:id="@+id/txt_end_time"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Data e Hora Fim"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_start_time" />
+            <TextView
+                android:id="@+id/tv_datainicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/txt_oxygenator"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Oxigenador"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_end_time" />
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_horai_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/horai"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
 
-    <TextView
-        android:id="@+id/txt_aortic_cannula"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Cânula Aórtica"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_oxygenator" />
+            <TextView
+                android:id="@+id/tv_horainicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/txt_venous_valve"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Válvula Venosa"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_aortic_cannula" />
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_oxi_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/oxi"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
 
-    <TextView
-        android:id="@+id/txt_total_cec"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Total CEC"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_venous_valve" />
+            <TextView
+                android:id="@+id/tv_oxi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
 
-    <TextView
-        android:id="@+id/txt_total_clamp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Total Clamp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_total_cec" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TableRow>
+
+            <TextView
+                android:id="@+id/tv_canulaAA_label"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingEnd="8dp"
+                android:text="@string/canulaAA"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_canulaAA"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_canulaV_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/canulaV"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_canulaV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_totalCEC_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalCEC"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_totalCEC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_totalClamp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/totalClamp"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_totalClamp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_datafim_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/datafProc"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_datafim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_horafim_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/horafProc"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_horafim"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_cirurgiao_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cirurgiao"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_cirurgiao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_aux1_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auxiliar1"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_aux1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_aux2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/auxiliar2"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_aux2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_perf_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/perfusionista"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_perf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_hosp_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/hosp"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_hosp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow>
+            <TextView
+                android:id="@+id/tv_vo2_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vo2_escolhidocor"
+                android:textSize="16sp"
+                android:paddingEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_vo2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="16sp" />
+        </TableRow>
+
+
+
+
+
+
+
+
+    </TableLayout>
+</LinearLayout>

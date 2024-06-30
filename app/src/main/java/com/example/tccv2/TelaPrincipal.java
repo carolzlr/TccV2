@@ -96,7 +96,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_relatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Calculo_Rep.class);
+                Intent intent = new Intent(TelaPrincipal.this, RelatorioResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
@@ -106,7 +106,7 @@ public class TelaPrincipal extends AppCompatActivity {
         card_procedimento.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(TelaPrincipal.this, Procedimento.class);
+                Intent intent = new Intent(TelaPrincipal.this, ProcedimentoResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
                 finish();
