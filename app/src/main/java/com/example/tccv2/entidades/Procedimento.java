@@ -76,6 +76,20 @@ public class Procedimento {
         this.obs = obs;
     }
 
+    public Procedimento(int idProcedimento, String nomeProc, long dataInicio, long horaInicio, String oxigenador, String canulaAA,
+                        String canulaV, long totalCec, long totalClamp, long datafProc) {
+        this.idProcedimento = idProcedimento;
+        this.nomeProc = nomeProc;
+        this.dataInicio = dataInicio;
+        this.horaInicio = horaInicio;
+        this.oxigenador = oxigenador;
+        this.canulaAA = canulaAA;
+        this.canulaV = canulaV;
+        this.totalCec = totalCec;
+        this.totalClamp = totalClamp;
+        this.datafProc = datafProc;
+    }
+
     public int getIdProcedimento() {
         return idProcedimento;
     }

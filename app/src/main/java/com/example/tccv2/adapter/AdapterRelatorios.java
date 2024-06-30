@@ -81,7 +81,7 @@ public class AdapterRelatorios extends RecyclerView.Adapter<AdapterRelatorios.Re
             tv_canulaAA = itemView.findViewById(R.id.tv_canulaAA);
             tv_canulaV = itemView.findViewById(R.id.tv_canulaV);
             tv_totalCEC = itemView.findViewById(R.id.tv_totalCEC);
-            tv_totalClamp = itemView.findViewById(R.id.id_totalClamp);
+            tv_totalClamp = itemView.findViewById(R.id.tv_totalClamp);
             tv_datafim = itemView.findViewById(R.id.tv_datafim);
             tv_cirurgiao = itemView.findViewById(R.id.tv_cirurgiao);
             tv_aux1 = itemView.findViewById(R.id.tv_aux1);

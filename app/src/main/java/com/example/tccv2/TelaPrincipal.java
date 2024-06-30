@@ -32,15 +32,14 @@ public class TelaPrincipal extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tela_principal);
 
+        // Recuperar o idUser
+        userId = getIntent().getIntExtra("USER_ID", -1);
+
         // Inicializando os componentes
         iniciarComponentes();
 
         // Exibir o nome do usuário na tela
         exibirNomeUsuario();
-
-        // Recuperar o idUser
-        userId = getIntent().getIntExtra("USER_ID", -1);
-
 
         bt_sair.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,7 +56,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, Cad_Equipe.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -67,8 +65,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, Perfil.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
-
             }
         });
 
@@ -78,8 +74,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, PacienteResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
-
             }
         });
 
@@ -89,7 +83,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, Formulas.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -99,7 +92,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, RelatorioResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -109,7 +101,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, ProcedimentoResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -119,7 +110,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, Infos.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -129,7 +119,6 @@ public class TelaPrincipal extends AppCompatActivity {
                 Intent intent = new Intent(TelaPrincipal.this, EquipeResumo.class);
                 intent.putExtra("USER_ID", userId);
                 startActivity(intent);
-                finish();
             }
         });
     }
@@ -139,10 +128,8 @@ public class TelaPrincipal extends AppCompatActivity {
         bt_sair = findViewById(R.id.bt_sair);
         bt_iniciar = findViewById(R.id.bt_iniciar);
         bt_perfil = findViewById(R.id.bt_perfil);
-
         nome_app = findViewById(R.id.nome_app);
         nome_usuario = findViewById(R.id.nome_usuario);
-
         card_paciente = findViewById(R.id.card_paciente);
         card_formulas = findViewById(R.id.card_formulas);
         card_info = findViewById(R.id.card_info);
@@ -153,10 +140,10 @@ public class TelaPrincipal extends AppCompatActivity {
 
     // Método para exibir o nome do usuário na tela
     private void exibirNomeUsuario() {
-        // Recuperar o nome do usuário do extra da intent
-        String userName = getIntent().getStringExtra("userName");
-
-        // Exibir o nome do usuário na TextView
-        nome_usuario.setText(userName);
+        dbHelper = new DbHelper(this);
+        String userName = dbHelper.recuperarNome(userId);
+        if (userName != null) {
+            nome_usuario.setText(userName);
+        }
     }
 }

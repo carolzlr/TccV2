@@ -33,7 +33,7 @@ public class DbHelper extends SQLiteOpenHelper {
     //Responsável por fazer as operações de acesso do banco
     public static final String DATABASE_NOME = "BDCEC";
 
-    public static final int DATABASE_VERSION = 24;
+    public static final int DATABASE_VERSION = 25;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NOME, null, DATABASE_VERSION);
@@ -215,30 +215,30 @@ public class DbHelper extends SQLiteOpenHelper {
             + " FOREIGN KEY (" + Contract.Calculo_Rep.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
             + "( " + Contract.Usuario._ID + "))";
 
-    private static final String CREATE_PROCEDIMENTO = "CREATE TABLE "
+    private static final String CREATE_PROCEDIMENTO = " create table "
             + Contract.Procedimento.TABELA + "("
-            + Contract.Procedimento._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + Contract.Procedimento._ID + " integer primary key autoincrement,"
             + Contract.Procedimento.COLUNA_USUARIO + " INTEGER, "
             + Contract.Procedimento.COLUNA_NOMEPROC + " TEXT, "
-            + Contract.Procedimento.COLUNA_DATAINICIO + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_HORAINICO + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_DATAINICIO + " TEXT, "
+            + Contract.Procedimento.COLUNA_HORAINICO + " TEXT, "
             + Contract.Procedimento.COLUNA_OXI + " TEXT, "
             + Contract.Procedimento.COLUNA_CANULAAA + " TEXT, "
             + Contract.Procedimento.COLUNA_CANULAV + " TEXT, "
             + Contract.Procedimento.COLUNA_PROT + " TEXT, "
-            + Contract.Procedimento.COLUNA_HEPMG + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_HEPML + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_INCIOCEC + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_FINALCEC + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_TCEC + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_INCIOCALMP + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_FIMCLAMP + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_TCLAMP + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_DATAFPROC + " INTEGER, " // Alterado para INTEGER
-            + Contract.Procedimento.COLUNA_HORAFPROC + " INTEGER, " // Alterado para INTEGER
+            + Contract.Procedimento.COLUNA_HEPMG + " TEXT, "
+            + Contract.Procedimento.COLUNA_HEPML + " TEXT, "
+            + Contract.Procedimento.COLUNA_INCIOCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_FINALCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_TCEC + " TEXT, "
+            + Contract.Procedimento.COLUNA_INCIOCALMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_FIMCLAMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_TCLAMP + " TEXT, "
+            + Contract.Procedimento.COLUNA_DATAFPROC + " TEXT, "
+            + Contract.Procedimento.COLUNA_HORAFPROC + " TEXT, "
             + Contract.Procedimento.COLUNA_OBS + " TEXT, "
-            + "FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
-            + "(" + Contract.Usuario._ID + "))";
+            + " FOREIGN KEY (" + Contract.Procedimento.COLUNA_USUARIO + ") REFERENCES " + Contract.Usuario.TABELA
+            + "( " + Contract.Usuario._ID + "))";
 
 
     @Override
@@ -362,6 +362,27 @@ public class DbHelper extends SQLiteOpenHelper {
                 Contract.Usuario._ID + " = ?",
                 new String[]{String.valueOf(userId)},
                 null, null, null);
+    }
+
+    // Recuperar nome do usuário por id
+    // Método para recuperar o nome do usuário pelo ID
+    public String recuperarNome(int idUsuario) {
+        String userName = null;
+        SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(
+                Contract.Usuario.TABELA,
+                new String[]{Contract.Usuario.COLUNA_NOME_USUARIO},
+                Contract.Usuario._ID + "=?",
+                new String[]{String.valueOf(idUsuario)},
+                null,
+                null,
+                null
+        );
+        if (cursor.moveToFirst()) {
+            userName = cursor.getString(cursor.getColumnIndexOrThrow(Contract.Usuario.COLUNA_NOME_USUARIO));
+        }
+        cursor.close();
+        return userName;
     }
 
     // Método para salvar as alterações do usuário
@@ -811,32 +832,37 @@ public class DbHelper extends SQLiteOpenHelper {
     public List<Procedimento> resumirProcedimento(int usuario) {
         List<Procedimento> resumoProcedimento = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = this.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.rawQuery(
-                "SELECT idProcedimento AS _id, usuario, nomeProc, dataInicio, horaInicio, " +
-                        "oxigendaor, canulaAA, canulaV, protamina, hepMg, hepMl, iCec, fCec, " +
-                        "totalCec, iClamp, fClamp, totalClamp, dataFProc, horafProc, obs " +
-                        "FROM procedimento WHERE usuario = ?",
-                new String[]{String.valueOf(usuario)}
+        Cursor cursor = sqLiteDatabase.query(
+                Contract.Procedimento.TABELA,
+                null,
+                Contract.Procedimento.COLUNA_USUARIO + "=?",
+                new String[]{String.valueOf(usuario)},
+                null,
+                null,
+                null
         );
-        if (cursor.moveToFirst()) {
+        if (cursor.moveToFirst()){
             do {
                 Procedimento procedimento = new Procedimento();
-                procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
-                procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow("nomeProc")));
-                procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow("dataInicio")));
-                procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow("horaInicio")));
-                procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow("oxigendaor")));
-                procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow("canulaAA")));
-                procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow("canulaV")));
-                procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow("totalCec")));
-                procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow("totalClamp")));
-                procedimento.setDatafProc(cursor.getLong(cursor.getColumnIndexOrThrow("dataFProc")));
-                procedimento.setHorafProc(cursor.getLong(cursor.getColumnIndexOrThrow("horafProc")));
+                procedimento.setIdProcedimento(cursor.getInt(cursor.getColumnIndexOrThrow(Contract.Procedimento._ID)));
+                procedimento.setNomeProc(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_NOMEPROC)));
+                procedimento.setDataInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAINICIO)));
+                procedimento.setHoraInicio(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAINICO)));
+                procedimento.setOxigenador(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_OXI)));
+                procedimento.setCanulaAA(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAAA)));
+                procedimento.setCanulaV(cursor.getString(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_CANULAV)));
+                procedimento.setTotalCec(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCEC)));
+                procedimento.setTotalClamp(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_TCLAMP)));
+                procedimento.setDatafProc(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_DATAFPROC)));
+                procedimento.setHorafProc(cursor.getLong(cursor.getColumnIndexOrThrow(Contract.Procedimento.COLUNA_HORAFPROC)));
+
                 resumoProcedimento.add(procedimento);
             } while (cursor.moveToNext());
         } else {
             Log.e("DbHelper", "Cursor is null or empty");
         }
+
+        // Fecha o cursor para liberar os recursos
         if (cursor != null) {
             cursor.close();
         }
