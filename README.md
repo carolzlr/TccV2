@@ -22,26 +22,40 @@ TccV2/
 
 └── settings.gradle        # Configurações do projeto Gradle
 
+
 🚀 Como Rodar o Projeto
+
 Para rodar o projeto localmente, siga os passos abaixo:
 
 Clonar o repositório:
+
 git clone https://github.com/carolzlr/TccV2.git
 
+
 Navegar até o diretório do projeto:
+
 cd TccV2
 
+
 Construir o projeto:
+
 ./gradlew build
 
+
 Executar o aplicativo:
+
 ./gradlew run
+
 
 Certifique-se de ter o Java Development Kit (JDK) instalado em sua máquina.
 
 🛠️ Tecnologias Utilizadas
+
 Java
+
 Gradle
 
+
 📄 Licença
+
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo LICENSE para mais detalhes.
